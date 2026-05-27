@@ -30,6 +30,10 @@
   corruption on XLL unload; getTypeMap() now performs a fresh registry lookup on
   every call
 
+- Removed dependency on log4cxx: replaced the log4cxx-based Logger implementation
+  with a plain C++ streams implementation (std::ofstream / std::cout); removed
+  log4cxx, apr, and aprutil from the solution and all project files
+
 - Upgraded project files to VS2026 (v145 toolset)
 
 <strong>Release 1.22.0 - May 2021</strong>

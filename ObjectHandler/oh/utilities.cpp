@@ -24,9 +24,7 @@
 #include <oh/config.hpp>
 #endif
 #include <oh/utilities.hpp>
-#ifdef OH_INCLUDE_LOG4CXX
 #include <oh/logger.hpp>
-#endif
 #include <oh/repository.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -55,70 +53,42 @@ namespace ObjectHandler {
 
     std::string logSetFile(const std::string &logFileName,
                            const int &logLevel) {
-#ifdef OH_INCLUDE_LOG4CXX
         Logger::instance().setFile(logFileName, logLevel);
         return logFileName;
-#else
-        return std::string();
-#endif
     }
 
     DLL_API void logWriteMessage(const std::string &message,
                                  const int &level) {
-#ifdef OH_INCLUDE_LOG4CXX
         Logger::instance().writeMessage(message, level);
-#else
-        std::cout << "LOG - " << message << std::endl;
-#endif
     }
 
     void logSetLevel(const int &logLevel) {
-#ifdef OH_INCLUDE_LOG4CXX
         Logger::instance().setLevel(logLevel);
-#endif
     }
 
     const std::string logFile(){
-#ifdef OH_INCLUDE_LOG4CXX
         return Logger::instance().file();
-#else
-        return std::string();
-#endif
     }
 
     const int logLevel(){
-#ifdef OH_INCLUDE_LOG4CXX
         return Logger::instance().level();
-#else
-        return 0;
-#endif
     }
 
     void logSetConsole(const int &console,
                       const int &logLevel) {
-#ifdef OH_INCLUDE_LOG4CXX
-            Logger::instance().setConsole(console, logLevel);
-#endif
+        Logger::instance().setConsole(console, logLevel);
     }
 
     void logObject(const std::string &objectID) {
         std::ostringstream msg;
         Repository::instance().dumpObject(objectID, msg);
-#ifdef OH_INCLUDE_LOG4CXX
         Logger::instance().writeMessage(msg.str());
-#else
-        std::cout << "LOG - " << msg.str() << std::endl;
-#endif
     }
 
     void logAllObjects() {
         std::ostringstream msg;
         Repository::instance().dump(msg);
-#ifdef OH_INCLUDE_LOG4CXX
         Logger::instance().writeMessage(msg.str());
-#else
-        std::cout << "LOG - " << msg.str() << std::endl;
-#endif
     }
 
     std::vector<std::string> split(const std::string& line,
