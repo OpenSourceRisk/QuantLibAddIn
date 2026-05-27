@@ -26,6 +26,7 @@
 #include <qlxl/session.hpp>
 #include <qlxl/conversions/all.hpp>
 #include <oh/enumerations/typefactory.hpp>
+#include <qlo/enumerations/factories/calendarfactory.hpp>
 #include <ql/time/date.hpp>
 #include <ql/time/calendar.hpp>
 #include <ql/optional.hpp>

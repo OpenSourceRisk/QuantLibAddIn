@@ -4,9 +4,9 @@ This document explains how to build the QuantLibXL Excel add-in and its
 prerequisites from source code using the hand-maintained Visual Studio
 solution files.
 
-> **Last verified:** built successfully with VS 2026 (v145 toolset), x64,
-> Release (dynamic runtime), producing
-> `QuantLibXL\xll\QuantLibXL-v145-x64-mt-1_23_0.xll`.
+> **Last verified:** all 8 configurations (4 runtime variants × basic + full)
+> built successfully with VS 2026 (v145 toolset), x64, producing all four
+> XLLs in `QuantLibXL\xll\`. See sections 2.2 and 5 for full details.
 
 ---
 
@@ -45,10 +45,18 @@ C:\Program Files\Microsoft Visual Studio\<version>\Professional\VC\Tools\MSVC\<t
 
 ### 2.2 Boost
 
-Boost is managed via conan. Boost 1.83.0 for x64/Release/dynamic-runtime
-(`compiler.runtime=dynamic`) must be present in the local conan cache.
+`boost.props` in the repository root controls Boost include and library
+paths. It is configuration-aware: each of the four runtime/build-type
+combinations points to a different Boost library directory. The include
+directory (headers) is shared across all configurations.
 
-To check whether it is already cached:
+#### Dynamic-runtime configurations (Release and Debug, `/MD`/`/MDd`)
+
+These use a conan-cached Boost 1.83.0 build. The Release dynamic build
+has already been provisioned; the same conan package also contains the
+Debug dynamic (`-mt-gd-`) libraries.
+
+To check whether the package is already cached:
 
 ```
 conan list boost/1.83.0
@@ -60,7 +68,7 @@ If it is not cached, install it:
 conan install . --output-folder=conan --build=missing -s build_type=Release
 ```
 
-Once the package is in the cache, find its directory:
+Once cached, find its directory:
 
 ```
 conan cache path boost/1.83.0:<package-id>
@@ -68,22 +76,37 @@ conan cache path boost/1.83.0:<package-id>
 
 where `<package-id>` is the hash shown by `conan list boost/1.83.0:*`.
 
-Then open `boost.props` in the repository root and set `BoostIncludeDir`
-and `BoostLibDir` to point at that directory, e.g.:
+#### Static-runtime configurations (Release and Debug static, `/MT`/`/MTd`)
+
+Conan cannot download the static-runtime Boost packages when the corporate
+firewall blocks the package server. Instead, use a locally pre-built Boost
+snapshot. The snapshot at `C:\erik\junk\boost\boost_1_83_0` contains:
+
+- `stage\lib` — Debug dynamic (`-mt-gd-`) and static-runtime
+  (`libboost_*-mt-s-*`, `libboost_*-mt-sgd-*`) libraries built with vc143
+- `stage-mt\lib` — Static-runtime libraries with full vc143 decorated names
+  (`libboost_*-vc143-mt-s-*`, `libboost_*-vc143-mt-sgd-*`)
+
+#### Configuring boost.props
+
+Open `boost.props` in the repository root. It contains four
+configuration-conditional `BoostLibDir` blocks — one per build type — plus
+a single shared `BoostIncludeDir`. Update each path to match the actual
+locations on the machine being used:
 
 ```xml
+<!-- shared headers -->
 <BoostIncludeDir>C:\Users\username\.conan2\p\boostXXXXXXXXXXXXX\p\include</BoostIncludeDir>
-<BoostLibDir>C:\Users\username\.conan2\p\boostXXXXXXXXXXXXX\p\lib</BoostLibDir>
+
+<!-- Release  (/MD)  — conan cache -->
+<!-- Debug    (/MDd) — local snapshot stage\lib  -->
+<!-- Release (static runtime) (/MT)  — local snapshot stage-mt\lib -->
+<!-- Debug   (static runtime) (/MTd) — local snapshot stage-mt\lib -->
 ```
 
 `boost.props` is imported by every project in the solution via
 `QuantLib\QuantLib.props`. It also sets `<LanguageStandard>stdcpp17</LanguageStandard>`
-globally, which is required by the QuantLib 1.42 headers.
-
-> **Note:** Only the dynamic-runtime (`/MD`) build has been tested.
-> The static-runtime configurations (`Release (static runtime)`) would
-> require a separate conan install with `compiler.runtime=static` and
-> corresponding static Boost libraries. This has not been set up yet.
+globally, which is required by the QuantLib headers.
 
 ### 2.3 Python 3 (Full build only)
 
@@ -137,8 +160,12 @@ In the Visual Studio toolbar select:
 
 | Goal | Configuration | Platform |
 |---|---|---|
-| Dynamic-runtime XLL (tested, recommended) | **Release** | **x64** |
-| Static-runtime XLL (not yet set up) | **Release (static runtime)** | **x64** |
+| Dynamic-runtime release XLL | **Release** | **x64** |
+| Dynamic-runtime debug XLL | **Debug** | **x64** |
+| Static-runtime release XLL | **Release (static runtime)** | **x64** |
+| Static-runtime debug XLL | **Debug (static runtime)** | **x64** |
+
+Always build for **x64**, not Win32.
 
 ### Step 4 — Build
 
@@ -166,6 +193,39 @@ encodes the toolset, platform, configuration and version:
 
 The toolset tag (`v145`, `v143`, …) is determined automatically from the
 Visual Studio version used to open the solution.
+
+The basic and full builds share the same output filenames and overwrite each
+other. Build full only when gensrc metadata has changed; use basic otherwise.
+
+---
+
+## 5.1 Command-line builds (MSBuild)
+
+To build from the command line without opening Visual Studio, set
+`VisualStudioVersion` so that `QuantLib.props` selects the correct toolset,
+and add `nmake.exe` to the PATH for Full builds:
+
+```powershell
+$env:VisualStudioVersion = "18.0"
+$env:PATH = "C:\Program Files\Microsoft Visual Studio\18\Professional\VC\Tools\MSVC\14.50.35717\bin\Hostx64\x64;" + $env:PATH
+$msbuild = "C:\Program Files\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\MSBuild.exe"
+
+# example: Release (static runtime), basic build
+&$msbuild "C:\erik\repos\QuantLibAddin\QuantLibXL\QuantLibXL_basic.sln" `
+    /p:Configuration="Release (static runtime)" /p:Platform=x64 /m /nologo
+```
+
+Configuration names with spaces (e.g. `"Release (static runtime)"`) must be
+quoted. The `/m` flag enables parallel compilation. Expected build times on
+this machine are roughly:
+
+| Configuration | Basic | Full |
+|---|---|---|
+| Release / Debug | ~30 s (incremental) | ~1 min (incremental) |
+| Release (static) / Debug (static) | ~20 min (clean) | ~40 min (clean) |
+
+Static-runtime clean builds are slow because QuantLib itself must be
+recompiled from scratch for the new runtime library setting.
 
 ---
 
