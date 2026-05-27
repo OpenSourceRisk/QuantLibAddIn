@@ -108,3 +108,6 @@ QuantLibAddin/Docs/doxywarnings.txt
 QuantLibXL/Docs/*.chm
 QuantLibXL/Docs/doxywarnings.txt
 
+
+# Local machine build overrides
+QuantLib/Build.props

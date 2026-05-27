@@ -36,8 +36,11 @@ namespace ObjectHandler {
         Case insensitive comparison predicate.
         Comparison is done using specified locales.
     */
-    class my_iless : public std::binary_function<std::string, std::string, bool> {
+    class my_iless {
       public:
+        using result_type = bool;
+        using first_argument_type = std::string;
+        using second_argument_type = std::string;
         //! Constructor
         /*!
             \param loc locales used for comparison

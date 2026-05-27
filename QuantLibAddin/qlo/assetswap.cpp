@@ -85,16 +85,17 @@ namespace QuantLibAddin {
             QuantLib::Schedule);
 
         libraryObject_ = boost::shared_ptr<QuantLib::Instrument>(new
-            QuantLib::AssetSwap(parAssetSwap,
+            QuantLib::AssetSwap(payFixedRate,
                                 bond,
                                 bondCleanPrice,
-                                nonParRepayment,
-                                gearing,
                                 iborIndex,
                                 spread,
+                                QuantLib::Schedule(),
                                 floatingDayCounter,
-                                dealMaturity,
-                                payFixedRate));
+                                parAssetSwap,
+                                gearing,
+                                nonParRepayment,
+                                dealMaturity));
     }
 
 }

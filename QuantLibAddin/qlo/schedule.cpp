@@ -75,10 +75,10 @@ namespace QuantLibAddin {
         bool permanent)
     : ObjectHandler::LibraryObject<QuantLib::Schedule>(p, permanent) {
 
-        boost::optional<QuantLib::BusinessDayConvention> optionalTerminationDateConvention(terminationDateConvention);
-        boost::optional<QuantLib::Period> optionalTenor(tenor);
-        boost::optional<QuantLib::DateGeneration::Rule> optionalRule(rule);
-        boost::optional<bool> optionalEndOfMonth(endOfMonth);
+        QuantLib::ext::optional<QuantLib::BusinessDayConvention> optionalTerminationDateConvention(terminationDateConvention);
+        QuantLib::ext::optional<QuantLib::Period> optionalTenor(tenor);
+        QuantLib::ext::optional<QuantLib::DateGeneration::Rule> optionalRule(rule);
+        QuantLib::ext::optional<bool> optionalEndOfMonth(endOfMonth);
 
         QuantLib::Schedule schedule(dates,
             calendar,

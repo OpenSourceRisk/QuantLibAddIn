@@ -32,6 +32,14 @@
 #  define LIB_TOOLSET "vc80"
 #elif (_MSC_VER == 1500)
 #  define LIB_TOOLSET "vc90"
+#elif (_MSC_VER >= 1940)
+#  define LIB_TOOLSET "v143"
+#elif (_MSC_VER >= 1924)
+#  define LIB_TOOLSET "v142"
+#elif (_MSC_VER >= 1910)
+#  define LIB_TOOLSET "v141"
+#elif (_MSC_VER >= 1900)
+#  define LIB_TOOLSET "v140"
 #else
 #  error "unknown Microsoft compiler"
 #endif

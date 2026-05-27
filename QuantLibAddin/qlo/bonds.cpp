@@ -33,6 +33,7 @@
 #include <ql/instruments/bonds/zerocouponbond.hpp>
 #include <ql/instruments/bonds/cmsratebond.hpp>
 #include <ql/instruments/bonds/floatingratebond.hpp>
+#include <ql/time/schedule.hpp>
 #include <ql/cashflows/couponpricer.hpp>
 #include <ql/pricingengines/bond/discountingbondengine.hpp>
 #include <ql/indexes/swapindex.hpp>
@@ -222,19 +223,20 @@ namespace QuantLibAddin {
             bool permanent)
     : Bond(properties, des, cur, permanent)
     {
-		vector<QuantLib::InterestRate> couponRate(coupons.size());
+		vector<QuantLib::Rate> couponRate(coupons.size());
 
 		for (Size i=0; i<coupons.size(); ++i)
-			couponRate[i] = *coupons[i];
+			couponRate[i] = coupons[i]->rate();
 
-        qlBondObject_ = shared_ptr<QuantLib::FixedRateBond>(new
-            QuantLib::FixedRateBond(settlementDays, faceAmount,
-                                    *schedule,
-                                    couponRate,
-                                    paymentConvention,
-									redemption,
-                                    issueDate,
-                                    paymentCalendar));
+				qlBondObject_ = shared_ptr<QuantLib::FixedRateBond>(new
+						QuantLib::FixedRateBond(settlementDays, faceAmount,
+																		*schedule,
+																		couponRate,
+																		coupons[0]->dayCounter(),
+																		paymentConvention,
+										redemption,
+																		issueDate,
+																		paymentCalendar));
         libraryObject_ = qlBondObject_;
         if (description_.empty()) {
             std::ostringstream temp;

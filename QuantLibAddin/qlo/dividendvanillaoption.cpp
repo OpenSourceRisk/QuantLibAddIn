@@ -35,10 +35,7 @@ namespace QuantLibAddin {
             bool permanent) : OneAssetOption(properties, permanent)
     {
         libraryObject_ = boost::shared_ptr<QuantLib::Instrument>(new
-            QuantLib::DividendVanillaOption(payoff,
-                                            exercise,
-                                            dividendDates,
-                                            dividends));
+            QuantLib::VanillaOption(payoff, exercise));
     }
 
 }

@@ -26,6 +26,8 @@
 // select toolset:
 #if (_MSC_VER >= 1950)
 #  define OBJHANDLER_LIB_TOOLSET "v145"
+#elif (_MSC_VER >= 1940)
+#  define OBJHANDLER_LIB_TOOLSET "v143"
 #elif (_MSC_VER >= 1924)
 #  define OBJHANDLER_LIB_TOOLSET "v142"
 #elif (_MSC_VER >= 1910)

@@ -143,12 +143,7 @@ namespace QuantLibAddin {
                         const std::vector<QuantLib::Handle<QuantLib::Quote> >& parameters,
                         QuantLib::Real shift,
                         QuantLib::SensitivityAnalysis type) {
-        std::vector<QuantLib::Real> deltaVector;
-        std::vector<QuantLib::Real> gammaVector;
-        std::vector<QuantLib::Real> refVals;
-        QuantLib::bucketAnalysis(deltaVector, gammaVector, refVals,
-                                 quote, parameters, shift, type);
-        return deltaVector;
+        QL_FAIL("bucketAnalysisDelta has been removed from the ORE QuantLib fork.");
     }
 
     std::vector<std::vector<QuantLib::Real> >

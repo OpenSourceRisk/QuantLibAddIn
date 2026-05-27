@@ -32,6 +32,7 @@
 #include <ql/indexes/swapindex.hpp>
 #include <ql/termstructures/yield/ratehelpers.hpp>
 #include <ql/termstructures/yield/bondhelpers.hpp>
+#include <ql/time/schedule.hpp>
 #include <ql/termstructures/yield/oisratehelper.hpp>
 
 #include <oh/repository.hpp>
@@ -275,11 +276,7 @@ namespace QuantLibAddin {
                         const QuantLib::Handle<QuantLib::YieldTermStructure>& discount,
                         bool permanent)
     : RateHelper(properties, permanent) {
-        libraryObject_ = shared_ptr<QuantLib::DatedOISRateHelper>(new
-            QuantLib::DatedOISRateHelper(startDate, endDate,
-                                         fixedRate,
-                                         overnightIndex));
-        quoteName_ = f(properties->getSystemProperty("FixedRate"));
+        QL_FAIL("DatedOISRateHelper has been removed from the ORE QuantLib fork.");
     }
 
     BondHelper::BondHelper(
@@ -589,7 +586,6 @@ namespace QuantLibAddin {
               public QuantLib::Visitor<QuantLib::FuturesRateHelper>,
               public QuantLib::Visitor<QuantLib::SwapRateHelper>,
               public QuantLib::Visitor<QuantLib::OISRateHelper>,
-              public QuantLib::Visitor<QuantLib::DatedOISRateHelper>,
               public QuantLib::Visitor<QuantLib::BMASwapRateHelper>,
               public QuantLib::Visitor<QuantLib::FixedRateBondHelper>,
               public QuantLib::Visitor<QuantLib::FxSwapRateHelper> {
@@ -614,9 +610,6 @@ namespace QuantLibAddin {
                 rate_ = h.quote()->value();
             }
             void visit(QuantLib::OISRateHelper& h) {
-                rate_ = h.quote()->value();
-            }
-            void visit(QuantLib::DatedOISRateHelper& h) {
                 rate_ = h.quote()->value();
             }
             void visit(QuantLib::BMASwapRateHelper& h) {

@@ -41,6 +41,7 @@
 #include <ql/math/interpolations/bicubicsplineinterpolation.hpp>
 #include <ql/processes/blackscholesprocess.hpp>
 #include <ql/instruments/vanillaoption.hpp>
+#include <ql/instruments/dividendschedule.hpp>
 
 namespace QuantLibAddin {
 
@@ -121,7 +122,7 @@ namespace QuantLibAddin {
     boost::shared_ptr<QuantLib::PricingEngine> ADE_Engine(
         const boost::shared_ptr<QuantLib::GeneralizedBlackScholesProcess>& process) {
         return boost::shared_ptr<QuantLib::PricingEngine> (
-            new QuantLib::AnalyticDividendEuropeanEngine(process));
+            new QuantLib::AnalyticDividendEuropeanEngine(process, QuantLib::DividendSchedule()));
     }
     boost::shared_ptr<QuantLib::PricingEngine> ADGAPA_Engine(
         const boost::shared_ptr<QuantLib::GeneralizedBlackScholesProcess>& process) {
