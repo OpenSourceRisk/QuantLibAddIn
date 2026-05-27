@@ -23,6 +23,18 @@
 
 /*! \page history Version History
 
+<strong>Release x.y.z - MMM YYYY</strong>
+
+- Updated for compatibility with the ORE fork of QuantLib (see QuantLibAddin
+  release notes for full details of API changes)
+
+- qlCalendarAdvance reimplemented manually in manual.cpp with registration via
+  new registerManualFunctions()/unregisterManualFunctions() hooks in addin.cpp,
+  to accommodate an optional 5th parameter added to Calendar::advance()
+
+- Upgraded project files to VS2026 (v145 toolset); solution updated to suppress
+  gensrc from running automatically in Release|x64 configuration
+
 <strong>Release 1.22.0 - May 2021</strong>
 
 - Deleted obsolete classes FDAmericanEngine, FDEuropeanEngine, FDBermudanEngine

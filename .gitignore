@@ -24,6 +24,7 @@ QuantLibAddin/qlo/enumerations/register/register_classes.cpp
 QuantLibAddin/qlo/enumerations/register/register_pairs.cpp
 QuantLibAddin/qlo/enumerations/register/register_types.cpp
 QuantLibAddin/qlo/loop/loop_*.hpp
+!QuantLibAddin/qlo/loop/loop_calendar_manual.hpp
 !QuantLibAddin/qlo/loop/loop_valueobjects.hpp
 QuantLibAddin/qlo/serialization/create/create_*.cpp
 QuantLibAddin/qlo/serialization/create/create_*.hpp
@@ -111,3 +112,5 @@ QuantLibXL/Docs/doxywarnings.txt
 
 # Local machine build overrides
 QuantLib/Build.props
+boost.props
+conanfile.txt

@@ -25,9 +25,8 @@
     <DataType defaultSuperType='enumeration'>QuantLib::Position::Type</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::Replication::Type</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::SalvagingAlgorithm::Type</DataType>
-    <DataType defaultSuperType='enumeration'>QuantLib::SensitivityAnalysis</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::Settlement::Type</DataType>
-    <DataType defaultSuperType='enumeration'>QuantLib::OvernightIndexedSwap::Type</DataType>
+    <!-- QuantLib::OvernightIndexedSwap::Type is now identical to QuantLib::VanillaSwap::Type (both are Swap::Type) - removed to avoid duplicate registration -->
     <DataType defaultSuperType='enumeration'>QuantLib::VanillaSwap::Type</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::Futures::Type</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::Weekday</DataType>

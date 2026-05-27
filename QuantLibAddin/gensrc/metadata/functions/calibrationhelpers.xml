@@ -169,14 +169,13 @@
       </ReturnValue>
     </Member>
 
-    <!--Member name='qlOneFactorAffineModelCalibrate' type='QuantLib::OneFactorAffineModel'>
+    <!-- qlOneFactorAffineModelCalibrate: calibrate() now takes CalibrationHelper not BlackCalibrationHelper, upcast not supported by gensrc
+    <Member name='qlOneFactorAffineModelCalibrate' type='QuantLib::OneFactorAffineModel'>
       <description>calibrate a model.</description>
       <libraryFunction>calibrate</libraryFunction>
       <SupportedPlatforms>
-        SupportedPlatform name='Excel' calcInWizard='false'/
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
-        SupportedPlatform name='Cpp'/
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -219,16 +218,16 @@
         <type>void</type>
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
-    </Member-->
+    </Member>
+    -->
 
-    <!--Member name='qlModelG2Calibrate' type='QuantLib::G2'>
+    <!-- qlModelG2Calibrate: calibrate() now takes CalibrationHelper not BlackCalibrationHelper, upcast not supported by gensrc
+    <Member name='qlModelG2Calibrate' type='QuantLib::G2'>
       <description>calibrate a model.</description>
       <libraryFunction>calibrate</libraryFunction>
       <SupportedPlatforms>
-        SupportedPlatform name='Excel' calcInWizard='false'/
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
-        SupportedPlatform name='Cpp'/
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -271,7 +270,8 @@
         <type>void</type>
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
-    </Member-->
+    </Member>
+    -->
 
   </Functions>
 </Category>

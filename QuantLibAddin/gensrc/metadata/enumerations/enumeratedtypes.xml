@@ -16,6 +16,9 @@
 
   <EnumeratedTypeGroups>
 
+    <!-- QuantLib::SensitivityAnalysis removed from ORE QuantLib fork (v1.41+);
+         qlBucketAnalysis/qlBucketAnalysisDelta/qlBucketAnalysisDelta2 suppressed in quotes.xml
+         (those QuantLibAddin functions depended on this type)
     <EnumeratedTypeGroup type='QuantLib::SensitivityAnalysis'>
       <includeFile>oh/enumerations/typefactory.hpp</includeFile>
       <constructor>true</constructor>
@@ -30,6 +33,7 @@
         </EnumeratedType>
       </EnumeratedTypes>
     </EnumeratedTypeGroup>
+    -->
 
     <EnumeratedTypeGroup type='QuantLib::DateGeneration::Rule'>
       <includeFile>oh/enumerations/typefactory.hpp</includeFile>
@@ -1636,6 +1640,7 @@
       </EnumeratedTypes>
     </EnumeratedTypeGroup>
 
+    <!-- QuantLib::OvernightIndexedSwap::Type is now identical to QuantLib::VanillaSwap::Type (both are Swap::Type) - removed to avoid duplicate registration
     <EnumeratedTypeGroup type='QuantLib::OvernightIndexedSwap::Type'>
       <includeFile>oh/enumerations/typefactory.hpp</includeFile>
       <constructor>true</constructor>
@@ -1650,6 +1655,7 @@
         </EnumeratedType>
       </EnumeratedTypes>
     </EnumeratedTypeGroup>
+    -->
 
     <EnumeratedTypeGroup type='QuantLib::Option::Type'>
       <includeFile>oh/enumerations/typefactory.hpp</includeFile>

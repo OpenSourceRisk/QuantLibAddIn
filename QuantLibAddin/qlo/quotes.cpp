@@ -29,7 +29,6 @@
 #include <ql/quotes/futuresconvadjustmentquote.hpp>
 #include <ql/quotes/impliedstddevquote.hpp>
 #include <ql/quotes/lastfixingquote.hpp>
-#include <ql/experimental/risk/sensitivityanalysis.hpp>
 #include <ql/termstructures/volatility/optionlet/optionletstripper.hpp>
 
 using std::vector;
@@ -194,22 +193,4 @@ namespace QuantLibAddin {
             QuantLib::LastFixingQuote(index));
     }
 
-    vector<vector<Real> >
-    bucketAnalysis(const vector<vector<QuantLib::Handle<QuantLib::Quote> > >& q,
-                   const vector<shared_ptr<QuantLib::Instrument> >& instr,
-                   const std::vector<QuantLib::Real>& quant,
-                   Real shift,
-                   QuantLib::SensitivityAnalysis type)
-    {
-        QL_FAIL("bucketAnalysis has been removed from the ORE QuantLib fork.");
     }
-
-    std::vector<std::vector<QuantLib::Real> >
-    bucketAnalysisDelta2(const std::vector<QuantLib::Handle<QuantLib::Quote> >& quotes,
-                         const std::vector<QuantLib::Handle<QuantLib::Quote> >& parameters,
-                         QuantLib::Real shift,
-                         QuantLib::SensitivityAnalysis type) {
-        QL_FAIL("bucketAnalysisDelta2 has been removed from the ORE QuantLib fork.");
-    }
-
-}

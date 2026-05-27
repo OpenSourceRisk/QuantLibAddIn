@@ -23,6 +23,17 @@
 
 /*! \page history Version History
 
+<strong>Release x.y.z - MMM YYYY</strong>
+
+- Serialization addin: skip creator/factory/register generation for constructors
+  where the Cpp platform is suppressed, allowing gensrc metadata to drive
+  exclusion of removed classes from serialization without editing generated files
+
+- Added support for optional trailing parameters in loop function typedefs, required for
+  qlCalendarAdvance under the ORE fork of QuantLib (Calendar::advance gained an optional
+  5th parameter); the generated loop typedef (loop_calendar.hpp) is supplemented by
+  loop_calendar_manual.hpp which provides the correct cmf5 bind signature
+
 <strong>Release 1.22.0 - May 2021</strong>
 
 - Maintenance release.

@@ -87,12 +87,12 @@
       </ReturnValue>
     </Member>
 
+    <!-- qlFRAforwardValue: removed in newer QuantLib (forwardValue() no longer exists)
     <Member name='qlFRAforwardValue' type='QuantLib::ForwardRateAgreement'>
       <description>Returns the forward value of the FRA.</description>
       <libraryFunction>forwardValue</libraryFunction>
       <SupportedPlatforms>
         <SupportedPlatform name='Excel'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters/>
@@ -102,13 +102,14 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Member>
+    -->
 
+    <!-- qlFRAspotValue: removed in newer QuantLib (spotValue() no longer exists)
     <Member name='qlFRAspotValue' type='QuantLib::ForwardRateAgreement'>
       <description>Returns the spot value of the FRA.</description>
       <libraryFunction>spotValue</libraryFunction>
       <SupportedPlatforms>
         <SupportedPlatform name='Excel'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters/>
@@ -118,6 +119,7 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Member>
+    -->
 
   </Functions>
 </Category>

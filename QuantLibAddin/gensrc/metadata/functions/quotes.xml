@@ -29,7 +29,6 @@
     <include>ql/quotes/futuresconvadjustmentquote.hpp</include>
     <include>ql/quotes/lastfixingquote.hpp</include>
     <include>ql/quotes/impliedstddevquote.hpp</include>
-    <include>ql/experimental/risk/sensitivityanalysis.hpp</include>
     <include>ql/indexes/swapindex.hpp</include>
     <include>qlo/capletvolstructure.hpp</include>
     <include>qlo/baseinstruments.hpp</include>
@@ -159,6 +158,7 @@
       </ReturnValue>
     </Member>
 
+    <!-- qlBucketAnalysis: QuantLibAddin implementation removed; depends on QuantLib::SensitivityAnalysis which was removed from the ORE QuantLib fork (v1.41+)
     <Procedure name='qlBucketAnalysis'>
       <description>delta NPV bucket sensitivity analysis for a (single/vector/matrix) SimpleQuote.</description>
       <alias>QuantLibAddin::bucketAnalysis</alias>
@@ -169,7 +169,6 @@
         <Parameters>
           <Parameter name='SimpleQuote'>
             <type>QuantLib::Quote</type>
-            <!--<type>QuantLib::SimpleQuote</type>-->
             <superType>libToHandle</superType>
             <tensorRank>matrix</tensorRank>
             <description>simple quotes.</description>
@@ -189,11 +188,6 @@
             <tensorRank>scalar</tensorRank>
             <description>shift.</description>
           </Parameter>
-          <Parameter name='SensitivityAnalysis' default='"Centered"'>
-            <type>QuantLib::SensitivityAnalysis</type>
-            <tensorRank>scalar</tensorRank>
-            <description>SensitivityAnalysis type.</description>
-          </Parameter>
         </Parameters>
       </ParameterList>
       <ReturnValue>
@@ -201,7 +195,9 @@
         <tensorRank>matrix</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
+    <!-- qlBucketAnalysisDelta: QuantLibAddin implementation removed; depends on QuantLib::SensitivityAnalysis which was removed from the ORE QuantLib fork (v1.41+)
     <Procedure name='qlBucketAnalysisDelta'>
       <description>Parameters' bucket analysis delta for a single SimpleQuote.</description>
       <alias>QuantLibAddin::bucketAnalysisDelta</alias>
@@ -227,11 +223,6 @@
             <tensorRank>scalar</tensorRank>
             <description>shift.</description>
           </Parameter>
-          <Parameter name='SensitivityAnalysis' default='"Centered"'>
-            <type>QuantLib::SensitivityAnalysis</type>
-            <tensorRank>scalar</tensorRank>
-            <description>SensitivityAnalysis type.</description>
-          </Parameter>
         </Parameters>
       </ParameterList>
       <ReturnValue>
@@ -239,7 +230,9 @@
         <tensorRank>vector</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
+    <!-- qlBucketAnalysisDelta2: QuantLibAddin implementation removed; depends on QuantLib::SensitivityAnalysis which was removed from the ORE QuantLib fork (v1.41+)
     <Procedure name='qlBucketAnalysisDelta2'>
       <description>Parameters' bucket analysis delta for a SimpleQuote vector.</description>
       <alias>QuantLibAddin::bucketAnalysisDelta2</alias>
@@ -250,7 +243,6 @@
         <Parameters>
           <Parameter name='SimpleQuote'>
             <type>QuantLib::Quote</type>
-            <!--<type>QuantLib::SimpleQuote</type>-->
             <superType>libToHandle</superType>
             <tensorRank>vector</tensorRank>
             <description>simple quote.</description>
@@ -266,11 +258,6 @@
             <tensorRank>scalar</tensorRank>
             <description>shift.</description>
           </Parameter>
-          <Parameter name='SensitivityAnalysis' default='"Centered"'>
-            <type>QuantLib::SensitivityAnalysis</type>
-            <tensorRank>scalar</tensorRank>
-            <description>SensitivityAnalysis type.</description>
-          </Parameter>
         </Parameters>
       </ParameterList>
       <ReturnValue>
@@ -278,6 +265,7 @@
         <tensorRank>matrix</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
     <Constructor name='qlSimpleQuote'>
       <libraryFunction>SimpleQuote</libraryFunction>

@@ -22,7 +22,8 @@
 #endif
 
 #include <qlo/dividendvanillaoption.hpp>
-#include <ql/instruments/dividendvanillaoption.hpp>
+//#include <ql/instruments/dividendvanillaoption.hpp>  // removed in newer QuantLib
+#include <ql/instruments/vanillaoption.hpp>
 
 namespace QuantLibAddin {
 

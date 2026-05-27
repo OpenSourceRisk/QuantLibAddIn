@@ -22,6 +22,9 @@
 #include <qlo/serialization/serializationfactory.hpp>
 #include <qlxl/register/register_all.hpp>
 
+void registerManualFunctions(const XLOPER&);
+void unregisterManualFunctions(const XLOPER&);
+
 /* Use BOOST_MSVC instead of _MSC_VER since some other vendors
    (Metrowerks, for example) also #define _MSC_VER
 */
@@ -114,6 +117,9 @@ DLLEXPORT int xlAutoOpen() {
         // Initialize QuantLib functions
         registerQlFunctions(xDll);
 
+        // Initialize manually implemented functions
+        registerManualFunctions(xDll);
+
         // Initialize the Enumeration Registry
         QuantLibAddin::registerEnumerations();
 
@@ -149,6 +155,9 @@ DLLEXPORT int xlAutoClose() {
         // Unregister ObjectHandler functions
         unregisterOhFunctions(xDll);
 #endif
+
+        // Unregister manually implemented functions
+        unregisterManualFunctions(xDll);
 
         // Unregister QuantLib functions
         unregisterQlFunctions(xDll);

@@ -175,9 +175,9 @@
       </ReturnValue>
     </EnumerationMember>
 
-    <Procedure name='qlCalendarHolidayList'>
+    <EnumerationMember name='qlCalendarHolidayList' type='QuantLib::Calendar'>
       <description>returns the holidays in a period between two dates according to a given holiday calendar.</description>
-      <alias>QuantLib::Calendar::holidayList</alias>
+      <libraryFunction>holidayList</libraryFunction>
       <SupportedPlatforms>
         <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel' implementation='manual'/>
@@ -186,11 +186,6 @@
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
-          <Parameter name='Calendar' exampleValue ='TARGET'>
-            <type>QuantLib::Calendar</type>
-            <tensorRank>scalar</tensorRank>
-            <description>Calendar to use for holiday determination.</description>
-          </Parameter>
           <Parameter name='FromDate' exampleValue ='01-Jan-2005'>
             <type>QuantLib::Date</type>
             <tensorRank>scalar</tensorRank>
@@ -212,7 +207,7 @@
         <type>QuantLib::Date</type>
         <tensorRank>vector</tensorRank>
       </ReturnValue>
-    </Procedure>
+    </EnumerationMember>
 
     <EnumerationMember name='qlCalendarAdjust' type='QuantLib::Calendar' loopParameter='Date'>
       <description>Adjusts a non-business day to the appropriate near business day according to a given calendar with respect to the given convention.</description>
@@ -243,13 +238,15 @@
       </ReturnValue>
     </EnumerationMember>
 
+    <!-- qlCalendarAdvance: implemented manually in manual.cpp / loop_calendar_manual.hpp
+         due to extra optional parameter in Calendar::advance (ORE fork of QuantLib)
+         that gensrc cannot express in the loop typedef (cmf5 vs cmf4).
     <EnumerationMember name='qlCalendarAdvance' type='QuantLib::Calendar' loopParameter='Period'>
       <description>advances a date according to a given calendar.</description>
       <libraryFunction>advance</libraryFunction>
       <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel'/>
-        <!--SupportedPlatform name='Calc'/-->
+        <SupportedPlatform name='Calc'/>
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -280,6 +277,7 @@
         <tensorRank>vector</tensorRank>
       </ReturnValue>
     </EnumerationMember>
+    -->
 
     <EnumerationMember name='qlCalendarBusinessDaysBetween' type='QuantLib::Calendar' loopParameter='FirstDate'>
       <description>Returns the number of business days between two dates.</description>

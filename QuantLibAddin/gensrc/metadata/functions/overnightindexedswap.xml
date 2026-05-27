@@ -38,7 +38,7 @@
       <ParameterList>
         <Parameters>
           <Parameter name='PayerReceiver' default='"Payer"'>
-            <type>QuantLib::OvernightIndexedSwap::Type</type>
+            <type>QuantLib::VanillaSwap::Type</type>
             <tensorRank>scalar</tensorRank>
             <description>PAYER to pay the fixed rate, RECEIVER to receive it.</description>
           </Parameter>
@@ -319,7 +319,7 @@
         <Parameters />
       </ParameterList>
       <ReturnValue>
-        <type>QuantLib::OvernightIndexedSwap::Type</type>
+        <type>QuantLib::VanillaSwap::Type</type>
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Member>

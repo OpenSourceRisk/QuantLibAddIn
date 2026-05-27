@@ -23,6 +23,15 @@
 
 /*! \page history Version History
 
+<strong>Release x.y.z - MMM YYYY</strong>
+
+- Fixed bug in RegistryManager::getTypeMap() where a stale static cached TypeMapPtr
+  could reference a deleted map after unregisterTypes() was called, causing heap
+  corruption on XLL unload; getTypeMap() now performs a fresh registry lookup on
+  every call
+
+- Upgraded project files to VS2026 (v145 toolset)
+
 <strong>Release 1.22.0 - May 2021</strong>
 
 - Improved processing for range references (thanks to Francois Botha)

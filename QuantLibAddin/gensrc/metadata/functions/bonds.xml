@@ -751,14 +751,13 @@
       </ReturnValue>
     </Procedure>
 
+    <!-- qlBondAtmRateFromYieldTermStructure: CleanPrice parameter now requires Bond::Price wrapper, not supported by gensrc
     <Procedure name='qlBondAtmRateFromYieldTermStructure'>
       <description>Returns the ATM rate implied by the given YieldTermStructure, settlement date, and clean price.</description>
       <alias>QuantLib::BondFunctions::atmRate</alias>
       <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -791,6 +790,7 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
     <!-- QuantLib::BondFunctions Yield functions -->
 
@@ -944,14 +944,13 @@
       </ReturnValue>
     </Procedure>
 
+    <!-- qlBondYieldFromCleanPrice: CleanPrice parameter now requires Bond::Price wrapper, not supported by gensrc
     <Procedure name='qlBondYieldFromCleanPrice'>
       <description>Returns the yield for the given bond corresponding to the given clean price and settlement date.</description>
       <alias>QuantLib::BondFunctions::yield</alias>
       <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -1008,6 +1007,7 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
     <Procedure name='qlBondDurationFromYield'>
       <description>Returns the duration implied by the given yield and settlement date.</description>
@@ -1172,14 +1172,13 @@
       </ReturnValue>
     </Procedure>
 
+    <!-- qlBondZSpreadFromCleanPrice: CleanPrice parameter now requires Bond::Price wrapper, not supported by gensrc
     <Procedure name='qlBondZSpreadFromCleanPrice'>
       <description>Returns the z-spread for the given bond corresponding to the given clean price and settlement date.</description>
       <alias>QuantLib::BondFunctions::zSpread</alias>
       <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -1215,7 +1214,7 @@
             <tensorRank>scalar</tensorRank>
             <description>frequency (e.g. Annual, Semiannual, Every4Month, Quarterly, Bimonthly, Monthly).</description>
           </Parameter>
-          
+
           <Parameter name='SettlementDate' const='False' default='QuantLib::Date()'>
             <type>QuantLib::Date</type>
             <tensorRank>scalar</tensorRank>
@@ -1244,6 +1243,7 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
     <!-- QuantLib::Bond Calculation -->
     

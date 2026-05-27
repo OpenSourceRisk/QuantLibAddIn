@@ -252,24 +252,25 @@ namespace QuantLibAddin {
         */
     };
 
-    class RiskyFixedBond : public Instrument {
-    public:
-        RiskyFixedBond(
-            const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
-            std::string name,
-            QuantLib::Currency ccy,
-            QuantLib::Real recoveryRate,
-            QuantLib::Handle<QuantLib::DefaultProbabilityTermStructure> 
-                defaultTS,
-            const boost::shared_ptr<QuantLib::Schedule>&  schedule,
-            QuantLib::Real rate,
-            QuantLib::DayCounter dayCounter,
-            QuantLib::BusinessDayConvention paymentConvention,
-            QuantLib::Real notionals,
-            QuantLib::Handle<QuantLib::YieldTermStructure> yieldTS,
-            QuantLib::Date npvDate,
-            bool permanent);
-    };
+    // RiskyFixedBond removed from the ORE fork of QuantLib
+    // class RiskyFixedBond : public Instrument {
+    // public:
+    //     RiskyFixedBond(
+    //         const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+    //         std::string name,
+    //         QuantLib::Currency ccy,
+    //         QuantLib::Real recoveryRate,
+    //         QuantLib::Handle<QuantLib::DefaultProbabilityTermStructure>
+    //             defaultTS,
+    //         const boost::shared_ptr<QuantLib::Schedule>&  schedule,
+    //         QuantLib::Real rate,
+    //         QuantLib::DayCounter dayCounter,
+    //         QuantLib::BusinessDayConvention paymentConvention,
+    //         QuantLib::Real notionals,
+    //         QuantLib::Handle<QuantLib::YieldTermStructure> yieldTS,
+    //         QuantLib::Date npvDate,
+    //         bool permanent);
+    // };
 
 
 
