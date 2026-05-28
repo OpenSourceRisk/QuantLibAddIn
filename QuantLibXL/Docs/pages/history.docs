@@ -25,6 +25,8 @@
 
 <strong>Release x.y.z - MMM YYYY</strong>
 
+- Added FX forward instrument and DiscountingFxForwardEngine (thanks to Mike Scaturo)
+
 - Added new ratehelpers and updated example sheet (thanks to Sebastian Schlenkrich)
 
 - qlCalendarAdvance reimplemented manually in manual.cpp with registration via

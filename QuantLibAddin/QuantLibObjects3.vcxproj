@@ -451,6 +451,7 @@
     <ClCompile Include="qlo\valueobjects\vo_evolutiondescription.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_exercise.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_forwardrateagreement.cpp" />
+    <ClCompile Include="qlo\valueobjects\vo_fxforward.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_index.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_interpolation.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_latentmodels.cpp" />
@@ -505,6 +506,7 @@
     <ClCompile Include="qlo\dividendvanillaoption.cpp" />
     <ClCompile Include="qlo\europeanoption.cpp" />
     <ClCompile Include="qlo\forwardrateagreement.cpp" />
+    <ClCompile Include="qlo\fxforward.cpp" />
     <ClCompile Include="qlo\forwardvanillaoption.cpp" />
     <ClCompile Include="qlo\overnightindexedswap.cpp" />
     <ClCompile Include="qlo\payoffs.cpp" />
@@ -569,6 +571,7 @@
     <ClCompile Include="qlo\serialization\create\create_evolutiondescription.cpp" />
     <ClCompile Include="qlo\serialization\create\create_exercise.cpp" />
     <ClCompile Include="qlo\serialization\create\create_forwardrateagreement.cpp" />
+    <ClCompile Include="qlo\serialization\create\create_fxforward.cpp" />
     <ClCompile Include="qlo\serialization\create\create_index.cpp" />
     <ClCompile Include="qlo\serialization\create\create_interpolation.cpp" />
     <ClCompile Include="qlo\serialization\create\create_latentmodels.cpp" />
@@ -624,6 +627,7 @@
     <ClCompile Include="qlo\serialization\register\serialization_evolutiondescription.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_exercise.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_forwardrateagreement.cpp" />
+    <ClCompile Include="qlo\serialization\register\serialization_fxforward.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_index.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_interpolation.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_latentmodels.cpp" />
@@ -722,6 +726,7 @@
     <ClInclude Include="qlo\valueobjects\vo_evolutiondescription.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_exercise.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_forwardrateagreement.hpp" />
+    <ClInclude Include="qlo\valueobjects\vo_fxforward.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_group.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_index.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_interpolation.hpp" />
@@ -779,6 +784,7 @@
     <ClInclude Include="qlo\dividendvanillaoption.hpp" />
     <ClInclude Include="qlo\europeanoption.hpp" />
     <ClInclude Include="qlo\forwardrateagreement.hpp" />
+    <ClInclude Include="qlo\fxforward.hpp" />
     <ClInclude Include="qlo\forwardvanillaoption.hpp" />
     <ClInclude Include="qlo\options.hpp" />
     <ClInclude Include="qlo\overnightindexedswap.hpp" />
@@ -870,6 +876,7 @@
     <ClInclude Include="qlo\serialization\create\create_evolutiondescription.hpp" />
     <ClInclude Include="qlo\serialization\create\create_exercise.hpp" />
     <ClInclude Include="qlo\serialization\create\create_forwardrateagreement.hpp" />
+    <ClInclude Include="qlo\serialization\create\create_fxforward.hpp" />
     <ClInclude Include="qlo\serialization\create\create_index.hpp" />
     <ClInclude Include="qlo\serialization\create\create_interpolation.hpp" />
     <ClInclude Include="qlo\serialization\create\create_latentmodels.hpp" />
@@ -926,6 +933,7 @@
     <ClInclude Include="qlo\serialization\register\serialization_evolutiondescription.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_exercise.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_forwardrateagreement.hpp" />
+    <ClInclude Include="qlo\serialization\register\serialization_fxforward.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_index.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_interpolation.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_latentmodels.hpp" />

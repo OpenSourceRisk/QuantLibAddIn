@@ -3,7 +3,7 @@ autom4te.cache/
 Clients/CppInstrumentIn/instrument_in
 Clients/Cpp/QLADemo
 Clients/CppSwapOut/swap_out
-config/
+/config/
 config.status
 configure
 Docs/.time-stamp-html
