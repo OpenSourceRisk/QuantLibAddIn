@@ -25,6 +25,8 @@
 
 <strong>Release x.y.z - MMM YYYY</strong>
 
+- Added new ratehelpers and updated example sheet (thanks to Sebastian Schlenkrich)
+
 - Updated for compatibility with the ORE fork of QuantLib:
 
   - qlCalendarHolidayList: Calendar::holidayList() changed from static to instance
