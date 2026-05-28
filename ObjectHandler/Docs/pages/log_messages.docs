@@ -43,7 +43,7 @@ message may also be retrieved by calling function \ref ohRangeRetrieveError.
 
 \section log_thresholds Logging Levels (Thresholds)
 
-The underlying logging framework (the log4cxx utility) implements a concept of
+The logging implementation supports a concept of
 thresholds, allowing greater granularity in determining which messages appear
 in the logfile.  The %ObjectHandler logging functions expose this threshold
 functionality, however it's not really used and the default logging thresholds

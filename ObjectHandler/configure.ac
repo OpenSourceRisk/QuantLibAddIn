@@ -46,20 +46,6 @@ AC_LANG([C++])
 
 # Confirm existence of dependencies
 
-# Configure and validate the path to log4cxx
-
-AC_ARG_WITH([log4cxx],
-    [AS_HELP_STRING([--without-log4cxx], [disable support for log4cxx, write log messages to stdout])],
-    [],
-    [with_log4cxx=yes])
-AS_IF([test "x$with_log4cxx" != xno],
-    [AC_CHECK_HEADER(
-        [log4cxx/logger.h],
-        [HAVE_LOG4CXX=1],
-        [AC_MSG_ERROR([log4cxx test failed (--without-log4cxx to disable)])])])
-AM_CONDITIONAL([OH_LINK_LOG4CXX], [test "$HAVE_LOG4CXX" -eq 1])
-AS_IF([test "$HAVE_LOG4CXX" -eq 1], AC_DEFINE([OH_INCLUDE_LOG4CXX], [1], [Support for logging]))
-
 # Check for tools needed for building documentation
 
 AC_PATH_PROG([DOXYGEN], [doxygen])

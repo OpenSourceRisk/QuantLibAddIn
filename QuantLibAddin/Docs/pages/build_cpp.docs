@@ -101,7 +101,7 @@ on your machine, e.g:
 \subsubsection build_cpp_win_directories 2.2.1 Directories
 
 The Visual C++ project files for %QuantLibAddin rely on relative pathnames to
-refer to the prerequisite projects %QuantLib, log4cxx, gensrc, and
+refer to the prerequisite projects %QuantLib, gensrc, and
 ObjectHandler.  In order for this to work, these projects must reside side by
 side in the directory tree, and the name of each project's parent directory
 must not include the version number (e.g.  \c %QuantLib not \c QuantLib-1.23.0).
@@ -113,7 +113,6 @@ suffix from the directory name).  For purposes of this tutorial we assume the
 packages have been installed in this way:
 \verbatim
 C:\build_ql_1_23_0\gensrc
-C:\build_ql_1_23_0\log4cxx
 C:\build_ql_1_23_0\ObjectHandler
 C:\build_ql_1_23_0\QuantLib
 C:\build_ql_1_23_0\QuantLibAddin
@@ -129,9 +128,6 @@ Download <tt>QuantLib-1.23.0.tgz</tt> and uncompress the package to
 
 Go to the 
 <a href="https://github.com/eehlers/QuantLibAddin-Old/releases/tag/QuantLibAddin-v1.23">QuantLibAddin downloads page</a>.
-
-Download <tt>log4cxx-0.10.0f15.zip</tt> and uncompress the package to
-<tt>C:\\build_ql_1_23_0\\log4cxx</tt>.
 
 Download <tt>gensrc-1.23.0.zip</tt> and uncompress the package to
 <tt>C:\\build_ql_1_23_0\\gensrc</tt>.
@@ -222,9 +218,6 @@ Download <tt>QuantLib-1.23.0.tgz</tt> and uncompress the package to
 Go to the 
 <a href="https://github.com/eehlers/QuantLibAddin-Old/releases/tag/QuantLibAddin-v1.23">QuantLibAddin downloads page</a>.
 
-Download <tt>log4cxx-0.10.0f15.tar.gz</tt> and uncompress the package to
-<tt>/home/erik/build/log4cxx-0.10.0</tt>.
-
 Download <tt>gensrc-1.23.0.tgz</tt> and uncompress the package to
 <tt>/home/erik/build/gensrc-1.23.0</tt>.
 
@@ -236,67 +229,7 @@ Download <tt>QuantLibAddin-1.23.0.tgz</tt> and uncompress the package to
 
 \subsection build_cpp_auto_build 3.3 Build
 
-\subsubsection build_cpp_auto_log4cxx 3.3.1 Build log4cxx
-
-Support for log4cxx is optional.  If you do not require logging, then when you
-configure ObjectHandler (see below), pass in the argument \c --without-log4cxx,
-which will cause log messages to be written to stdout instead of to the log
-file.  In that case you can skip ahead to the next section, \ref
-build_cpp_auto_oh.  If you need logging, read on.
-
-First you need to install apr and apr-utils.  Our copy of log4cxx includes
-source code for apr and apr-utils.  In the past we used to build them with
-these commands:
-
-\verbatim
-cd /home/erik/build/log4cxx-0.10.0/src/apr
-./buildconf
-./configure --prefix=/home/erik/install
-make install
-cd /home/erik/build/log4cxx-0.10.0/src/apr-util
-./buildconf
-./configure --prefix=/home/erik/install --with-apr=/home/erik/install
-make install
-\endverbatim
-
-But those commands no longer seem to work on new linux systems.  There might be
-a binary release available for your platform, on ubuntu you might try something
-like this:
-
-\verbatim
-sudo apt-get install libapr1-dev libaprutil1-dev
-\endverbatim
-
-Another possibility is to go to the apache web site and download the latest
-sources for apr and apr-utils.  At the time of this writing the files are
-apr-1.5.1.tar.gz and apr-util-1.5.3.tar.gz.  Copy them to a temp directory,
-untar them, and compile them something like this:
-
-\verbatim
-cd /home/erik/temp/apr-1.5.1
-./buildconf
-./configure --prefix=/home/erik/install
-make install
-cd /home/erik/temp/apr-util-1.5.3
-./buildconf --with-apr=../apr-1.5.1
-./configure --prefix=/home/erik/install --with-apr=../apr-1.5.1
-make install
-\endverbatim
-
-Once you have apr and apr-utils installed, go back and build log4cxx:
-
-\verbatim
-cd /home/erik/build/log4cxx-0.10.0
-./autogen.sh
-./configure --prefix=/home/erik/install --with-apr=/home/erik/install \
-    --with-apr-util=/home/erik/install
-make install
-\endverbatim
-
 \subsubsection build_cpp_auto_oh 3.3.2 Build ObjectHandler
-
-If you don't need logging, pass in the argument \c --without-log4cxx to
-\c configure.
 
 \verbatim
 cd /home/erik/build/ObjectHandler-1.23.0
@@ -367,13 +300,13 @@ build instructions above, the command would be
 g++ -I/home/erik/install/include -c -o yourapp.o yourapp.cpp
 \endverbatim
 
-When linking your program use the -l option to tell gcc to link to the log4cxx,
+When linking your program use the -l option to tell gcc to link to the
 ObjectHandler, %QuantLib, and %QuantLibAddin libraries, and use -L to specify
 the path containing those libraries, e.g:
 
 \verbatim
 g++ -o yourapp yourapp.o -L/home/erik/install/lib \
-    -llog4cxx -lObjectHandler -lQuantLib -lQuantLibAddin
+    -lObjectHandler -lQuantLib -lQuantLibAddin
 \endverbatim
 
 Finally before invoking your executable you need to ensure that your

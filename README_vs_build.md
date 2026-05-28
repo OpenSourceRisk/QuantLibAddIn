@@ -131,8 +131,7 @@ expected layout after cloning this repository is:
 QuantLibAddin\
   boost.props           # Boost location settings — edit before building
   conanfile.txt         # conan package descriptor (boost/1.83.0)
-  gensrc\               # code-generation framework
-  log4cxx\              # logging library
+  gensrc\               # code-generation framework 
   ObjectHandler\        # object repository
   QuantLib\             # QuantLib C++ analytics library (git submodule)
   QuantLibAddin\        # QuantLib C++ wrapper

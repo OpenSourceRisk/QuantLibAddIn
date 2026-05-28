@@ -13,7 +13,6 @@
 #    QL_PATH: Full path to the QuantLib directory 
 #    OH_PATH: Full path to the ObjectHandler directory
 #    QA_PATH: Full path to the QuantLibAddin directory
-#    LG_PATH: Full path to the log4cxx directory
 #    BOOST_PATH: Full path to boost directory
 #
 # Changes compared to the original: 
@@ -82,8 +81,7 @@ RL_INC= -I$(QL_PATH) -I$(OH_PATH) -I$(QA_PATH) -I$(BOOST_PATH) -I$(SIM_PATH)
 
 # FIXME: link QuantLibAddin dynamically (this leads to a Calc crash currently)
 RL_LIB=  \
-        -L$(LG_PATH)/src/main/cpp/.libs/ -llog4cxx \
-        -L$(BOOST_PATH)/stage/lib/ \
+		-L$(BOOST_PATH)/stage/lib/ \
         -L$(OH_PATH)/oh/.libs -lObjectHandler \
         -L$(QL_PATH)/ql/.libs -lQuantLib \
         -L$(QA_PATH)/qlo/.libs  -lQuantLibAddin \
@@ -99,10 +97,7 @@ WIN_LIB= $(QA_PATH)/lib/QuantLibObjects-vc100-mt-1_2_0.lib \
 	$(BOOST_PATH)/stage/lib/libboost_serialization-vc100-mt-1_48.lib \
 	$(BOOST_PATH)/stage/lib/libboost_filesystem-vc100-mt-1_48.lib \
 	$(BOOST_PATH)/stage/lib/libboost_regex-vc100-mt-1_48.lib \
-	$(BOOST_PATH)/stage/lib/libboost_system-vc100-mt-1_48.lib \
-	$(LG_PATH)/msvc/lib/log4cxxs-vc100-mt-0_10_0.lib \
-	$(LG_PATH)/msvc/lib/apr-vc100-mt-0_10_0.lib \
-	$(LG_PATH)/msvc/lib/aprutil-vc100-mt-0_10_0.lib
+	$(BOOST_PATH)/stage/lib/libboost_system-vc100-mt-1_48.lib
 # \
 #	$(LG_PATH)/msvc/lib/stricmp-vc80-mt-0_10_0.lib 
 

@@ -43,12 +43,10 @@ import shutil
 # ROOT_DIRS - The list of root folders from which
 # you want the find/replace to begin.
 ROOT_DIRS = (
-    '/home/erik/projects/QuantLibAddin-Old/log4cxx/src/main/include/log4cxx',
     '/home/erik/projects/QuantLibAddin-Old/gensrc',
     '/home/erik/projects/QuantLibAddin-Old/ObjectHandler',
     '/home/erik/projects/QuantLibAddin-Old/QuantLibAddin',
     '/home/erik/projects/QuantLibAddin-Old/QuantLibXL',
-    #'C:/projects/QuantLibAddin-Old4/log4cxx',
     #'C:/projects/QuantLibAddin-Old4/gensrc',
     #'C:/projects/QuantLibAddin-Old4/ObjectHandler',
     #'C:/projects/QuantLibAddin-Old4/QuantLibAddin',
@@ -192,7 +190,6 @@ IGNORE_DIRS = (
     re.compile('^html-online$'),
     re.compile('^Launcher$'),
     re.compile('^lib$'),
-    #re.compile('^log4cxx$'),
     re.compile('^Workbooks$'),
 )
 

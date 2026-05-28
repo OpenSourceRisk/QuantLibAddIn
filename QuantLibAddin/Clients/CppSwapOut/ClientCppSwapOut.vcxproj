@@ -182,7 +182,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>build\$(PlatformToolset)\$(Platform)\$(Configuration)/SwapOut-$(PlatformToolset)-mt-gd.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
@@ -226,7 +226,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>build\$(PlatformToolset)\$(Platform)\$(Configuration)/SwapOut-$(PlatformToolset)-mt-gd.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
@@ -270,7 +270,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>build\$(PlatformToolset)\$(Platform)\$(Configuration)/SwapOut-$(PlatformToolset)-mt-s.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -314,7 +314,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>build\$(PlatformToolset)\$(Platform)\$(Configuration)/SwapOut-$(PlatformToolset)-mt-s.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -357,7 +357,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>build\$(PlatformToolset)\$(Platform)\$(Configuration)/SwapOut-$(PlatformToolset)-mt.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -401,7 +401,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>build\$(PlatformToolset)\$(Platform)\$(Configuration)/SwapOut-$(PlatformToolset)-mt.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -444,7 +444,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>build\$(PlatformToolset)\$(Platform)\$(Configuration)/SwapOut-$(PlatformToolset)-mt-sgd.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
@@ -488,7 +488,7 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ObjectHandler\lib;..\..\..\QuantLib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>build\$(PlatformToolset)\$(Platform)\$(Configuration)/SwapOut-$(PlatformToolset)-mt-sgd.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>

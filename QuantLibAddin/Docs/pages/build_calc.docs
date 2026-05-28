@@ -161,7 +161,6 @@ See also the standard gcc installation notes:
 You need to build and install the following projects:
 
 \li %QuantLib
-\li log4cxx
 \li ObjectHandler
 \li %QuantLibAddin
 
