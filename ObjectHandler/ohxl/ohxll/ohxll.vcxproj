@@ -109,7 +109,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxll\$(Platform)\$(Configuration)/ohxll.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxll\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxll\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxll\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -159,7 +159,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxll\$(Platform)\$(Configuration)/ohxll.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxll\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxll\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxll\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

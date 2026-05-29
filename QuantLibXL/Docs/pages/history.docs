@@ -76,6 +76,8 @@
   - swaptionvolstructure.cpp, dividendvanillaoption.cpp, credit.cpp: updated for
     renamed/removed QuantLib classes
 
+- Visual Studio project files: Redirect Debug PDB output to OutDir to avoid mspdbsrv post-build copy lock
+
 <strong>Release 1.22.0 - May 2021</strong>
 
 - Deleted obsolete classes FDAmericanEngine, FDEuropeanEngine, FDBermudanEngine

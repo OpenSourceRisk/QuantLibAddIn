@@ -180,7 +180,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllStatic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -228,7 +228,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllStatic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -469,7 +469,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllStatic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -517,7 +517,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllStatic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

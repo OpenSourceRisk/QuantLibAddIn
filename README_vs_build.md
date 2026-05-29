@@ -232,7 +232,37 @@ recompiled from scratch for the new runtime library setting.
 
 ---
 
-## 6 Loading the Add-in in Excel
+## 6 Known Issues
+
+### mspdbsrv PDB file lock
+
+**Symptom:** A Debug-configuration build fails with `MSB3027: Could not copy
+"...\build\...\Foo.pdb" to "...\lib\Foo.pdb" — being used by another
+process`.
+
+**Root cause:** `mspdbsrv.exe` (the MSVC PDB server, spawned by `cl.exe /MP`
+to serialise concurrent writes from parallel compiler processes) keeps the PDB
+file **open after compilation finishes**. It lingers for reuse by incremental
+builds, holding an exclusive write handle on the PDB that lives in the build
+intermediate directory (`IntDir`). MSBuild's post-build step tries to copy
+that file to the output (`OutDir` / `lib\`), but mspdbsrv's handle prevents
+it.
+
+**Fix (applied):** The `<ProgramDataBaseFileName>` for all Debug configurations
+in QuantLib.vcxproj and QuantLibObjects3.vcxproj has been set to
+`$(OutDir)$(TargetName).pdb` — that is, the final `lib\` path — rather than
+the intermediate `build\` directory. mspdbsrv writes the PDB directly to its
+final destination; there is no post-build copy step, so the lock is
+irrelevant.
+
+This means the `lib\` PDB is held open by mspdbsrv while the build is
+running, but it is already in the right place. Subsequent builds can
+overwrite it once mspdbsrv has finished with it (which happens naturally
+before the next compilation begins).
+
+---
+
+## 7 Loading the Add-in in Excel
 
 1. Open Excel.
 2. Go to **File > Options > Add-ins**.

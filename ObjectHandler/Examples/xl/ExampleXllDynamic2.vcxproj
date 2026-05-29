@@ -108,7 +108,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllDynamic2.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -156,7 +156,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllDynamic2.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

@@ -118,7 +118,7 @@
       <PrecompiledHeaderOutputFile>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -172,7 +172,7 @@
       <PrecompiledHeaderOutputFile>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -228,7 +228,7 @@
       <PrecompiledHeaderOutputFile>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
@@ -285,7 +285,7 @@
       <PrecompiledHeaderOutputFile>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>

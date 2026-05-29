@@ -164,7 +164,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/ohxllib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -196,7 +196,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/ohxllib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -230,7 +230,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/ohxllib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -264,7 +264,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/ohxllib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -298,7 +298,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/ohxllib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -332,7 +332,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/ohxllib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -364,7 +364,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/ohxllib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -396,7 +396,7 @@
       <PrecompiledHeaderOutputFile>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/ohxllib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>..\..\build\$(PlatformToolset)\ohxllib\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

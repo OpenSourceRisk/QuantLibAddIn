@@ -36,6 +36,8 @@
 
 - Upgraded project files to VS2026 (v145 toolset)
 
+- Visual Studio project files: Redirect Debug PDB output to OutDir to avoid mspdbsrv post-build copy lock
+
 <strong>Release 1.22.0 - May 2021</strong>
 
 - Improved processing for range references (thanks to Francois Botha)
