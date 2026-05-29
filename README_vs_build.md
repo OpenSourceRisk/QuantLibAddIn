@@ -204,6 +204,13 @@ Visual Studio version used to open the solution. Building with VS 2022
 produces separate XLL files (v143-tagged) that coexist with the VS 2026
 builds (v145-tagged) in the same xll\ directory.
 
+The intermediate static libraries (QuantLib, QuantLibObjects,
+ObjectHandler-xllib, xlsdk) do **not** include a toolset tag in their
+filenames. A v143 build therefore overwrites the v145 intermediates and
+vice versa. This is harmless provided both toolset versions are not built
+in an interleaved fashion; build all configurations for one toolset before
+switching to the other.
+
 The basic and full builds share the same output filenames and overwrite each
 other. Build full only when gensrc metadata has changed; use basic otherwise.
 
