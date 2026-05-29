@@ -5,9 +5,9 @@ prerequisites from source code using the hand-maintained Visual Studio
 solution files.
 
 > **Last verified:** all 8 configurations (4 runtime variants × basic + full)
-> built successfully with VS 2026 (v145 toolset), x64 **and Win32**, producing
-> eight XLLs (four per platform) in `QuantLibXL\xll\`. See sections 2.2 and 5
-> for full details.
+> built successfully with VS 2026 (v145 toolset) and VS 2022 (v143 toolset),
+> x64 and Win32, producing XLLs in `QuantLibXL\xll\`. See sections 2.2
+> and 5 for full details.
 
 ---
 
@@ -32,8 +32,13 @@ have changed the gensrc metadata (the XML files under
 
 VS 2026 (v145 toolset) or VS 2022 (v143 toolset) is required. The
 "Desktop development with C++" workload must be installed. The platform
-toolset is selected automatically from `QuantLib\QuantLib.props` based on
+toolset is selected automatically from QuantLib\QuantLib.props based on
 the `VisualStudioVersion` environment variable.
+
+| Visual Studio version | VisualStudioVersion | Toolset tag |
+|---|---|---|
+| VS 2026 (version 18) | 18.0 | v145 |
+| VS 2022 (version 17) | 17.0 | v143 |
 
 For the Full build, the **"Desktop development with C++"** workload must
 include the **C++ CMake tools** component, which provides `nmake.exe` on
@@ -195,7 +200,9 @@ encodes the toolset, platform, configuration and version:
 | Debug (static runtime) | Win32 | `QuantLibXL-v145-mt-sgd-1_23_0.xll` |
 
 The toolset tag (`v145`, `v143`, …) is determined automatically from the
-Visual Studio version used to open the solution.
+Visual Studio version used to open the solution. Building with VS 2022
+produces separate XLL files (v143-tagged) that coexist with the VS 2026
+builds (v145-tagged) in the same xll\ directory.
 
 The basic and full builds share the same output filenames and overwrite each
 other. Build full only when gensrc metadata has changed; use basic otherwise.
@@ -208,14 +215,26 @@ To build from the command line without opening Visual Studio, set
 `VisualStudioVersion` so that `QuantLib.props` selects the correct toolset,
 and add `nmake.exe` to the PATH for Full builds:
 
+For VS 2026 (v145):
+
 ```powershell
 $env:VisualStudioVersion = "18.0"
-$env:PATH = "C:\Program Files\Microsoft Visual Studio\18\Professional\VC\Tools\MSVC\14.50.35717\bin\Hostx64\x64;" + $env:PATH
 $msbuild = "C:\Program Files\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\MSBuild.exe"
 
-# example: Release (static runtime), basic build
 &$msbuild "C:\erik\repos\QuantLibAddin\QuantLibXL\QuantLibXL_basic.sln" `
     /p:Configuration="Release (static runtime)" /p:Platform=x64 /m /nologo
+```
+
+For VS 2022 (v143), use that installation's MSBuild and pass `VisualStudioVersion=17.0`
+so that QuantLib.props selects the v143 toolset instead of v145:
+
+```powershell
+$env:VisualStudioVersion = "17.0"
+$msbuild = "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
+
+&$msbuild "C:\erik\repos\QuantLibAddin\QuantLibXL\QuantLibXL_basic.sln" `
+    /p:Configuration="Release (static runtime)" /p:Platform=x64 `
+    /p:VisualStudioVersion=17.0 /m /nologo
 ```
 
 Configuration names with spaces (e.g. `"Release (static runtime)"`) must be
