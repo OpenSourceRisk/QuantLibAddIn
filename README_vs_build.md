@@ -5,8 +5,9 @@ prerequisites from source code using the hand-maintained Visual Studio
 solution files.
 
 > **Last verified:** all 8 configurations (4 runtime variants × basic + full)
-> built successfully with VS 2026 (v145 toolset), x64, producing all four
-> XLLs in `QuantLibXL\xll\`. See sections 2.2 and 5 for full details.
+> built successfully with VS 2026 (v145 toolset), x64 **and Win32**, producing
+> eight XLLs (four per platform) in `QuantLibXL\xll\`. See sections 2.2 and 5
+> for full details.
 
 ---
 
@@ -155,16 +156,15 @@ described in section 2.2.
 
 ### Step 3 — Select configuration and platform
 
-In the Visual Studio toolbar select:
+In the Visual Studio toolbar select the desired configuration and platform
+(**x64** or **Win32**):
 
 | Goal | Configuration | Platform |
 |---|---|---|
-| Dynamic-runtime release XLL | **Release** | **x64** |
-| Dynamic-runtime debug XLL | **Debug** | **x64** |
-| Static-runtime release XLL | **Release (static runtime)** | **x64** |
-| Static-runtime debug XLL | **Debug (static runtime)** | **x64** |
-
-Always build for **x64**, not Win32.
+| Dynamic-runtime release XLL | **Release** | **x64** or **Win32** |
+| Dynamic-runtime debug XLL | **Debug** | **x64** or **Win32** |
+| Static-runtime release XLL | **Release (static runtime)** | **x64** or **Win32** |
+| Static-runtime debug XLL | **Debug (static runtime)** | **x64** or **Win32** |
 
 ### Step 4 — Build
 
@@ -189,6 +189,10 @@ encodes the toolset, platform, configuration and version:
 | Release (static runtime) | x64 | `QuantLibXL-v145-x64-mt-s-1_23_0.xll` |
 | Debug | x64 | `QuantLibXL-v145-x64-mt-gd-1_23_0.xll` |
 | Debug (static runtime) | x64 | `QuantLibXL-v145-x64-mt-sgd-1_23_0.xll` |
+| Release | Win32 | `QuantLibXL-v145-mt-1_23_0.xll` |
+| Release (static runtime) | Win32 | `QuantLibXL-v145-mt-s-1_23_0.xll` |
+| Debug | Win32 | `QuantLibXL-v145-mt-gd-1_23_0.xll` |
+| Debug (static runtime) | Win32 | `QuantLibXL-v145-mt-sgd-1_23_0.xll` |
 
 The toolset tag (`v145`, `v143`, …) is determined automatically from the
 Visual Studio version used to open the solution.
