@@ -78,6 +78,11 @@
 
 - Visual Studio project files: Redirect Debug PDB output to OutDir to avoid mspdbsrv post-build copy lock
 
+- Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate
+  to qlFraForwardRate; removed qlFixedRateBond2: deleted the QuantLibAddin wrapper constructor that accepted
+  a vector of InterestRate objects as coupons, on the grounds that the same bond can be constructed via the
+  simpler qlFixedRateBond interface which takes raw Rate values and a DayCounter directly (thanks to Francois Botha)
+
 <strong>Release 1.22.0 - May 2021</strong>
 
 - Deleted obsolete classes FDAmericanEngine, FDEuropeanEngine, FDBermudanEngine

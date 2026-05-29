@@ -272,8 +272,6 @@ namespace QuantLibAddin {
     //         bool permanent);
     // };
 
-
-
     class SyntheticCDO : public Instrument {
     public:
         SyntheticCDO(

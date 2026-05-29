@@ -325,8 +325,6 @@ namespace QuantLibAddin {
                QuantLib::PiecewiseYieldCurve<QuantLib::Discount,QuantLib::LogLinear>(referenceDate, helpers, dayCounter));
     }
 
-
-
     // RiskyFixedBond::RiskyFixedBond removed from the ORE fork of QuantLib
     // RiskyFixedBond::RiskyFixedBond(
     //     const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
@@ -350,7 +348,6 @@ namespace QuantLibAddin {
     //                 paymentConvention,notionals,yieldTS///, npvDate
     //                                    ));
     // }
-
 
     SyntheticCDO::SyntheticCDO(
         const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
