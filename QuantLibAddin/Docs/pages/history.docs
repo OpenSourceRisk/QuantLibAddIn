@@ -25,6 +25,8 @@
 
 <strong>Release x.y.z - MMM YYYY</strong>
 
+- Added a cmake build that sits alongside the existing build using the manually maintained Visual Studio solution files
+
 - Added FX forward instrument and DiscountingFxForwardEngine (thanks to Mike Scaturo)
 
 - Added new ratehelpers and updated example sheet (thanks to Sebastian Schlenkrich)

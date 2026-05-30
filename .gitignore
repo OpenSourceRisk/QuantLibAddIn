@@ -52,6 +52,8 @@ XL-Launcher/bin/Release/
 XL-Launcher/obj/
 
 # Build outputs
+/build
+CMakeUserPresets.json
 **/x64/Debug
 **/x64/Release
 **/Debug

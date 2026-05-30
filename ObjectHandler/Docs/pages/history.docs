@@ -25,6 +25,8 @@
 
 <strong>Release x.y.z - MMM YYYY</strong>
 
+- Added a cmake build that sits alongside the existing build using the manually maintained Visual Studio solution files
+
 - Fixed bug in RegistryManager::getTypeMap() where a stale static cached TypeMapPtr
   could reference a deleted map after unregisterTypes() was called, causing heap
   corruption on XLL unload; getTypeMap() now performs a fresh registry lookup on

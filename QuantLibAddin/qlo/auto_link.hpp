@@ -78,10 +78,12 @@
 
 #define QLADDIN_LIB_NAME "QuantLibObjects-" QLADDIN_LIB_TOOLSET QLADDIN_LIB_PLATFORM QLADDIN_LIB_THREAD_OPT QLADDIN_LIB_RT_OPT "-" QLADDIN_LIB_VERSION ".lib"
 
+#ifndef QLADDIN_NO_AUTO_LINK
 #pragma comment(lib, QLADDIN_LIB_NAME)
 #ifdef BOOST_LIB_DIAGNOSTIC
 #  pragma message("Will (need to) link to lib file: " QLADDIN_LIB_NAME)
 #endif
+#endif // QLADDIN_NO_AUTO_LINK
 
 #endif
 

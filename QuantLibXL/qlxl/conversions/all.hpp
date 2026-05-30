@@ -21,6 +21,10 @@
 
 #include <ohxl/conversions/all.hpp>
 #include <qlo/conversions/all.hpp>
+// Ensure the full specialisation Create<QuantLib::Calendar> is visible to all
+// XLL translation units before they instantiate it, suppressing implicit
+// template instantiation and the duplicate-symbol link error that would follow.
+#include <qlo/enumerations/factories/calendarfactory.hpp>
 #include <qlxl/conversions/opertovector.hpp>
 #include <qlxl/conversions/opertomatrix.hpp>
 #include <qlxl/conversions/scalartooper.hpp>

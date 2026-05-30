@@ -76,10 +76,11 @@
 
 #define XLSDK_LIB_NAME "xlsdk-" XLSDK_LIB_TOOLSET XLSDK_LIB_PLATFORM XLSDK_LIB_THREAD_OPT XLSDK_LIB_RT_OPT ".lib"
 
+#ifndef XLSDK_NO_AUTO_LINK
 #pragma comment(lib, XLSDK_LIB_NAME)
 #ifdef BOOST_LIB_DIAGNOSTIC
 #  pragma message("Linking to lib file: " XLSDK_LIB_NAME)
 #endif
+#endif // XLSDK_NO_AUTO_LINK
 
-#endif
-
+#endif // xlsdk_autolink_hpp

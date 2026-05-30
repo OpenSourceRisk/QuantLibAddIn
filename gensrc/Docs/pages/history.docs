@@ -25,6 +25,8 @@
 
 <strong>Release x.y.z - MMM YYYY</strong>
 
+- Added a cmake build that sits alongside the existing build using the manually maintained Visual Studio solution files
+
 - Serialization addin: skip creator/factory/register generation for constructors
   where the Cpp platform is suppressed, allowing gensrc metadata to drive
   exclusion of removed classes from serialization without editing generated files
