@@ -295,3 +295,9 @@ target_link_libraries(QuantLibObjects PUBLIC
     Boost::filesystem
     Boost::serialization
 )
+
+# -----------------------------------------------------------------------
+# AddinCpp static library and QLADemo client executable
+# -----------------------------------------------------------------------
+add_subdirectory(Addins/Cpp)
+add_subdirectory(Clients/Cpp)

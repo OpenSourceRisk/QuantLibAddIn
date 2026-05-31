@@ -27,6 +27,11 @@
 
 - Added a cmake build that sits alongside the existing build using the manually maintained Visual Studio solution files
 
+- Reenabled the C++ addin.  In the visual studio build, the build of the C++
+  addin was still working.  Fixed a problem where the build would fail if
+  doxygen were not installed.  Extended the cmake build to support the build of
+  the C++ addin.
+
 - Added FX forward instrument and DiscountingFxForwardEngine (thanks to Mike Scaturo)
 
 - Added new ratehelpers and updated example sheet (thanks to Sebastian Schlenkrich)
