@@ -1,19 +1,24 @@
 # ObjectHandler — builds three static libraries consumed by the XLL:
 # Ensure Boost imported targets are available (find_package is idempotent).
-if(NOT MSVC_LINK_DYNAMIC_RUNTIME)
-    set(Boost_USE_STATIC_RUNTIME ON)
+# Static Boost (and static runtime) is only forced for the MSVC/Windows build;
+# on Linux we use the platform's default Boost libraries.
+if(MSVC)
+    if(NOT MSVC_LINK_DYNAMIC_RUNTIME)
+        set(Boost_USE_STATIC_RUNTIME ON)
+    endif()
+    set(Boost_USE_STATIC_LIBS ON)
 endif()
-set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.58.0 REQUIRED COMPONENTS filesystem serialization)
 
 
-#   xlsdk          : Excel SDK (framewrk.cpp + xlcall32.lib)
+#   xlsdk          : Excel SDK (framewrk.cpp + xlcall32.lib)   [Windows only]
 #   ohlib          : ObjectHandler core (oh/*.cpp)
-#   ohxllib        : ObjectHandler Excel layer (ohxl/**/*.cpp)
+#   ohxllib        : ObjectHandler Excel layer (ohxl/**/*.cpp) [Windows only]
 
 # -----------------------------------------------------------------------
-# xlsdk
+# xlsdk  (Windows/Excel only)
 # -----------------------------------------------------------------------
+if(WIN32)
 add_library(xlsdk STATIC
     xlsdk/framewrk.cpp
 )
@@ -29,6 +34,7 @@ target_link_libraries(xlsdk PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/xlsdk/x64/XLCALL32.LIB,
         ${CMAKE_CURRENT_SOURCE_DIR}/xlsdk/xlcall32.lib>
 )
+endif()
 
 # -----------------------------------------------------------------------
 # ohlib  (ObjectHandler core — no Excel dependency)
@@ -49,8 +55,9 @@ target_include_directories(ohlib PUBLIC
 target_link_libraries(ohlib PUBLIC Boost::boost Boost::filesystem Boost::serialization)
 
 # -----------------------------------------------------------------------
-# ohxllib  (ObjectHandler Excel layer — depends on ohlib + xlsdk)
+# ohxllib  (ObjectHandler Excel layer — depends on ohlib + xlsdk) [Windows only]
 # -----------------------------------------------------------------------
+if(WIN32)
 add_library(ohxllib STATIC
     ohxl/callingrange.cpp
     ohxl/configuration.cpp
@@ -90,3 +97,4 @@ target_include_directories(ohxllib PUBLIC
 )
 
 target_link_libraries(ohxllib PUBLIC ohlib xlsdk)
+endif()

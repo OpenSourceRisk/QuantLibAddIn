@@ -60,8 +60,13 @@ target_include_directories(QLADemo PRIVATE
 
 target_link_libraries(QLADemo PRIVATE
     AddinCpp
-    odbc32
-    odbccp32
-    Ws2_32
-    advapi32
 )
+
+if(WIN32)
+    target_link_libraries(QLADemo PRIVATE
+        odbc32
+        odbccp32
+        Ws2_32
+        advapi32
+    )
+endif()

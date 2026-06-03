@@ -2,10 +2,12 @@
 # Builds the QuantLibObjects static library (the QuantLib/ObjectHandler wrapper).
 
 # Ensure Boost components are available.
-if(NOT MSVC_LINK_DYNAMIC_RUNTIME)
-    set(Boost_USE_STATIC_RUNTIME ON)
+if(MSVC)
+    if(NOT MSVC_LINK_DYNAMIC_RUNTIME)
+        set(Boost_USE_STATIC_RUNTIME ON)
+    endif()
+    set(Boost_USE_STATIC_LIBS ON)
 endif()
-set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.58.0 REQUIRED COMPONENTS filesystem serialization)
 
 add_library(QuantLibObjects STATIC
