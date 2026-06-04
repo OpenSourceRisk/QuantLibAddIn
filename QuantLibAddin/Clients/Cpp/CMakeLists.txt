@@ -2,7 +2,7 @@
 # Builds the QLADemo console executable (C++ addin demo client).
 #
 # Output naming mirrors Build A:
-#   QLADemo-v<toolset>-x64-mt[-s|-gd|-sgd]-1_23_0.exe
+#   QLADemo-v<toolset>-x64-mt[-s|-gd|-sgd]-1_42_0.exe
 #
 # The executable is written to  build/<preset>/cpp/
 # which keeps it separate from the Build A output in
@@ -31,7 +31,7 @@ else()
     set(QLADEMO_DEBUG_RUNTIME_TAG   "-mt-sgd")
 endif()
 
-set(QLADEMO_VERSION_TAG "1_23_0")
+set(QLADEMO_VERSION_TAG "1_42_0")
 
 set(QLADEMO_BASE_NAME
     "QLADemo-${QLADEMO_TOOLSET_TAG}${QLADEMO_PLATFORM_TAG}"

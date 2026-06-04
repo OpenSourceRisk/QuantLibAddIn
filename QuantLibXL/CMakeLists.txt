@@ -2,7 +2,7 @@
 # Builds the QuantLibXL Excel XLL (a DLL with .xll extension).
 #
 # Output naming mirrors Build A:
-#   QuantLibXL-v<toolset>-x64-mt[-s|-gd|-sgd]-1_23_0.xll
+#   QuantLibXL-v<toolset>-x64-mt[-s|-gd|-sgd]-1_42_0.xll
 #
 # The toolset tag, platform tag and runtime tag are computed from cmake
 # variables so that the name matches the hand-maintained VS project output.
@@ -45,7 +45,7 @@ endif()
 # -----------------------------------------------------------------------
 # Version tag
 # -----------------------------------------------------------------------
-set(QLXL_VERSION_TAG "1_23_0")
+set(QLXL_VERSION_TAG "1_42_0")
 
 # -----------------------------------------------------------------------
 # Compose the base output name (without config suffix)
@@ -204,7 +204,7 @@ set(QLXL_SRC
 # -----------------------------------------------------------------------
 add_library(QuantLibXL SHARED ${QLXL_SRC})
 
-# Output filename: QuantLibXL-v145-x64-mt-s-1_23_0  (no lib prefix on Windows)
+# Output filename: QuantLibXL-v145-x64-mt-s-1_42_0  (no lib prefix on Windows)
 # We use generator expressions to select the runtime tag per config.
 set_target_properties(QuantLibXL PROPERTIES
     PREFIX ""

@@ -23,7 +23,7 @@
 
 /*! \page history Version History
 
-<strong>Release x.y.z - MMM YYYY</strong>
+<strong>Release 1.42 - MMM YYYY</strong>
 
 - Added a cmake build that sits alongside the existing build using the manually maintained Visual Studio solution files
 

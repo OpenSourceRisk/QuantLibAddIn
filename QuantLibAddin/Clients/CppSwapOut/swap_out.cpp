@@ -204,7 +204,7 @@ int main() {
 
         LOG_MESSAGE("Example of serializing to/from a buffer:");
 
-        qlSimpleQuote("quote1", 1.23, 0, false, OH_NULL, false);
+        qlSimpleQuote("quote1", 1.42, 0, false, OH_NULL, false);
         std::vector<std::string> idList;
         idList.push_back("quote1");
         std::string xml = ohObjectSaveString(idList, OH_NULL, OH_NULL);

@@ -16,7 +16,7 @@ Eric's notes to himself on how to package the release.
 |QuantLibXL - source    |    --            | make_zip_source.bat    |
 |====================================================================
 
-(1) /home/erik/projects/QuantLibAddin-Old/ObjectHandler/dev_tools/tgz2zip gensrc 1.23.0
-(2) /home/erik/projects/QuantLibAddin-Old/ObjectHandler/dev_tools/tgz2zip ObjectHandler 1.23.0
-(3) /home/erik/projects/QuantLibAddin-Old/ObjectHandler/dev_tools/tgz2zip QuantLibAddin 1.23.0
+(1) /home/erik/projects/QuantLibAddin-Old/ObjectHandler/dev_tools/tgz2zip gensrc 1.42.0
+(2) /home/erik/projects/QuantLibAddin-Old/ObjectHandler/dev_tools/tgz2zip ObjectHandler 1.42.0
+(3) /home/erik/projects/QuantLibAddin-Old/ObjectHandler/dev_tools/tgz2zip QuantLibAddin 1.42.0
 
