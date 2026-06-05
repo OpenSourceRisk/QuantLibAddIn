@@ -184,15 +184,29 @@ CMakeLists.txt              <- root: wires together all subprojects
 CMakePresets.json           <- configure and build presets
 cmake\
   commonSettings.cmake      <- MSVC compile options, CRT selection, auto-link suppressors
+  QuantLibAddinDocs.cmake   <- shared docs helper (tool discovery + target helpers)
+  RunDoxygen.cmake          <- build-time driver that runs doxygen for one project
+gensrc\
+  CMakeLists.txt            <- optional gensrc code-generation step
+  Docs\CMakeLists.txt       <- gensrc-docs target
 ObjectHandler\
   CMakeLists.txt            <- builds xlsdk, ohlib, ohxllib static libs
+  Docs\CMakeLists.txt       <- ObjectHandler-docs target
 QuantLibAddin\
   CMakeLists.txt            <- builds QuantLibObjects static lib
+  Docs\CMakeLists.txt       <- QuantLibAddin-docs target
 QuantLibXL\
   CMakeLists.txt            <- builds the XLL
+  Docs\CMakeLists.txt       <- QuantLibXL-docs target
 QuantLib\
   CMakeLists.txt            <- upstream QuantLib cmake (unchanged)
 ```
+
+Each subproject keeps its own documentation build in its `Docs\CMakeLists.txt`,
+so a project's docs are part of that standalone project (just like its code) and
+can be built on their own.  The two shared pieces live under `cmake\`:
+`QuantLibAddinDocs.cmake` (tool discovery and the `qla_add_doxygen_docs` /
+`qla_add_gensrc_docs` helpers) and `RunDoxygen.cmake` (the per-project driver).
 
 ---
 
@@ -239,3 +253,116 @@ QuantLibXL-<toolset>-x64-<runtime-tag>-1_23_0.xll
 (e.g. `v145` for VS 2026, `v143` for VS 2022).  `<runtime-tag>` is
 `-mt-s` / `-mt-sgd` (static CRT) or `-mt` / `-mt-gd` (dynamic CRT)
 depending on `MSVC_LINK_DYNAMIC_RUNTIME`.
+
+---
+
+## 10  Documentation (Doxygen)
+
+The cmake build can also build the HTML documentation for gensrc,
+ObjectHandler, QuantLibAddin and QuantLibXL, replicating the legacy automake
+`make docs` target.  This works on both Windows and Linux/WSL.
+
+### Prerequisites
+
+- **Doxygen** (the `doxygen` executable on `PATH`).
+- **Graphviz** (the `dot` executable on `PATH`) — optional, but enables the
+  inheritance / collaboration diagrams.  When `dot` is not found the docs
+  still build, just without the graphs.
+- **Python 3** — used to run the doxyfile preprocessor and `gensrc`.
+
+A C++ compiler and Boost are **not** required to build the documentation.
+
+### Building the docs
+
+There are two ways to drive the documentation build.
+
+**A. Standalone (recommended when you only want the docs)** — each project's
+`Docs` directory is itself a tiny standalone cmake project that needs only
+Python, Doxygen and dot, so it works even on a machine that cannot compile the
+libraries (no Boost / no C++ toolchain).  Configure the `Docs` directory of the
+project you want and build its `docs` target:
+
+```powershell
+cmake -S ObjectHandler\Docs -B build\docs-objecthandler
+cmake --build build\docs-objecthandler --target docs
+```
+
+The same pattern works for `gensrc\Docs`, `QuantLibAddin\Docs` and
+`QuantLibXL\Docs`.  (The QuantLibXL *library* is Windows-only, but its
+documentation builds on any platform.)
+
+**B. As part of the main build** — add `-DQLA_BUILD_DOCS=ON` at configure
+time, then build the aggregate `docs` target (or an individual project target):
+
+```powershell
+cmake --preset windows-vs2026-x64-static -DQLA_BUILD_DOCS=ON
+cmake --build build\windows-vs2026-x64-static --target docs
+```
+
+On Linux/WSL the equivalent standalone build is:
+
+```bash
+cmake -S ObjectHandler/Docs -B build/docs-objecthandler
+cmake --build build/docs-objecthandler --target docs
+```
+
+### Targets
+
+In the main build (option B) the aggregate `docs` target and all four
+per-project targets are available:
+
+| Target               | Builds |
+|----------------------|--------|
+| `docs`               | all four projects below (aggregate) |
+| `gensrc-docs`        | gensrc HTML docs |
+| `ObjectHandler-docs` | ObjectHandler HTML docs |
+| `QuantLibAddin-docs` | QuantLibAddin HTML docs |
+| `QuantLibXL-docs`    | QuantLibXL HTML docs |
+
+In a standalone `Docs` build (option A) the project exposes its own
+`<project>-docs` target plus a convenience `docs` target that builds it.
+
+Because this is a *pristine* checkout, the `Docs/auto.pages` Doxygen inputs for
+ObjectHandler and QuantLibAddin do not exist yet.  Each project that needs them
+defines its own gensrc step — `ObjectHandler-docs-gensrc` and
+`QuantLibAddin-docs-gensrc` — which runs `gensrc.py -d` and is wired as a
+prerequisite of that project's doc target.  QuantLibXL reuses
+`QuantLibAddin-docs-gensrc` (it consumes the same QuantLibAddin auto.pages), so
+a single `--target docs` produces everything from a clean tree.
+
+### Output locations
+
+The generated HTML is written under the build tree, keeping the source tree
+clean.  In the main build (option B) all four appear under one build directory:
+
+```
+build\<preset>\gensrc\Docs\gensrc-docs\html\index.html
+build\<preset>\ObjectHandler\Docs\ObjectHandler-docs\html\index.html
+build\<preset>\QuantLibAddin\Docs\QuantLibAddin-docs\html\index.html
+build\<preset>\QuantLibXL\Docs\QuantLibXL-docs\html\index.html
+```
+
+In a standalone build (option A) the output is under that project's build
+directory, e.g. `build\docs-objecthandler\ObjectHandler-docs\html\index.html`.
+A per-project `doxywarnings.txt` is written next to each `html` directory.
+
+### Design notes
+
+- Each subproject owns its documentation build in its own
+  `<project>\Docs\CMakeLists.txt`, consistent with the repository convention
+  that every subdirectory is a self-contained project.  Two pieces are shared
+  under `cmake\`:
+  - **`cmake\QuantLibAddinDocs.cmake`** discovers the tools (Python 3, Doxygen,
+    optional dot) once and provides the `qla_add_doxygen_docs` and
+    `qla_add_gensrc_docs` helper functions used by each `Docs\CMakeLists.txt`.
+  - **`cmake\RunDoxygen.cmake`** is a `cmake -P` script invoked once per
+    project.  It runs `ObjectHandler/Docs/preprocess_doxyfile.py` (which sets
+    `STRIP_FROM_PATH` and, on posix, `HAVE_DOT=YES` / `GENERATE_HTMLHELP=NO`),
+    appends a small block of overrides that redirect `OUTPUT_DIRECTORY` into the
+    build tree, runs doxygen with the working directory set to the project's
+    `Docs` directory (the `.doxy` files use relative INPUT / header paths), and
+    finally copies `tabs.css`, `ql.css` and the `images` into the html output —
+    exactly the steps the old `Makefile.am` performed.
+- The older `.doxy` files predate Doxygen 1.9, so Doxygen emits a number of
+  "obsolete tag" warnings; these are harmless.  `WARN_AS_ERROR` is `NO`, so
+  content warnings do not fail the build.

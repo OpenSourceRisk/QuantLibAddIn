@@ -15,6 +15,11 @@ This note assumes a writable checkout in the Linux filesystem (fast, and require
 location works.  Do NOT build from /mnt/c -- WSL has a large performance lag
 there and /mnt/c is mounted read-only from inside WSL in this environment.)
 
+NB (current environment): the live pristine checkout is now at
+`/home/developer/repos/QuantLibAddin`, and Boost is supplied as the archive
+`/home/developer/repos/boost_1_83_0.zip` (unzip it before the Boost step below).
+Substitute these paths for the `~/repos2/...` ones used throughout this note.
+
 On a native Linux box you would instead just install Boost from the system package manager or conan and skip the manual Boost steps below.
 
 ## Environment
@@ -24,15 +29,15 @@ On a native Linux box you would instead just install Boost from the system packa
 | Distro   | Ubuntu 22.04 (WSL2) |
 | Compiler | gcc / g++ 11.4.0 |
 | sudo     | not available (cannot apt install) |
-| cmake    | not installed in the distro (provisioned in user space, below) |
-| ninja    | not installed in the distro (provisioned in user space, below) |
+| cmake    | not in distro; user-space 4.3.2 at `~/tools/cmake/cmake/data/bin/cmake`; on PATH for login/interactive shells (added to `~/.bash_profile` + `~/.bash_aliases`, like doxygen/dot — provisioning below) |
+| ninja    | not in distro; user-space 1.13.0 at `~/tools/ninja/ninja-1.13.0.data/scripts/ninja`; on PATH for login/interactive shells (added to `~/.bash_profile` + `~/.bash_aliases`, like doxygen/dot — provisioning below) |
 | conan    | not installed |
 | Python   | python3 3.10 (system) |
 
 ## Driving WSL from a Windows (PowerShell) agent — gotchas
 
 If you are driving the build via `wsl.exe -- bash -c '...'` from PowerShell
-(rather than typing inside an interactive WSL shell), three things bite:
+(rather than typing inside an interactive WSL shell), five things bite:
 
 1. **Use a non-login shell and avoid `$` in the outer command line.**
    `bash -lc` produced garbled/empty output capture in this environment, and
@@ -61,6 +66,35 @@ If you are driving the build via `wsl.exe -- bash -c '...'` from PowerShell
    - create the file under a Windows temp dir and copy it in with
 	 `sed 's/\r$//' /mnt/c/.../file > ~/target` to strip CRLF line endings.
 
+4. **User-space tools are on PATH for login/interactive shells, but absent
+   under a bare `bash -c`.**  cmake, ninja, doxygen and dot all live in user
+   space and are added to PATH by `~/.bash_profile` (login) and
+   `~/.bash_aliases` (interactive).  But `wsl.exe -- bash -c '...'` is
+   **neither a login nor an interactive shell**, so it sources no startup files
+   and sees none of them -- e.g. `cmake: command not found` even though
+   `/home/developer/tools/cmake/cmake/data/bin/cmake` (verified 4.3.2) exists.
+   Two fixes: invoke a login+interactive shell
+   (`wsl.exe -- bash -lic '...'`), or -- more robustly -- `source` the env
+   scripts at the top of your script:
+   `source /home/developer/qla_env.sh` (cmake + ninja) and
+   `source /home/developer/doxy_env.sh` (doxygen + dot).
+
+5. **Recommended pattern: a base64-shipped script that sources the env.**
+   The single most reliable way to run a multi-step command -- setting PATH and
+   sidestepping every quoting / `$`-expansion / CRLF pitfall at once -- is to
+   put everything in a script file, ship it into WSL with base64, and run it:
+
+   ```powershell
+   $b = [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\path\script.sh"))
+   wsl.exe -- bash -c "echo $b | base64 -d | tr -d '\r' > /tmp/script.sh; bash /tmp/script.sh"
+   ```
+
+   Make the first lines of `script.sh` `source /home/developer/qla_env.sh` and
+   `source /home/developer/doxy_env.sh` so cmake/ninja/doxygen/dot are all on
+   PATH.  base64 avoids PowerShell `$`-expansion and quoting; `tr -d '\r'`
+   strips CRLFs; and the short `wsl.exe` command line dodges the security-agent
+   block from gotcha #2.
+
 ## Tooling provisioning (no root, no apt)
 
 There is no sudo/apt and no system cmake/ninja, so both are provisioned into
@@ -74,8 +108,13 @@ user space without installing anything system-wide:
 			 ~/tools/ninja/ninja-*.data/scripts/ninja
 
 The wheels are just zip archives of prebuilt Linux binaries.  Verified
-versions: cmake 4.3.2, ninja 1.13.0.  Put both directories on PATH, e.g. via
-a small env script that you `source` in every command:
+versions: cmake 4.3.2, ninja 1.13.0.  Both directories are put on PATH by
+appending a `cmake+ninja (user-space)` block to `~/.bash_profile` and
+`~/.bash_aliases` (the same files that carry the `doxygen+graphviz` block), so
+login and interactive shells pick them up automatically.  A standalone
+`~/qla_env.sh` carrying the same export is also kept, for `source`-ing inside
+non-interactive `bash -c` scripts (which load no startup files — see gotchas
+#4 and #5):
 
 	# ~/qla_env.sh
 	export PATH=/home/developer/tools/cmake/cmake/data/bin:/home/developer/tools/ninja/ninja-1.13.0.data/scripts:$PATH

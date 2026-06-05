@@ -77,3 +77,38 @@ if(QLA_RUN_GENSRC)
     add_dependencies(ohlib ohgensrc)
     add_dependencies(QuantLibObjects qlgensrc)
 endif()
+
+# -----------------------------------------------------------------------
+# Documentation — adds per-project doc targets (gensrc-docs, ObjectHandler-docs,
+# QuantLibAddin-docs, QuantLibXL-docs) and an aggregate `docs` target that
+# build the HTML documentation with Doxygen, mirroring the legacy automake
+# "make docs".  Off by default; enable with -DQLA_BUILD_DOCS=ON.
+#
+# Each project keeps its own documentation build in <project>/Docs/CMakeLists.txt
+# so that, like the rest of the repository, a project's docs are part of that
+# standalone project and can be built on their own, e.g.:
+#     cmake -S ObjectHandler/Docs -B <build> && cmake --build <build> --target docs
+#
+# Building the docs needs only Python 3, Doxygen and (optionally) Graphviz dot —
+# not a C++ compiler or Boost — so the documentation can be built even on a
+# machine that cannot compile the libraries.
+#
+# QuantLibAddin/Docs is added before QuantLibXL/Docs because the QuantLibXL docs
+# reuse the QuantLibAddin-docs-gensrc target defined by QuantLibAddin/Docs.
+# -----------------------------------------------------------------------
+option(QLA_BUILD_DOCS "Add targets to build the HTML documentation with Doxygen" OFF)
+if(QLA_BUILD_DOCS)
+    add_subdirectory(gensrc/Docs)
+    add_subdirectory(ObjectHandler/Docs)
+    add_subdirectory(QuantLibAddin/Docs)
+    add_subdirectory(QuantLibXL/Docs)
+
+    # Aggregate target: build every project's documentation with one command.
+    add_custom_target(docs
+        COMMENT "Building all HTML documentation (gensrc, ObjectHandler, QuantLibAddin, QuantLibXL)")
+    add_dependencies(docs
+        gensrc-docs
+        ObjectHandler-docs
+        QuantLibAddin-docs
+        QuantLibXL-docs)
+endif()
