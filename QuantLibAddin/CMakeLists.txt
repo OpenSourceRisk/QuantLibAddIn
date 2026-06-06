@@ -291,6 +291,11 @@ target_compile_definitions(QuantLibObjects PRIVATE
     _LIB
 )
 
+# Suppress the qlo/auto_link.hpp #pragma comment(lib, ...) directive; cmake
+# manages linking.  PUBLIC so every consumer of QuantLibObjects (e.g. the XLL)
+# inherits it too.
+target_compile_definitions(QuantLibObjects PUBLIC QLADDIN_NO_AUTO_LINK)
+
 target_link_libraries(QuantLibObjects PUBLIC
     ql_library
     ohlib
@@ -303,3 +308,14 @@ target_link_libraries(QuantLibObjects PUBLIC
 # -----------------------------------------------------------------------
 add_subdirectory(Addins/Cpp)
 add_subdirectory(Clients/Cpp)
+
+# -----------------------------------------------------------------------
+# Documentation — QuantLibAddin owns its own Docs build (QuantLibAddin-docs
+# target).  Gated on BUILD_DOCS so the integrated build only adds it when
+# requested.  The option is (re)declared here so that this value is also
+# honoured when QuantLibAddin is configured on its own.
+# -----------------------------------------------------------------------
+option(BUILD_DOCS "Add targets to build the HTML documentation with Doxygen" OFF)
+if(BUILD_DOCS)
+    add_subdirectory(Docs)
+endif()

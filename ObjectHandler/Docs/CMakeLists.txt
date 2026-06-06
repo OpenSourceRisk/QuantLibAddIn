@@ -11,7 +11,7 @@
 #     cannot compile the libraries.  That is why the standalone project is
 #     declared with no languages (project(... NONE)).
 #
-#   * As part of the top-level build — enabled with -DQLA_BUILD_DOCS=ON in the
+#   * As part of the top-level build — enabled with -DBUILD_DOCS=ON in the
 #     root CMakeLists.txt — in which case the targets below are simply added to
 #     the main project.
 #
@@ -23,19 +23,19 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 	project(ObjectHandlerDocs NONE)
 endif()
 
-# Locate the shared documentation helper in <repo-root>/cmake.
+# Locate the shared documentation helper in <repo-root>/gensrc/cmake.
 get_filename_component(_repo_root "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
-include("${_repo_root}/cmake/QuantLibAddinDocs.cmake")
+include("${_repo_root}/gensrc/cmake/DocsCommon.cmake")
 
 # ObjectHandler's documentation consumes the Docs/auto.pages (function reference
 # and enumeration pages) produced by `gensrc.py -d`.  gensrc runs with its
 # working directory set to ObjectHandler/gensrc and --oh_dir=.. (the parent,
 # i.e. ObjectHandler).  On a pristine checkout these pages do not exist yet, so
 # the gensrc step is wired as a prerequisite below.
-qla_add_gensrc_docs(ObjectHandler-docs-gensrc
+add_gensrc_docs(ObjectHandler-docs-gensrc
 	"${CMAKE_CURRENT_SOURCE_DIR}/../gensrc" "..")
 
-qla_add_doxygen_docs(ObjectHandler-docs "${CMAKE_CURRENT_SOURCE_DIR}" objecthandler.doxy)
+add_doxygen_docs(ObjectHandler-docs "${CMAKE_CURRENT_SOURCE_DIR}" objecthandler.doxy)
 add_dependencies(ObjectHandler-docs ObjectHandler-docs-gensrc)
 
 # When configured standalone, provide a convenience `docs` target so that

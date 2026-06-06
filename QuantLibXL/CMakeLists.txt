@@ -6,6 +6,12 @@
 #
 # The toolset tag, platform tag and runtime tag are computed from cmake
 # variables so that the name matches the hand-maintained VS project output.
+#
+# The XLL itself is Windows-only, so the whole library build is guarded by
+# if(WIN32).  The QuantLibXL *documentation* (added at the bottom of this file)
+# builds on any platform, so it is intentionally placed outside that guard.
+
+if(WIN32)
 
 # -----------------------------------------------------------------------
 # Toolset tag  (e.g. v145 for VS 2026, v143 for VS 2022)
@@ -250,4 +256,18 @@ target_link_libraries(QuantLibXL PRIVATE
 # Suppress safe-exception-handler warning for x64 (no /SAFESEH on x64)
 if(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 8)
     target_link_options(QuantLibXL PRIVATE /SAFESEH:NO)
+endif()
+
+endif() # WIN32 — end of the Windows-only XLL library build
+
+# -----------------------------------------------------------------------
+# Documentation — QuantLibXL owns its own Docs build (QuantLibXL-docs target).
+# Unlike the XLL library above, the documentation builds on any platform, so it
+# lives outside the if(WIN32) guard.  Gated on BUILD_DOCS so the integrated
+# build only adds it when requested.  The option is (re)declared here so that
+# this value is also honoured when QuantLibXL is configured on its own.
+# -----------------------------------------------------------------------
+option(BUILD_DOCS "Add targets to build the HTML documentation with Doxygen" OFF)
+if(BUILD_DOCS)
+    add_subdirectory(Docs)
 endif()

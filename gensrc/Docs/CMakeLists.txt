@@ -11,7 +11,7 @@
 #     cannot compile the libraries.  That is why the standalone project is
 #     declared with no languages (project(... NONE)).
 #
-#   * As part of the top-level build — enabled with -DQLA_BUILD_DOCS=ON in the
+#   * As part of the top-level build — enabled with -DBUILD_DOCS=ON in the
 #     root CMakeLists.txt — in which case the gensrc-docs target is simply added
 #     to the main project.
 #
@@ -23,14 +23,14 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 	project(gensrcDocs NONE)
 endif()
 
-# Locate the shared documentation helper in <repo-root>/cmake.
+# Locate the shared documentation helper in <repo-root>/gensrc/cmake.
 get_filename_component(_repo_root "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
-include("${_repo_root}/cmake/QuantLibAddinDocs.cmake")
+include("${_repo_root}/gensrc/cmake/DocsCommon.cmake")
 
 # gensrc HTML docs.  Unlike ObjectHandler / QuantLibAddin / QuantLibXL, gensrc's
 # own documentation does not consume the gensrc-generated Docs/auto.pages, so no
 # gensrc prerequisite is wired here.
-qla_add_doxygen_docs(gensrc-docs "${CMAKE_CURRENT_SOURCE_DIR}" gensrc.doxy)
+add_doxygen_docs(gensrc-docs "${CMAKE_CURRENT_SOURCE_DIR}" gensrc.doxy)
 
 # When configured standalone, provide a convenience `docs` target so that
 # `cmake --build <build> --target docs` works the same as in the other projects.

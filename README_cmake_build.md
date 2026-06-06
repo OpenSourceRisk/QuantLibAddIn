@@ -182,12 +182,12 @@ cmake --build C:\erik\repos\QuantLibAddin\build\windows-vs2022-x64-static --conf
 ```
 CMakeLists.txt              <- root: wires together all subprojects
 CMakePresets.json           <- configure and build presets
-cmake\
-  commonSettings.cmake      <- MSVC compile options, CRT selection, auto-link suppressors
-  QuantLibAddinDocs.cmake   <- shared docs helper (tool discovery + target helpers)
-  RunDoxygen.cmake          <- build-time driver that runs doxygen for one project
 gensrc\
   CMakeLists.txt            <- optional gensrc code-generation step
+  cmake\
+    commonSettings.cmake    <- MSVC compile options, CRT selection (generic)
+    DocsCommon.cmake        <- shared docs helper (tool discovery + target helpers)
+    RunDoxygen.cmake        <- build-time driver that runs doxygen for one project
   Docs\CMakeLists.txt       <- gensrc-docs target
 ObjectHandler\
   CMakeLists.txt            <- builds xlsdk, ohlib, ohxllib static libs
@@ -202,11 +202,43 @@ QuantLib\
   CMakeLists.txt            <- upstream QuantLib cmake (unchanged)
 ```
 
+The shared cmake helpers live under `gensrc\cmake\` because gensrc is the root of
+the project dependency chain (`gensrc <- ObjectHandler <- QuantLibAddin <-
+QuantLibXL`): every project may depend on gensrc, so generic build code placed
+there is visible to all of them without any of them having to reference a project
+further down the chain.  In particular, ObjectHandler can be configured and built
+standalone (see section 10) without any reference to QuantLibAddin, QuantLib or
+QuantLibXL.
+
 Each subproject keeps its own documentation build in its `Docs\CMakeLists.txt`,
 so a project's docs are part of that standalone project (just like its code) and
-can be built on their own.  The two shared pieces live under `cmake\`:
-`QuantLibAddinDocs.cmake` (tool discovery and the `qla_add_doxygen_docs` /
-`qla_add_gensrc_docs` helpers) and `RunDoxygen.cmake` (the per-project driver).
+can be built on their own.  The shared docs pieces are `DocsCommon.cmake` (tool
+discovery and the `add_doxygen_docs` / `add_gensrc_docs` helpers) and
+`RunDoxygen.cmake` (the per-project driver), both under `gensrc\cmake\`.
+
+### Standalone subproject builds
+
+Because every subproject's `CMakeLists.txt` guards its root-only logic with
+`if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)`, a subproject can be
+configured on its own, without the projects further down the dependency chain.
+For example, ObjectHandler (which depends only on its upstream gensrc and on
+Boost) can be built standalone — with no reference to QuantLibAddin, QuantLib or
+QuantLibXL:
+
+```powershell
+# Just the ObjectHandler libraries
+cmake -S ObjectHandler -B build\objecthandler-only ^
+      -DBOOST_INCLUDEDIR=C:/path/to/boost/include ^
+      -DBOOST_LIBRARYDIR=C:/path/to/boost/lib-md
+cmake --build build\objecthandler-only --config Release
+
+# ObjectHandler plus its documentation (needs Python + Doxygen, not Boost)
+cmake -S ObjectHandler -B build\objecthandler-docs -DBUILD_DOCS=ON
+cmake --build build\objecthandler-docs --target docs
+```
+
+This mirrors Build A, where `ObjectHandler\ObjectHandler.sln` builds a
+standalone ObjectHandler.
 
 ---
 
@@ -222,15 +254,20 @@ with the cmake-managed link step.
 
 Each auto_link header has been guarded with a `#ifndef` macro:
 
-| Header                | Guard macro            |
-|-----------------------|------------------------|
-| `oh/auto_link.hpp`    | `OH_NO_AUTO_LINK`      |
-| `qlo/auto_link.hpp`   | `QLADDIN_NO_AUTO_LINK` |
-| `xlsdk/auto_link.hpp` | `XLSDK_NO_AUTO_LINK`   |
+| Header                | Guard macro            | Defined by (PUBLIC, on) |
+|-----------------------|------------------------|-------------------------|
+| `oh/auto_link.hpp`    | `OH_NO_AUTO_LINK`      | `ohlib`                 |
+| `qlo/auto_link.hpp`   | `QLADDIN_NO_AUTO_LINK` | `QuantLibObjects`       |
+| `xlsdk/auto_link.hpp` | `XLSDK_NO_AUTO_LINK`   | `xlsdk`                 |
 
-`cmake/commonSettings.cmake` defines all three macros so the cmake build
-never uses the auto-link mechanism.  The hand-maintained solution files do
-not define these macros, so their behaviour is unchanged.
+Each macro is defined as a **PUBLIC compile definition on the library that owns
+the header** (via `target_compile_definitions`), so it is inherited by every
+consumer of that library through the normal link graph and never leaks the other
+projects' names into a project's build.  In particular, the ObjectHandler build
+defines only `OH_NO_AUTO_LINK` and `XLSDK_NO_AUTO_LINK`; it has no knowledge of
+`QLADDIN_NO_AUTO_LINK` (that belongs to QuantLibAddin), respecting the project
+hierarchy.  The hand-maintained solution files do not define these macros, so
+their behaviour is unchanged.
 
 ### QuantLib tagged layout
 
@@ -291,11 +328,11 @@ The same pattern works for `gensrc\Docs`, `QuantLibAddin\Docs` and
 `QuantLibXL\Docs`.  (The QuantLibXL *library* is Windows-only, but its
 documentation builds on any platform.)
 
-**B. As part of the main build** — add `-DQLA_BUILD_DOCS=ON` at configure
+**B. As part of the main build** — add `-DBUILD_DOCS=ON` at configure
 time, then build the aggregate `docs` target (or an individual project target):
 
 ```powershell
-cmake --preset windows-vs2026-x64-static -DQLA_BUILD_DOCS=ON
+cmake --preset windows-vs2026-x64-static -DBUILD_DOCS=ON
 cmake --build build\windows-vs2026-x64-static --target docs
 ```
 
@@ -351,11 +388,13 @@ A per-project `doxywarnings.txt` is written next to each `html` directory.
 - Each subproject owns its documentation build in its own
   `<project>\Docs\CMakeLists.txt`, consistent with the repository convention
   that every subdirectory is a self-contained project.  Two pieces are shared
-  under `cmake\`:
-  - **`cmake\QuantLibAddinDocs.cmake`** discovers the tools (Python 3, Doxygen,
-    optional dot) once and provides the `qla_add_doxygen_docs` and
-    `qla_add_gensrc_docs` helper functions used by each `Docs\CMakeLists.txt`.
-  - **`cmake\RunDoxygen.cmake`** is a `cmake -P` script invoked once per
+  under `gensrc\cmake\` (gensrc is the upstream of every project, so generic
+  helpers placed there are visible to all without creating a downstream
+  dependency):
+  - **`gensrc\cmake\DocsCommon.cmake`** discovers the tools (Python 3, Doxygen,
+    optional dot) once and provides the `add_doxygen_docs` and
+    `add_gensrc_docs` helper functions used by each `Docs\CMakeLists.txt`.
+  - **`gensrc\cmake\RunDoxygen.cmake`** is a `cmake -P` script invoked once per
     project.  It runs `ObjectHandler/Docs/preprocess_doxyfile.py` (which sets
     `STRIP_FROM_PATH` and, on posix, `HAVE_DOT=YES` / `GENERATE_HTMLHELP=NO`),
     appends a small block of overrides that redirect `OUTPUT_DIRECTORY` into the

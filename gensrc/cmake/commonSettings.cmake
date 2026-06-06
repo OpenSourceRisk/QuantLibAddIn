@@ -51,15 +51,18 @@ if(MSVC)
         $<$<BOOL:${MSVC_PARALLELBUILD}>:/MP>
     )
 
+    # Note: the per-project auto_link.hpp pragma-comment suppressors
+    # (OH_NO_AUTO_LINK, XLSDK_NO_AUTO_LINK, QLADDIN_NO_AUTO_LINK) are NOT set
+    # here.  Each is a PUBLIC compile definition on the library that owns the
+    # header, so it propagates only to that library and its consumers.  This
+    # keeps generic settings free of project-specific (e.g. QuantLibAddin)
+    # references.
     add_compile_definitions(
         WIN32
         _WINDOWS
         _SCL_SECURE_NO_DEPRECATE
         _CRT_SECURE_NO_DEPRECATE
         BOOST_ALL_NO_LIB         # disable Boost auto-link; cmake handles linking
-        QLADDIN_NO_AUTO_LINK     # disable QuantLibAddin auto_link.hpp pragma comment
-        OH_NO_AUTO_LINK          # disable ObjectHandler  auto_link.hpp pragma comment
-        XLSDK_NO_AUTO_LINK       # disable xlsdk          auto_link.hpp pragma comment
     )
 
     add_link_options(
