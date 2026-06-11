@@ -1,0 +1,38 @@
+---
+default:
+  interruptible: true
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+include:
+  - project: ci/containers/secure-container-pipeline
+    ref: 4.1.12
+    file:
+      - /templates/secure-pipeline.yml
+  - component: gitlab.dx1.lseg.com/app/app-51172/ci/components/auto-vault@release/1.x.x-stable
+    inputs:
+      enable-cd-user-token: false
+  - component: gitlab.dx1.lseg.com/app/app-51172/ci/components/versioning@release/1.x.x-stable
+  - component: gitlab.dx1.lseg.com/app/app-51172/ci/components/auto-blackduck@release/1.x.x-stable
+    inputs:
+      always-scan: true
+      detect-tools: "DETECTOR, SIGNATURE_SCAN"
+
+
+stages:
+  - .pre
+  #- secure-pipeline
+  - license-scan
+
+variables:
+  GIT_DEPTH: 0
+  RUNNER_TAG: "acadia_ore_amd64"
+
+
+
+
+
+
