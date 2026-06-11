@@ -21,6 +21,7 @@ include:
 stages:
   - .pre
   #- secure-pipeline
+  - scan
   - license-scan
 
 variables:
