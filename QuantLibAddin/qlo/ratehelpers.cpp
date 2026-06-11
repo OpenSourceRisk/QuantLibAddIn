@@ -7,6 +7,7 @@
  Copyright (C) 2005, 2006, 2007 Eric Ehlers
  Copyright (C) 2005 Plamen Neykov
  Copyright (C) 2015 Maddalena Zanzi
+ Copyright (C) 2022 Sebastian Schlenkrich
 
  This file is part of QuantLib, a free-software/open-source library
  for financial quantitative analysts and developers - http://quantlib.org/
@@ -28,11 +29,15 @@
 
 #include <qlo/ratehelpers.hpp>
 
+#include <ql/experimental/termstructures/basisswapratehelpers.hpp>
+#include <ql/experimental/termstructures/crosscurrencyratehelpers.hpp>
 #include <ql/indexes/iborindex.hpp>
 #include <ql/indexes/swapindex.hpp>
 #include <ql/termstructures/yield/ratehelpers.hpp>
 #include <ql/termstructures/yield/bondhelpers.hpp>
+#include <ql/time/schedule.hpp>
 #include <ql/termstructures/yield/oisratehelper.hpp>
+#include <ql/termstructures/yield/overnightindexfutureratehelper.hpp>
 
 #include <oh/repository.hpp>
 
@@ -275,11 +280,153 @@ namespace QuantLibAddin {
                         const QuantLib::Handle<QuantLib::YieldTermStructure>& discount,
                         bool permanent)
     : RateHelper(properties, permanent) {
-        libraryObject_ = shared_ptr<QuantLib::DatedOISRateHelper>(new
-            QuantLib::DatedOISRateHelper(startDate, endDate,
-                                         fixedRate,
-                                         overnightIndex));
-        quoteName_ = f(properties->getSystemProperty("FixedRate"));
+        QL_FAIL("DatedOISRateHelper has been removed from the ORE QuantLib fork.");
+    }
+
+    OvernightIndexFutureRateHelper::OvernightIndexFutureRateHelper(
+        const shared_ptr<ValueObject>& properties,
+        const QuantLib::Handle<QuantLib::Quote>& price,
+        const QuantLib::Date& valueDate,
+        const QuantLib::Date& maturityDate,
+        const boost::shared_ptr<QuantLib::OvernightIndex>& overnightIndex,
+        const QuantLib::Handle<QuantLib::Quote>& convexityAdjustment,
+        QuantLib::RateAveraging::Type averagingMethod,
+        bool permanent)
+        : RateHelper(properties, permanent) {
+        libraryObject_ = shared_ptr<QuantLib::OvernightIndexFutureRateHelper>(new
+            QuantLib::OvernightIndexFutureRateHelper(
+                price,
+                valueDate,
+                maturityDate,
+                overnightIndex,
+                convexityAdjustment,
+                averagingMethod)
+            );
+        quoteName_ = f(properties->getSystemProperty("Price"));
+    }
+
+    IborIborBasisSwapRateHelper::IborIborBasisSwapRateHelper(
+        const shared_ptr<ValueObject>& properties,
+        const QuantLib::Handle<QuantLib::Quote>& basis,
+        const QuantLib::Period& tenor,
+        QuantLib::Natural settlementDays,
+        const QuantLib::Calendar& calendar,
+        QuantLib::BusinessDayConvention convention,
+        bool endOfMonth,
+        const boost::shared_ptr<QuantLib::IborIndex>& baseIndex,
+        const boost::shared_ptr<QuantLib::IborIndex>& otherIndex,
+        const QuantLib::Handle<QuantLib::YieldTermStructure>& discountHandle,
+        bool bootstrapBaseCurve,
+        bool permanent)
+        : RateHelper(properties, permanent) {
+        libraryObject_ = shared_ptr<QuantLib::IborIborBasisSwapRateHelper>(new
+            QuantLib::IborIborBasisSwapRateHelper(
+                basis,
+                tenor,
+                settlementDays,
+                calendar,
+                convention,
+                endOfMonth,
+                baseIndex,
+                otherIndex,
+                discountHandle,
+                bootstrapBaseCurve)
+            );
+        quoteName_ = f(properties->getSystemProperty("Basis"));
+    }
+
+    OvernightIborBasisSwapRateHelper::OvernightIborBasisSwapRateHelper(
+        const shared_ptr<ValueObject>& properties,
+        const QuantLib::Handle<QuantLib::Quote>& basis,
+        const QuantLib::Period& tenor,
+        QuantLib::Natural settlementDays,
+        const QuantLib::Calendar& calendar,
+        QuantLib::BusinessDayConvention convention,
+        bool endOfMonth,
+        const boost::shared_ptr<QuantLib::OvernightIndex>& baseIndex,
+        const boost::shared_ptr<QuantLib::IborIndex>& otherIndex,
+        const QuantLib::Handle<QuantLib::YieldTermStructure>& discountHandle,
+        bool permanent)
+        : RateHelper(properties, permanent) {
+        libraryObject_ = shared_ptr<QuantLib::OvernightIborBasisSwapRateHelper>(new
+            QuantLib::OvernightIborBasisSwapRateHelper(
+                basis,
+                tenor,
+                settlementDays,
+                calendar,
+                convention,
+                endOfMonth,
+                baseIndex,
+                otherIndex,
+                discountHandle)
+            );
+        quoteName_ = f(properties->getSystemProperty("Basis"));
+    }
+
+    ConstNotionalCrossCurrencyBasisSwapRateHelper::ConstNotionalCrossCurrencyBasisSwapRateHelper(
+        const shared_ptr<ValueObject>& properties,
+        const QuantLib::Handle<QuantLib::Quote>& basis,
+        const QuantLib::Period& tenor,
+        QuantLib::Natural fixingDays,
+        const QuantLib::Calendar& calendar,
+        QuantLib::BusinessDayConvention convention,
+        bool endOfMonth,
+        const boost::shared_ptr<QuantLib::IborIndex>& baseCurrencyIndex,
+        const boost::shared_ptr<QuantLib::IborIndex>& quoteCurrencyIndex,
+        const QuantLib::Handle<QuantLib::YieldTermStructure>& collateralCurve,
+        bool isFxBaseCurrencyCollateralCurrency,
+        bool isBasisOnFxBaseCurrencyLeg,
+        bool permanent)
+        : RateHelper(properties, permanent) {
+        libraryObject_ = shared_ptr<QuantLib::ConstNotionalCrossCurrencyBasisSwapRateHelper>(new
+            QuantLib::ConstNotionalCrossCurrencyBasisSwapRateHelper(
+                basis,
+                tenor,
+                fixingDays,
+                calendar,
+                convention,
+                endOfMonth,
+                baseCurrencyIndex,
+                quoteCurrencyIndex,
+                collateralCurve,
+                isFxBaseCurrencyCollateralCurrency,
+                isBasisOnFxBaseCurrencyLeg)
+            );
+        quoteName_ = f(properties->getSystemProperty("Basis"));
+    }
+
+    MtMCrossCurrencyBasisSwapRateHelper::MtMCrossCurrencyBasisSwapRateHelper(
+        const shared_ptr<ValueObject>& properties,
+        const QuantLib::Handle<QuantLib::Quote>& basis,
+        const QuantLib::Period& tenor,
+        QuantLib::Natural fixingDays,
+        const QuantLib::Calendar& calendar,
+        QuantLib::BusinessDayConvention convention,
+        bool endOfMonth,
+        const boost::shared_ptr<QuantLib::IborIndex>& baseCurrencyIndex,
+        const boost::shared_ptr<QuantLib::IborIndex>& quoteCurrencyIndex,
+        const QuantLib::Handle<QuantLib::YieldTermStructure>& collateralCurve,
+        bool isFxBaseCurrencyCollateralCurrency,
+        bool isBasisOnFxBaseCurrencyLeg,
+        bool isFxBaseCurrencyLegResettable,
+        bool permanent)
+        : RateHelper(properties, permanent) {
+        libraryObject_ = shared_ptr<QuantLib::MtMCrossCurrencyBasisSwapRateHelper>(new
+            QuantLib::MtMCrossCurrencyBasisSwapRateHelper(
+                basis,
+                tenor,
+                fixingDays,
+                calendar,
+                convention,
+                endOfMonth,
+                baseCurrencyIndex,
+                quoteCurrencyIndex,
+                collateralCurve,
+                isFxBaseCurrencyCollateralCurrency,
+                isBasisOnFxBaseCurrencyLeg,
+                isFxBaseCurrencyLegResettable)
+            );
+        quoteName_ = f(properties->getSystemProperty("Basis"));
     }
 
     BondHelper::BondHelper(
@@ -589,7 +736,6 @@ namespace QuantLibAddin {
               public QuantLib::Visitor<QuantLib::FuturesRateHelper>,
               public QuantLib::Visitor<QuantLib::SwapRateHelper>,
               public QuantLib::Visitor<QuantLib::OISRateHelper>,
-              public QuantLib::Visitor<QuantLib::DatedOISRateHelper>,
               public QuantLib::Visitor<QuantLib::BMASwapRateHelper>,
               public QuantLib::Visitor<QuantLib::FixedRateBondHelper>,
               public QuantLib::Visitor<QuantLib::FxSwapRateHelper> {
@@ -614,9 +760,6 @@ namespace QuantLibAddin {
                 rate_ = h.quote()->value();
             }
             void visit(QuantLib::OISRateHelper& h) {
-                rate_ = h.quote()->value();
-            }
-            void visit(QuantLib::DatedOISRateHelper& h) {
                 rate_ = h.quote()->value();
             }
             void visit(QuantLib::BMASwapRateHelper& h) {

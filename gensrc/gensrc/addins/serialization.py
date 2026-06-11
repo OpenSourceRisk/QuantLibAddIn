@@ -78,6 +78,7 @@ class Serialization(addin.Addin):
 
             for func in cat.functions('*'):
                 if not func.generateVOs(): continue
+                if not func.platformSupported('Cpp', 1): continue
 
                 bufferCreators += Serialization.REGISTER_CREATOR % {
                     'functionName' : func.name() }
@@ -106,6 +107,7 @@ class Serialization(addin.Addin):
 
             for func in cat.functions('*'):
                 if not func.generateVOs(): continue
+                if not func.platformSupported('Cpp', 1): continue
                 bufferDeclarations += Serialization.DECLARE_CREATOR % {
                     'functionName' : func.name() }
                 bufferCreators += self.bufferCreator_.set({
@@ -189,6 +191,7 @@ class Serialization(addin.Addin):
 
             for func in cat.functions('*'):
                 if not func.generateVOs(): continue
+                if not func.platformSupported('Cpp', 1): continue
 
                 bufferCpp += Serialization.REGISTER_CALL % {
                     'classID' : classID,

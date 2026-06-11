@@ -23,6 +23,25 @@
 
 /*! \page history Version History
 
+<strong>Release 1.42 - MMM YYYY</strong>
+
+- Added a cmake build that sits alongside the existing build using the manually maintained Visual Studio solution files
+
+- Made the cmake build of the C++ addin work on Linux with gcc: portable WIN32/MSVC guards, gensrc moved into its own gensrc/CMakeLists.txt (optional QLA_RUN_GENSRC step), and a native linux-gcc preset
+
+- Fixed bug in RegistryManager::getTypeMap() where a stale static cached TypeMapPtr
+  could reference a deleted map after unregisterTypes() was called, causing heap
+  corruption on XLL unload; getTypeMap() now performs a fresh registry lookup on
+  every call
+
+- Removed dependency on log4cxx: replaced the log4cxx-based Logger implementation
+  with a plain C++ streams implementation (std::ofstream / std::cout); removed
+  log4cxx, apr, and aprutil from the solution and all project files
+
+- Upgraded project files to VS2026 (v145 toolset)
+
+- Visual Studio project files: Redirect Debug PDB output to OutDir to avoid mspdbsrv post-build copy lock
+
 <strong>Release 1.22.0 - May 2021</strong>
 
 - Improved processing for range references (thanks to Francois Botha)

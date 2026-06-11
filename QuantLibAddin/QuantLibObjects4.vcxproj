@@ -143,14 +143,14 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">.\build\$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\lib\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\build\$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QuantLibObjects-$(PlatformToolset)-mt-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuantLibObjects-$(PlatformToolset)-x64-mt-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QuantLibObjects-$(PlatformToolset)-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuantLibObjects-$(PlatformToolset)-x64-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">QuantLibObjects-$(PlatformToolset)-mt-sgd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">QuantLibObjects-$(PlatformToolset)-x64-mt-sgd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|Win32'">QuantLibObjects-$(PlatformToolset)-mt-s-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|x64'">QuantLibObjects-$(PlatformToolset)-x64-mt-s-1_23_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QuantLibObjects-$(PlatformToolset)-mt-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuantLibObjects-$(PlatformToolset)-x64-mt-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QuantLibObjects-$(PlatformToolset)-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuantLibObjects-$(PlatformToolset)-x64-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">QuantLibObjects-$(PlatformToolset)-mt-sgd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">QuantLibObjects-$(PlatformToolset)-x64-mt-sgd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|Win32'">QuantLibObjects-$(PlatformToolset)-mt-s-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|x64'">QuantLibObjects-$(PlatformToolset)-x64-mt-s-1_42_0</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -302,7 +302,7 @@
       <PrecompiledHeaderOutputFile>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibObjects.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -335,7 +335,7 @@
       <PrecompiledHeaderOutputFile>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibObjects.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -368,7 +368,7 @@
       <PrecompiledHeaderOutputFile>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibObjects.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -401,7 +401,7 @@
       <PrecompiledHeaderOutputFile>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibObjects.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\build\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -455,6 +455,7 @@
     <ClCompile Include="qlo\valueobjects\vo_evolutiondescription.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_exercise.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_forwardrateagreement.cpp" />
+    <ClCompile Include="qlo\valueobjects\vo_fxforward.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_index.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_interpolation.cpp" />
     <ClCompile Include="qlo\valueobjects\vo_latentmodels.cpp" />
@@ -509,6 +510,7 @@
     <ClCompile Include="qlo\dividendvanillaoption.cpp" />
     <ClCompile Include="qlo\europeanoption.cpp" />
     <ClCompile Include="qlo\forwardrateagreement.cpp" />
+    <ClCompile Include="qlo\fxforward.cpp" />
     <ClCompile Include="qlo\forwardvanillaoption.cpp" />
     <ClCompile Include="qlo\overnightindexedswap.cpp" />
     <ClCompile Include="qlo\payoffs.cpp" />
@@ -573,6 +575,7 @@
     <ClCompile Include="qlo\serialization\create\create_evolutiondescription.cpp" />
     <ClCompile Include="qlo\serialization\create\create_exercise.cpp" />
     <ClCompile Include="qlo\serialization\create\create_forwardrateagreement.cpp" />
+    <ClCompile Include="qlo\serialization\create\create_fxforward.cpp" />
     <ClCompile Include="qlo\serialization\create\create_index.cpp" />
     <ClCompile Include="qlo\serialization\create\create_interpolation.cpp" />
     <ClCompile Include="qlo\serialization\create\create_latentmodels.cpp" />
@@ -628,6 +631,7 @@
     <ClCompile Include="qlo\serialization\register\serialization_evolutiondescription.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_exercise.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_forwardrateagreement.cpp" />
+    <ClCompile Include="qlo\serialization\register\serialization_fxforward.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_index.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_interpolation.cpp" />
     <ClCompile Include="qlo\serialization\register\serialization_latentmodels.cpp" />
@@ -727,6 +731,7 @@
     <ClInclude Include="qlo\valueobjects\vo_evolutiondescription.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_exercise.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_forwardrateagreement.hpp" />
+    <ClInclude Include="qlo\valueobjects\vo_fxforward.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_group.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_index.hpp" />
     <ClInclude Include="qlo\valueobjects\vo_interpolation.hpp" />
@@ -784,6 +789,7 @@
     <ClInclude Include="qlo\dividendvanillaoption.hpp" />
     <ClInclude Include="qlo\europeanoption.hpp" />
     <ClInclude Include="qlo\forwardrateagreement.hpp" />
+    <ClInclude Include="qlo\fxforward.hpp" />
     <ClInclude Include="qlo\forwardvanillaoption.hpp" />
     <ClInclude Include="qlo\options.hpp" />
     <ClInclude Include="qlo\overnightindexedswap.hpp" />
@@ -875,6 +881,7 @@
     <ClInclude Include="qlo\serialization\create\create_evolutiondescription.hpp" />
     <ClInclude Include="qlo\serialization\create\create_exercise.hpp" />
     <ClInclude Include="qlo\serialization\create\create_forwardrateagreement.hpp" />
+    <ClInclude Include="qlo\serialization\create\create_fxforward.hpp" />
     <ClInclude Include="qlo\serialization\create\create_index.hpp" />
     <ClInclude Include="qlo\serialization\create\create_interpolation.hpp" />
     <ClInclude Include="qlo\serialization\create\create_latentmodels.hpp" />
@@ -931,6 +938,7 @@
     <ClInclude Include="qlo\serialization\register\serialization_evolutiondescription.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_exercise.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_forwardrateagreement.hpp" />
+    <ClInclude Include="qlo\serialization\register\serialization_fxforward.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_index.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_interpolation.hpp" />
     <ClInclude Include="qlo\serialization\register\serialization_latentmodels.hpp" />

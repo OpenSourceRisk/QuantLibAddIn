@@ -520,10 +520,10 @@
       </ParameterList>
     </Constructor>
 
+    <!-- qlRiskyFixedBond: QuantLib::RiskyFixedBond removed from the ORE fork
     <Constructor name='qlRiskyFixedBond'>
       <libraryFunction>RiskyFixedBond</libraryFunction>
       <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
         <SupportedPlatform name='Cpp'/>
@@ -594,6 +594,7 @@
         </Parameters>
       </ParameterList>
     </Constructor>
+    -->
 
     <!-- Limited by now to one curve/event_type pair and one default event-->
     <Constructor name='qlIssuer'>

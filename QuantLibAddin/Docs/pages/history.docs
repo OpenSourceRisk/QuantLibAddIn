@@ -23,6 +23,70 @@
 
 /*! \page history Version History
 
+<strong>Release 1.42 - MMM YYYY</strong>
+
+- Added a cmake build that sits alongside the existing build using the manually maintained Visual Studio solution files
+
+- Made the cmake build of the C++ addin work on Linux with gcc: portable WIN32/MSVC guards, gensrc moved into its own gensrc/CMakeLists.txt (optional QLA_RUN_GENSRC step), and a native linux-gcc preset
+
+- Reenabled the C++ addin.  In the visual studio build, the build of the C++
+  addin was still working.  Fixed a problem where the build would fail if
+  doxygen were not installed.  Extended the cmake build to support the build of
+  the C++ addin.
+
+- Added FX forward instrument and DiscountingFxForwardEngine (thanks to Mike Scaturo)
+
+- Added new ratehelpers and updated example sheet (thanks to Sebastian Schlenkrich)
+
+- Updated for compatibility with the ORE fork of QuantLib:
+
+  - qlCalendarHolidayList: Calendar::holidayList() changed from static to instance
+    method; updated gensrc metadata from Procedure/alias to EnumerationMember
+
+  - qlCalendarAdvance: Calendar::advance() gained an optional 5th parameter;
+    suppressed in gensrc metadata and reimplemented manually in manual.cpp /
+    loop_calendar_manual.hpp with the correct cmf5 bind signature
+
+  - qlBondAtmRateFromYieldTermStructure, qlBondYieldFromCleanPrice,
+    qlBondZSpreadFromCleanPrice: BondFunctions now requires Bond::Price wrapper
+    for clean price arguments; suppressed in gensrc metadata (bonds.xml)
+
+  - qlModelG2Calibrate, qlOneFactorAffineModelCalibrate: CalibratedModel::calibrate()
+    now takes CalibrationHelper instead of BlackCalibrationHelper; suppressed in
+    gensrc metadata (calibrationhelpers.xml)
+
+  - qlFRAforwardValue, qlFRAspotValue: ForwardRateAgreement::forwardValue() and
+    spotValue() removed; suppressed in gensrc metadata (forwardrateagreement.xml)
+
+  - qlBucketAnalysis, qlBucketAnalysisDelta, qlBucketAnalysisDelta2:
+    SensitivityAnalysis and underlying bucket analysis removed; suppressed in
+    gensrc metadata (quotes.xml); enum definition removed from QuantLibAddin
+
+  - qlRiskyFixedBond: QuantLib::RiskyFixedBond removed; suppressed in gensrc
+    metadata (credit.xml); class commented out in credit.hpp/credit.cpp
+
+  - qlCaAsianOption, qlDaAsianOption: confirmed working under the ORE fork;
+    no changes required
+
+  - OvernightIndexedSwap::Type collapsed into VanillaSwap::Type (both are
+    Swap::Type); removed duplicate registration from enumeratedtypes.xml,
+    types.xml, and overnightindexedswap.xml to avoid heap corruption on unload
+
+  - CmsMarketCalibration: updated include from swaptionvolcube1.hpp to
+    sabrswaptionvolatilitycube.hpp in gensrc metadata (cmsmarketcalibration.xml)
+
+  - swaptionvolstructure.cpp, dividendvanillaoption.cpp, credit.cpp: updated for
+    renamed/removed QuantLib classes
+
+- Upgraded project files to VS2026 (v145 toolset)
+
+- Visual Studio project files: Redirect Debug PDB output to OutDir to avoid mspdbsrv post-build copy lock
+
+- Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate
+  to qlFraForwardRate; removed qlFixedRateBond2: deleted the QuantLibAddin wrapper constructor that accepted
+  a vector of InterestRate objects as coupons, on the grounds that the same bond can be constructed via the
+  simpler qlFixedRateBond interface which takes raw Rate values and a DayCounter directly (thanks to Francois Botha)
+
 <strong>Release 1.22.0 - May 2021</strong>
 
 - Deleted obsolete classes FDAmericanEngine, FDEuropeanEngine, FDBermudanEngine

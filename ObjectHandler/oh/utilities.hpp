@@ -44,10 +44,8 @@ namespace ObjectHandler {
     //@}
 
     /*! \name Logging
-        These functions wrap calls to the Logger class
-        simplifying the syntax for the client application
-        and alleviating the need for the client application
-        to #include log4cxx headers.
+        These functions wrap calls to the Logger class,
+        simplifying the syntax for the client application.
     */
     //@{
     //! Start logging to file of given name.

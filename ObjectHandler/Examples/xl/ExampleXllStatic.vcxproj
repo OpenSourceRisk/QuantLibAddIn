@@ -142,8 +142,8 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\xll\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ExampleXllStatic-$(PlatformToolset)-mt-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ExampleXllStatic-$(PlatformToolset)-x64-mt-1_23_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ExampleXllStatic-$(PlatformToolset)-mt-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ExampleXllStatic-$(PlatformToolset)-x64-mt-1_42_0</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.xll</TargetExt>
@@ -152,12 +152,12 @@
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|x64'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.xll</TargetExt>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ExampleXllStatic-$(PlatformToolset)-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ExampleXllStatic-$(PlatformToolset)-x64-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">ExampleXllStatic-$(PlatformToolset)-mt-sgd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">ExampleXllStatic-$(PlatformToolset)-x64-mt-sgd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|Win32'">ExampleXllStatic-$(PlatformToolset)-mt-s-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|x64'">ExampleXllStatic-$(PlatformToolset)-x64-mt-s-1_23_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ExampleXllStatic-$(PlatformToolset)-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ExampleXllStatic-$(PlatformToolset)-x64-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">ExampleXllStatic-$(PlatformToolset)-mt-sgd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">ExampleXllStatic-$(PlatformToolset)-x64-mt-sgd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|Win32'">ExampleXllStatic-$(PlatformToolset)-mt-s-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|x64'">ExampleXllStatic-$(PlatformToolset)-x64-mt-s-1_42_0</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">
     <Midl>
@@ -180,7 +180,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllStatic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -194,13 +194,13 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-sgd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-sgd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-sgd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-sgd-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -228,7 +228,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllStatic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -242,13 +242,13 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-sgd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-sgd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-x64-mt-sgd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-x64-mt-sgd-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -291,12 +291,12 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-s-1_23_0.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-s-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-s-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-s-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -339,12 +339,12 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-s-1_23_0.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-s-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-x64-mt-s-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-x64-mt-s-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -387,12 +387,12 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-1_23_0.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -435,12 +435,12 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-1_23_0.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -469,7 +469,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllStatic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -483,13 +483,13 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-gd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-gd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-gd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-gd-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -517,7 +517,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllStatic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -531,13 +531,13 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib;..\..\..\log4cxx\msvc\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-gd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-gd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-gd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLStatic-$(PlatformToolset)-mt-gd-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>

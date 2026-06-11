@@ -27,8 +27,8 @@
 #include <qlo/swaptionvolstructure.hpp>
 
 #include <ql/termstructures/volatility/swaption/swaptionconstantvol.hpp>
-#include <ql/termstructures/volatility/swaption/swaptionvolcube2.hpp>
-#include <ql/termstructures/volatility/swaption/swaptionvolcube1.hpp>
+#include <ql/termstructures/volatility/swaption/interpolatedswaptionvolatilitycube.hpp>
+#include <ql/termstructures/volatility/swaption/sabrswaptionvolatilitycube.hpp>
 #include <ql/termstructures/volatility/swaption/swaptionvolmatrix.hpp>
 #include <ql/termstructures/volatility/swaption/spreadedswaptionvol.hpp>
 #include <ql/math/optimization/endcriteria.hpp>
@@ -111,7 +111,7 @@ namespace QuantLibAddin {
         bool permanent) : SwaptionVolatilityCube(properties, permanent)
     {
         libraryObject_ = boost::shared_ptr<QuantLib::Extrapolator>(new
-            QuantLib::SwaptionVolCube2(atmVol,
+            QuantLib::InterpolatedSwaptionVolatilityCube(atmVol,
                                        optionTenors,
                                        swapTenors,
                                        strikeSpreads,
@@ -141,7 +141,7 @@ namespace QuantLibAddin {
     {
         QL_REQUIRE(!atmVol.empty(), "atm vol handle not linked to anything");
         libraryObject_ = boost::shared_ptr<QuantLib::Extrapolator>(new
-            QuantLib::SwaptionVolCube1(atmVol,
+            QuantLib::SabrSwaptionVolatilityCube(atmVol,
                                        optionTenors,
                                        swapTenors,
                                        strikeSpreads,
@@ -159,33 +159,33 @@ namespace QuantLibAddin {
 
     std::vector<std::vector<ObjectHandler::property_t> >
     SwaptionVolCube1::getSparseSabrParameters() {
-        const boost::shared_ptr<QuantLib::SwaptionVolCube1>&
+        const boost::shared_ptr<QuantLib::SabrSwaptionVolatilityCube>&
             volCube = boost::dynamic_pointer_cast<
-                    QuantLib::SwaptionVolCube1>(libraryObject_);
+                    QuantLib::SabrSwaptionVolatilityCube>(libraryObject_);
         return getSabrParameters(volCube->sparseSabrParameters());
     }
 
     std::vector<std::vector<ObjectHandler::property_t> >
     SwaptionVolCube1::getDenseSabrParameters() {
-        const boost::shared_ptr<QuantLib::SwaptionVolCube1>&
+        const boost::shared_ptr<QuantLib::SabrSwaptionVolatilityCube>&
             volCube = boost::dynamic_pointer_cast<
-                    QuantLib::SwaptionVolCube1>(libraryObject_);
+                    QuantLib::SabrSwaptionVolatilityCube>(libraryObject_);
         return getSabrParameters(volCube->denseSabrParameters());
     }
 
     std::vector<std::vector<ObjectHandler::property_t> >
     SwaptionVolCube1::getMarketVolCube() {
-        const boost::shared_ptr<QuantLib::SwaptionVolCube1>&
+        const boost::shared_ptr<QuantLib::SabrSwaptionVolatilityCube>&
             volCube = boost::dynamic_pointer_cast<
-                    QuantLib::SwaptionVolCube1>(libraryObject_);
+                    QuantLib::SabrSwaptionVolatilityCube>(libraryObject_);
         return getVolCube(volCube->marketVolCube());
     }
 
     std::vector<std::vector<ObjectHandler::property_t> >
     SwaptionVolCube1::getVolCubeAtmCalibrated() {
-        const boost::shared_ptr<QuantLib::SwaptionVolCube1>&
+        const boost::shared_ptr<QuantLib::SabrSwaptionVolatilityCube>&
             volCube = boost::dynamic_pointer_cast<
-                    QuantLib::SwaptionVolCube1>(libraryObject_);
+                    QuantLib::SabrSwaptionVolatilityCube>(libraryObject_);
         return getVolCube(volCube->volCubeAtmCalibrated());
     }
 

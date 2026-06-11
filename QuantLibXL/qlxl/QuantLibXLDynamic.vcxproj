@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -87,10 +87,10 @@
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.xll</TargetExt>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QuantLibXLDynamic-$(PlatformToolset)-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuantLibXLDynamic-$(PlatformToolset)-x64-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QuantLibXLDynamic-$(PlatformToolset)-mt-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuantLibXLDynamic-$(PlatformToolset)-x64-mt-1_23_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QuantLibXLDynamic-$(PlatformToolset)-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuantLibXLDynamic-$(PlatformToolset)-x64-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QuantLibXLDynamic-$(PlatformToolset)-mt-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuantLibXLDynamic-$(PlatformToolset)-x64-mt-1_42_0</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PreBuildEvent>
@@ -118,7 +118,7 @@
       <PrecompiledHeaderOutputFile>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -132,13 +132,13 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic-$(PlatformToolset)-mt-gd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic-$(PlatformToolset)-mt-gd-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -172,7 +172,7 @@
       <PrecompiledHeaderOutputFile>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -186,13 +186,13 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic-$(PlatformToolset)-mt-gd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic-$(PlatformToolset)-mt-gd-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -228,7 +228,7 @@
       <PrecompiledHeaderOutputFile>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
@@ -242,12 +242,12 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic-$(PlatformToolset)-mt-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic-$(PlatformToolset)-mt-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -285,7 +285,7 @@
       <PrecompiledHeaderOutputFile>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DisableSpecificWarnings>4819;%(DisableSpecificWarnings)</DisableSpecificWarnings>
@@ -299,12 +299,12 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic-$(PlatformToolset)-mt-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildDynamic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXLDynamic-$(PlatformToolset)-mt-1_42_0.lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
@@ -342,6 +342,7 @@
     <ClCompile Include="functions\evolutiondescription.cpp" />
     <ClCompile Include="functions\exercise.cpp" />
     <ClCompile Include="functions\forwardrateagreement.cpp" />
+    <ClCompile Include="functions\fxforward.cpp" />
     <ClCompile Include="functions\handles.cpp" />
     <ClCompile Include="functions\index.cpp" />
     <ClCompile Include="functions\instruments.cpp" />
@@ -410,6 +411,7 @@
     <ClCompile Include="register\register_evolutiondescription.cpp" />
     <ClCompile Include="register\register_exercise.cpp" />
     <ClCompile Include="register\register_forwardrateagreement.cpp" />
+    <ClCompile Include="register\register_fxforward.cpp" />
     <ClCompile Include="register\register_handles.cpp" />
     <ClCompile Include="register\register_index.cpp" />
     <ClCompile Include="register\register_instruments.cpp" />

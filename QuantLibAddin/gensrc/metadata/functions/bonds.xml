@@ -751,14 +751,13 @@
       </ReturnValue>
     </Procedure>
 
+    <!-- qlBondAtmRateFromYieldTermStructure: CleanPrice parameter now requires Bond::Price wrapper, not supported by gensrc
     <Procedure name='qlBondAtmRateFromYieldTermStructure'>
       <description>Returns the ATM rate implied by the given YieldTermStructure, settlement date, and clean price.</description>
       <alias>QuantLib::BondFunctions::atmRate</alias>
       <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -791,6 +790,7 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
     <!-- QuantLib::BondFunctions Yield functions -->
 
@@ -944,14 +944,13 @@
       </ReturnValue>
     </Procedure>
 
+    <!-- qlBondYieldFromCleanPrice: CleanPrice parameter now requires Bond::Price wrapper, not supported by gensrc
     <Procedure name='qlBondYieldFromCleanPrice'>
       <description>Returns the yield for the given bond corresponding to the given clean price and settlement date.</description>
       <alias>QuantLib::BondFunctions::yield</alias>
       <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -1008,6 +1007,7 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
     <Procedure name='qlBondDurationFromYield'>
       <description>Returns the duration implied by the given yield and settlement date.</description>
@@ -1172,14 +1172,13 @@
       </ReturnValue>
     </Procedure>
 
+    <!-- qlBondZSpreadFromCleanPrice: CleanPrice parameter now requires Bond::Price wrapper, not supported by gensrc
     <Procedure name='qlBondZSpreadFromCleanPrice'>
       <description>Returns the z-spread for the given bond corresponding to the given clean price and settlement date.</description>
       <alias>QuantLib::BondFunctions::zSpread</alias>
       <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
         <SupportedPlatform name='Excel'/>
         <SupportedPlatform name='Calc'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters>
@@ -1215,7 +1214,7 @@
             <tensorRank>scalar</tensorRank>
             <description>frequency (e.g. Annual, Semiannual, Every4Month, Quarterly, Bimonthly, Monthly).</description>
           </Parameter>
-          
+
           <Parameter name='SettlementDate' const='False' default='QuantLib::Date()'>
             <type>QuantLib::Date</type>
             <tensorRank>scalar</tensorRank>
@@ -1244,6 +1243,7 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Procedure>
+    -->
 
     <!-- QuantLib::Bond Calculation -->
     
@@ -1452,71 +1452,6 @@
             <type>QuantLib::DayCounter</type>
             <tensorRank>scalar</tensorRank>
             <description>Payment DayCounter ID.</description>
-          </Parameter>
-          <Parameter name='PaymentBDC' default='"Following"'>
-            <type>QuantLib::BusinessDayConvention</type>
-            <tensorRank>scalar</tensorRank>
-            <description>payment business day convention.</description>
-          </Parameter>
-          <Parameter name='Redemption' default='100.0'>
-            <type>QuantLib::Real</type>
-            <tensorRank>scalar</tensorRank>
-            <description>Redemption value.</description>
-          </Parameter>
-          <Parameter name='IssueDate' default='QuantLib::Date()'>
-            <type>QuantLib::Date</type>
-            <tensorRank>scalar</tensorRank>
-            <description>issue date: the bond can't be traded until then.</description>
-          </Parameter>
-          <Parameter name='PaymentCalendar' exampleValue='TARGET'>
-            <type>QuantLib::Calendar</type>
-            <tensorRank>scalar</tensorRank>
-            <description>payment holiday calendar (e.g. TARGET).</description>
-          </Parameter>
-        </Parameters>
-      </ParameterList>
-    </Constructor>
-
-    <Constructor name='qlFixedRateBond2'>
-      <libraryFunction>FixedRateBond</libraryFunction>
-      <SupportedPlatforms>
-        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
-        <SupportedPlatform name='Excel'/>
-        <SupportedPlatform name='Calc'/>
-        <SupportedPlatform name='Cpp'/>
-      </SupportedPlatforms>
-      <ParameterList>
-        <Parameters>
-          <Parameter name='Description' default='std::string()'>
-            <type>string</type>
-            <tensorRank>scalar</tensorRank>
-            <description>Bond description string. Autogenerated if null</description>
-          </Parameter>
-          <Parameter name='Currency' examplevalue='EUR'>
-            <type>QuantLib::Currency</type>
-            <tensorRank>scalar</tensorRank>
-            <description>bond Currency.</description>
-          </Parameter>
-          <Parameter name='SettlementDays' exampleValue='3'>
-            <type>QuantLib::Size</type>
-            <tensorRank>scalar</tensorRank>
-            <description>settlement days.</description>
-          </Parameter>
-          <Parameter name='FaceAmount' default='100.0'>
-            <type>QuantLib::Real</type>
-            <tensorRank>scalar</tensorRank>
-            <description>Face nominal amount.</description>
-          </Parameter>
-          <Parameter name='ScheduleID'>
-            <type>QuantLib::Schedule</type>
-            <superType>libraryClass</superType>
-            <tensorRank>scalar</tensorRank>
-            <description>Schedule object ID.</description>
-          </Parameter>
-          <Parameter name='Coupons'>
-            <type>QuantLib::InterestRate</type>
-            <tensorRank>vector</tensorRank>
-            <description>coupon InterestRate IDs.</description>
           </Parameter>
           <Parameter name='PaymentBDC' default='"Following"'>
             <type>QuantLib::BusinessDayConvention</type>

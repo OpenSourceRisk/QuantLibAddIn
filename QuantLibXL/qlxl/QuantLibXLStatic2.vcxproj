@@ -143,14 +143,14 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|x64'">.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\xll\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QuantLibXL-$(PlatformToolset)-mt-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuantLibXL-$(PlatformToolset)-x64-mt-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QuantLibXL-$(PlatformToolset)-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuantLibXL-$(PlatformToolset)-x64-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">QuantLibXL-$(PlatformToolset)-mt-sgd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">QuantLibXL-$(PlatformToolset)-x64-mt-sgd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|Win32'">QuantLibXL-$(PlatformToolset)-mt-s-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|x64'">QuantLibXL-$(PlatformToolset)-x64-mt-s-1_23_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QuantLibXL-$(PlatformToolset)-mt-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuantLibXL-$(PlatformToolset)-x64-mt-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QuantLibXL-$(PlatformToolset)-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuantLibXL-$(PlatformToolset)-x64-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">QuantLibXL-$(PlatformToolset)-mt-sgd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">QuantLibXL-$(PlatformToolset)-x64-mt-sgd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|Win32'">QuantLibXL-$(PlatformToolset)-mt-s-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release (static runtime)|x64'">QuantLibXL-$(PlatformToolset)-x64-mt-s-1_42_0</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|Win32'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug (static runtime)|x64'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.xll</TargetExt>
@@ -182,7 +182,7 @@
       <PrecompiledHeaderOutputFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -196,13 +196,13 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-sgd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-sgd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-sgd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-sgd-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -232,7 +232,7 @@
       <PrecompiledHeaderOutputFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -246,13 +246,13 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-sgd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-sgd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-sgd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-sgd-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -282,7 +282,7 @@
       <PrecompiledHeaderOutputFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -296,13 +296,13 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-gd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-gd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-gd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-gd-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -332,7 +332,7 @@
       <PrecompiledHeaderOutputFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</AssemblerListingLocation>
       <ObjectFileName>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -346,13 +346,13 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-gd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-gd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-gd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-gd-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -397,12 +397,12 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-s-1_23_0.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-s-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-s-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-s-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -447,12 +447,12 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-s-1_23_0.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-s-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-s-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-s-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -497,12 +497,12 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-1_23_0.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -547,12 +547,12 @@
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;Ws2_32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;../../log4cxx/msvc/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-1_23_0.pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>../../ObjectHandler/lib;../../QuantLib/lib;../../QuantLibAddin/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildStatic\$(PlatformToolset)\$(Platform)\$(Configuration)/QuantLibXL-$(PlatformToolset)-mt-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -589,6 +589,7 @@
     <ClCompile Include="register\register_evolutiondescription.cpp" />
     <ClCompile Include="register\register_exercise.cpp" />
     <ClCompile Include="register\register_forwardrateagreement.cpp" />
+    <ClCompile Include="register\register_fxforward.cpp" />
     <ClCompile Include="register\register_handles.cpp" />
     <ClCompile Include="register\register_index.cpp" />
     <ClCompile Include="register\register_instruments.cpp" />
@@ -652,6 +653,7 @@
     <ClCompile Include="functions\evolutiondescription.cpp" />
     <ClCompile Include="functions\exercise.cpp" />
     <ClCompile Include="functions\forwardrateagreement.cpp" />
+    <ClCompile Include="functions\fxforward.cpp" />
     <ClCompile Include="functions\handles.cpp" />
     <ClCompile Include="functions\index.cpp" />
     <ClCompile Include="functions\instruments.cpp" />

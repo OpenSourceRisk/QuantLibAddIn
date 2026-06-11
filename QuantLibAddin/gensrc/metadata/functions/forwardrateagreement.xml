@@ -71,7 +71,7 @@
       </ParameterList>
     </Constructor>
 
-    <Member name='qlFRAforwardRate' type='QuantLib::ForwardRateAgreement'>
+    <Member name='qlFraForwardRate' type='QuantLib::ForwardRateAgreement'>
       <description>Returns the relevant forward rate associated with the FRA term.</description>
       <libraryFunction>forwardRate</libraryFunction>
       <SupportedPlatforms>
@@ -87,9 +87,9 @@
       </ReturnValue>
     </Member>
 
-    <Member name='qlFRAforwardValue' type='QuantLib::ForwardRateAgreement'>
-      <description>Returns the forward value of the FRA.</description>
-      <libraryFunction>forwardValue</libraryFunction>
+    <Member name='qlFraAmount' type='QuantLib::ForwardRateAgreement'>
+      <description>Returns the payoff of the FRA on the value date.</description>
+      <libraryFunction>amount</libraryFunction>
       <SupportedPlatforms>
         <SupportedPlatform name='Excel'/>
         <!--SupportedPlatform name='Cpp'/-->
@@ -103,12 +103,12 @@
       </ReturnValue>
     </Member>
 
-    <Member name='qlFRAspotValue' type='QuantLib::ForwardRateAgreement'>
-      <description>Returns the spot value of the FRA.</description>
-      <libraryFunction>spotValue</libraryFunction>
+    <!-- qlFRAforwardValue: removed in newer QuantLib (forwardValue() no longer exists)
+    <Member name='qlFRAforwardValue' type='QuantLib::ForwardRateAgreement'>
+      <description>Returns the forward value of the FRA.</description>
+      <libraryFunction>forwardValue</libraryFunction>
       <SupportedPlatforms>
         <SupportedPlatform name='Excel'/>
-        <!--SupportedPlatform name='Cpp'/-->
       </SupportedPlatforms>
       <ParameterList>
         <Parameters/>
@@ -118,6 +118,24 @@
         <tensorRank>scalar</tensorRank>
       </ReturnValue>
     </Member>
+    -->
+
+    <!-- qlFRAspotValue: removed in newer QuantLib (spotValue() no longer exists)
+    <Member name='qlFRAspotValue' type='QuantLib::ForwardRateAgreement'>
+      <description>Returns the spot value of the FRA.</description>
+      <libraryFunction>spotValue</libraryFunction>
+      <SupportedPlatforms>
+        <SupportedPlatform name='Excel'/>
+      </SupportedPlatforms>
+      <ParameterList>
+        <Parameters/>
+      </ParameterList>
+      <ReturnValue>
+        <type>double</type>
+        <tensorRank>scalar</tensorRank>
+      </ReturnValue>
+    </Member>
+    -->
 
   </Functions>
 </Category>

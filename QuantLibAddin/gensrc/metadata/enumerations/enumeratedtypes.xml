@@ -12,10 +12,14 @@
     Copyright (C) 2015 Riccardo Barone
     Copyright (C) 2015 Paolo Mazzocchi
     Copyright (C) 2016 Stefano Fondi
+    Copyright (C) 2022 Sebastian Schlenkrich
   </enumeratedTypeCopyright>
 
   <EnumeratedTypeGroups>
 
+    <!-- QuantLib::SensitivityAnalysis removed from ORE QuantLib fork (v1.41+);
+         qlBucketAnalysis/qlBucketAnalysisDelta/qlBucketAnalysisDelta2 suppressed in quotes.xml
+         (those QuantLibAddin functions depended on this type)
     <EnumeratedTypeGroup type='QuantLib::SensitivityAnalysis'>
       <includeFile>oh/enumerations/typefactory.hpp</includeFile>
       <constructor>true</constructor>
@@ -30,6 +34,7 @@
         </EnumeratedType>
       </EnumeratedTypes>
     </EnumeratedTypeGroup>
+    -->
 
     <EnumeratedTypeGroup type='QuantLib::DateGeneration::Rule'>
       <includeFile>oh/enumerations/typefactory.hpp</includeFile>
@@ -1636,6 +1641,7 @@
       </EnumeratedTypes>
     </EnumeratedTypeGroup>
 
+    <!-- QuantLib::OvernightIndexedSwap::Type is now identical to QuantLib::VanillaSwap::Type (both are Swap::Type) - removed to avoid duplicate registration
     <EnumeratedTypeGroup type='QuantLib::OvernightIndexedSwap::Type'>
       <includeFile>oh/enumerations/typefactory.hpp</includeFile>
       <constructor>true</constructor>
@@ -1650,6 +1656,7 @@
         </EnumeratedType>
       </EnumeratedTypes>
     </EnumeratedTypeGroup>
+    -->
 
     <EnumeratedTypeGroup type='QuantLib::Option::Type'>
       <includeFile>oh/enumerations/typefactory.hpp</includeFile>
@@ -2072,6 +2079,21 @@
         <EnumeratedType>
           <string>NoSeniority</string>
           <value>QuantLib::NoSeniority</value>
+        </EnumeratedType>
+      </EnumeratedTypes>
+    </EnumeratedTypeGroup>
+
+    <EnumeratedTypeGroup type='QuantLib::RateAveraging::Type'>
+      <includeFile>oh/enumerations/typefactory.hpp</includeFile>
+      <constructor>true</constructor>
+      <EnumeratedTypes>
+        <EnumeratedType>
+          <string>Compound</string>
+          <value>QuantLib::RateAveraging::Compound</value>
+        </EnumeratedType>
+        <EnumeratedType>
+          <string>Simple</string>
+          <value>QuantLib::RateAveraging::Simple</value>
         </EnumeratedType>
       </EnumeratedTypes>
     </EnumeratedTypeGroup>

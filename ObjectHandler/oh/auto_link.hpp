@@ -26,6 +26,8 @@
 // select toolset:
 #if (_MSC_VER >= 1950)
 #  define OBJHANDLER_LIB_TOOLSET "v145"
+#elif (_MSC_VER >= 1940)
+#  define OBJHANDLER_LIB_TOOLSET "v143"
 #elif (_MSC_VER >= 1924)
 #  define OBJHANDLER_LIB_TOOLSET "v142"
 #elif (_MSC_VER >= 1910)
@@ -87,10 +89,12 @@
 
 #define OBJHANDLER_LIB_NAME "ObjectHandler" OBJHANDLER_LIB_TYPE "-" OBJHANDLER_LIB_TOOLSET OBJHANDLER_LIB_PLATFORM OBJHANDLER_LIB_THREAD_OPT OBJHANDLER_LIB_RT_OPT "-" OBJHANDLER_LIB_VERSION ".lib"
 
+#ifndef OH_NO_AUTO_LINK
 #pragma comment(lib, OBJHANDLER_LIB_NAME)
 #ifdef BOOST_LIB_DIAGNOSTIC
 #  pragma message("Will (need to) link to lib file: " OBJHANDLER_LIB_NAME)
 #endif
+#endif // OH_NO_AUTO_LINK
 
 #endif
 
