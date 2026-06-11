@@ -12,7 +12,7 @@ include:
     inputs:
       enable-cd-user-token: false
   - component: gitlab.dx1.lseg.com/app/app-51172/ci/components/versioning@release/1.x.x-stable
-  - component: gitlab.dx1.lseg.com/app/app-51172/ci/components/auto-blackduck@release/d5f81c837001f5bd29dffee4f44746d190ce9826
+  - component: gitlab.dx1.lseg.com/app/app-51172/ci/components/auto-blackduck@d5f81c837001f5bd29dffee4f44746d190ce9826
     inputs:
       always-scan: true
       detect-tools: "DETECTOR, SIGNATURE_SCAN"
