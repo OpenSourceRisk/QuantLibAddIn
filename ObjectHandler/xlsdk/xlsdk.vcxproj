@@ -39,7 +39,8 @@
     <ProjectGuid>{4BD77A1E-AAE9-47A4-81FE-2308E5A460AF}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="..\..\QuantLib\QuantLib.props" />
+  <Import Project="..\toolset.props" />
+  <Import Project="..\boost.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>

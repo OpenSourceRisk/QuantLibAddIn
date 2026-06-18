@@ -23,7 +23,8 @@
     <ProjectGuid>{04D7369F-47BC-46B0-A374-41635A9656D8}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="..\..\..\QuantLib\QuantLib.props" />
+  <Import Project="..\..\toolset.props" />
+  <Import Project="..\..\boost.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
