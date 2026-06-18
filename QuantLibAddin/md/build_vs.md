@@ -6,7 +6,7 @@ This document explains how to build QuantLibAddin - the QuantLib wrapper layer
 using the hand-maintained Visual Studio solution file.
 
 QuantLibAddin is normally built as a prerequisite of QuantLibXL. If your goal is
-the QuantLibXL Excel add-in, follow `QuantLibXL\md\build_vs.md` instead - it
+the QuantLibXL Excel add-in, follow [../../QuantLibXL/md/build_vs.md](../../QuantLibXL/md/build_vs.md) instead - it
 builds QuantLibAddin for you as part of the dependency chain. Use this document
 when you want to build or test the QuantLibAddin layer (or its C++ clients) on
 its own.

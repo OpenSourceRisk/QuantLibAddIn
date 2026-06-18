@@ -30,15 +30,15 @@ There are two ways to build the projects:
 
 Here are the instructions to build the various projects from Visual Studio solution files:
 
-- QuantLibXL (including QuantLibAddin and ObjectHandler): ./QuantLibXL/md/build_vs.md
-- QuantLibAddin (including ObjectHandler): ./QuantLibAddin/md/build_vs.md
-- ObjectHandler: ./ObjectHandler/md/build_vs.md
+- QuantLibXL (including QuantLibAddin and ObjectHandler): [./QuantLibXL/md/build_vs.md](./QuantLibXL/md/build_vs.md)
+- QuantLibAddin (including ObjectHandler): [./QuantLibAddin/md/build_vs.md](./QuantLibAddin/md/build_vs.md)
+- ObjectHandler: [./ObjectHandler/md/build_vs.md](./ObjectHandler/md/build_vs.md)
 
 ### Building with cmake
 
 Here are the instructions to build the various projects using cmake:
 
-- QuantLibXL (including QuantLibAddin and ObjectHandler): ./QuantLibXL/md/build_cmake.md
-- QuantLibAddin (including ObjectHandler): ./QuantLibAddin/md/build_cmake.md
-- ObjectHandler: ./ObjectHandler/md/build_cmake.md
+- QuantLibXL (including QuantLibAddin and ObjectHandler): [./QuantLibXL/md/build_cmake.md](./QuantLibXL/md/build_cmake.md)
+- QuantLibAddin (including ObjectHandler): [./QuantLibAddin/md/build_cmake.md](./QuantLibAddin/md/build_cmake.md)
+- ObjectHandler: [./ObjectHandler/md/build_cmake.md](./ObjectHandler/md/build_cmake.md)
 

@@ -6,7 +6,7 @@ Excel-add-in framework that QuantLibAddin and QuantLibXL are built on - from a
 **git clone**, using the hand-maintained Visual Studio solution file.
 
 ObjectHandler is normally built as a prerequisite of QuantLibXL. If your goal is
-the QuantLibXL Excel add-in, follow `QuantLibXL\md\build_vs.md` instead - it
+the QuantLibXL Excel add-in, follow [../../QuantLibXL/md/build_vs.md](../../QuantLibXL/md/build_vs.md) instead - it
 builds ObjectHandler for you as part of the dependency chain. Use this document
 when you want to build or test ObjectHandler on its own.
 

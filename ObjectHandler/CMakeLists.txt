@@ -127,6 +127,18 @@ target_link_libraries(ohxllib PUBLIC ohlib xlsdk)
 endif()
 
 # -----------------------------------------------------------------------
+# Examples — the sample objects library and the C++ example program that
+# ship with ObjectHandler (Examples/ExampleObjects + Examples/C++).  Gated on
+# BUILD_EXAMPLES so the integrated build only adds them when requested.  The
+# option is (re)declared here so that this value is also honoured when
+# ObjectHandler is configured on its own.
+# -----------------------------------------------------------------------
+option(BUILD_EXAMPLES "Add targets to build the ObjectHandler example programs" OFF)
+if(BUILD_EXAMPLES)
+    add_subdirectory(Examples)
+endif()
+
+# -----------------------------------------------------------------------
 # Documentation — ObjectHandler owns its own Docs build (ObjectHandler-docs
 # target).  Gated on BUILD_DOCS so the integrated build only adds it when
 # requested.  The option is (re)declared here so that this value is also

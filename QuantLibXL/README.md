@@ -21,11 +21,11 @@ There are two ways to build the project:
 
 Here are the instructions to build the project from Visual Studio solution files:
 
-./md/build_vs.md
+[./md/build_vs.md](./md/build_vs.md)
 
 ### Building with cmake
 
 Here are the instructions to build the project using cmake:
 
-./md/build_cmake.md
+[./md/build_cmake.md](./md/build_cmake.md)
 

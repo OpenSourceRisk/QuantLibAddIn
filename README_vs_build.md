@@ -5,7 +5,7 @@ prerequisites from source code using the hand-maintained Visual Studio
 solution files.
 
 > **Scope.** This covers the hand-maintained Visual Studio solution files. For
-> the cmake build see `README_cmake_build.md`. The build was tested with VS 2026
+> the cmake build see [`README_cmake_build.md`](README_cmake_build.md). The build was tested with VS 2026
 > (v145 toolset) and VS 2022 (v143 toolset), x64 and Win32, producing XLLs in
 > `QuantLibXL\xll\`. See sections 2.2 and 5 for full details.
 

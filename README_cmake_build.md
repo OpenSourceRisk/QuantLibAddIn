@@ -2,7 +2,7 @@
 
 This document describes the cmake build for QuantLibXL.  It exists
 alongside the hand-maintained Visual Studio solution files documented in
-README_vs_build.md; both builds use the same source files and produce
+[README_vs_build.md](README_vs_build.md); both builds use the same source files and produce
 the same XLL output.
 
 ---
@@ -25,7 +25,7 @@ files (`QuantLibXL\xll\`).
 ## 2  Prerequisites
 
 The cmake build has the same prerequisites as the hand-maintained build
-(see README_vs_build.md sections 2.1 and 2.2) plus:
+(see [README_vs_build.md](README_vs_build.md) sections 2.1 and 2.2) plus:
 
 - **CMake 3.15+** - included with the "C++ CMake tools" component of the
   VS "Desktop development with C++" workload.
