@@ -14,3 +14,4 @@ qlo/config.hpp
 qlo/config.hpp.in
 qlo/stamp-h1
 x64
+cmake

@@ -7,9 +7,9 @@ This repo contains source code and examples for the QuantLibXL, QuantLibAddin, O
 
 The four projects are documented at the links below:
 
-https://www.quantlib.org/quantlibxl
-https://www.quantlib.org/quantlibaddin
-https://www.quantlib.org/objecthandler
+https://www.quantlib.org/quantlibxl  
+https://www.quantlib.org/quantlibaddin  
+https://www.quantlib.org/objecthandler  
 https://www.quantlib.org/gensrc
 
 Here are the instructions for downloading QuantLibXL:
@@ -36,9 +36,13 @@ Here are the instructions to build the various projects from Visual Studio solut
 
 ### Building with cmake
 
-Here are the instructions to build the various projects using cmake:
+There are two ways to build the projects with cmake:
 
-- QuantLibXL (including QuantLibAddin and ObjectHandler): [./QuantLibXL/md/build_cmake.md](./QuantLibXL/md/build_cmake.md)
-- QuantLibAddin (including ObjectHandler): [./QuantLibAddin/md/build_cmake.md](./QuantLibAddin/md/build_cmake.md)
-- ObjectHandler: [./ObjectHandler/md/build_cmake.md](./ObjectHandler/md/build_cmake.md)
+1) Invoke the build from here in the root directory, which configures and builds the whole stack (QuantLib, ObjectHandler, QuantLibAddin, and QuantLibXL) together in a single step: [./build_cmake.md](./build_cmake.md)
+
+2) Build the subprojects individually, as described in their respective documentation. Each subproject builds against the prebuilt prerequisites above it in the dependency chain (gensrc &lt;- ObjectHandler &lt;- QuantLibAddin &lt;- QuantLibXL):
+
+   - ObjectHandler: [./ObjectHandler/md/build_cmake.md](./ObjectHandler/md/build_cmake.md)
+   - QuantLibAddin (against prebuilt QuantLib and ObjectHandler): [./QuantLibAddin/md/build_cmake.md](./QuantLibAddin/md/build_cmake.md)
+   - QuantLibXL (against prebuilt QuantLib, ObjectHandler, and QuantLibAddin): [./QuantLibXL/md/build_cmake.md](./QuantLibXL/md/build_cmake.md)
 

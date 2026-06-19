@@ -12,11 +12,10 @@ the QuantLibXL Excel add-in, follow
 instead - it builds ObjectHandler for you as part of the dependency chain. Use
 this document when you want to build or test ObjectHandler on its own.
 
-For the full reference description of the cmake build (file layout, design notes
-and the documentation build) see
-[../../README_cmake_build.md](../../README_cmake_build.md) in the repository
-root. This HOWTO covers the common case: building the ObjectHandler libraries
-standalone from a clone.
+To build the whole stack - QuantLib, ObjectHandler, QuantLibAddin and
+QuantLibXL - in a single configure from the repository root, see
+[../../build_cmake.md](../../build_cmake.md). This HOWTO covers the common case:
+building the ObjectHandler libraries standalone from a clone.
 
 ---
 
@@ -31,7 +30,7 @@ A standalone cmake build produces three **static libraries**:
 | `ohxllib` | static library | ObjectHandler Excel layer (Windows only) |
 
 These are the libraries consumed by QuantLibAddin and QuantLibXL. The supplied
-presets also enable `BUILD_EXAMPLES` (section 4), so the build additionally
+presets also enable `BUILD_EXAMPLES` (section 5), so the build additionally
 produces the example program that ships with ObjectHandler:
 
 | Target | Kind | Description |
@@ -47,13 +46,39 @@ produces the example program that ships with ObjectHandler:
 ObjectHandler depends only on **Boost** and on its own upstream build settings
 (`gensrc\cmake\commonSettings.cmake`); it requires no other project in the
 repository. The standalone build described here therefore needs nothing beyond
-this repository and a Boost build.
+this repository and a Boost build (plus Python 3 for the one-time Full build
+described in section 2).
 
 ---
 
-## 2 Prerequisites
+## 2 Choose a build - Basic or Full
 
-### 2.1 CMake and a C++ compiler
+The Windows Excel layer (`ohxllib`) is compiled from source files that are
+**auto-generated** by gensrc and are **not** committed to the repository, so on
+a fresh clone they are not present yet. The build can generate them for you. The
+choice is a single cmake cache variable, `RUN_GENSRC`, set at configure time.
+
+| Build | Configure with | Description |
+|---|---|---|
+| Basic | (default - `RUN_GENSRC` is `OFF`) | Compiles the auto-generated source files that are already present in the clone. Does **not** require Python. Use this for normal compilation. |
+| Full  | `-DRUN_GENSRC=ON` | Runs gensrc first to (re)generate the auto-generated source files, then compiles. Requires Python 3. Use this on a fresh clone, or after you have changed the gensrc metadata (the XML files under `ObjectHandler\gensrc\metadata`). |
+
+On a **fresh clone the first build must be a Full build** (`-DRUN_GENSRC=ON`) so
+that the generated `ohxl` sources are created. Otherwise cmake fails at configure
+time with `Cannot find source file` for one of the `ohxl\functions\*.cpp` or
+`ohxl\register\*.cpp` files (see section 9). After one Full build the generated
+files exist, and subsequent Basic builds compile them without needing Python.
+
+> The core library `ohlib` has **no** auto-generated sources, so it builds from a
+> fresh clone with the default Basic build. The Linux build (which builds only
+> `ohlib`, not the Excel layer) therefore does not need the Full build at all;
+> only the Windows `ohxllib` does.
+
+---
+
+## 3 Prerequisites
+
+### 3.1 CMake and a C++ compiler
 
 - **CMake 3.15 or later.** CMake ships with the **"C++ CMake tools for
   Windows"** component of the Visual Studio **"Desktop development with C++"**
@@ -63,14 +88,14 @@ this repository and a Boost build.
   workload. This build is **x64 only**.
 
 The platform toolset is selected automatically by the generator named in the
-preset you choose (section 4); no manual toolset configuration is required:
+preset you choose (section 5); no manual toolset configuration is required:
 
 | Visual Studio | Generator (from the preset) | Platform toolset |
 |---|---|---|
 | VS 2022 (v17) | `Visual Studio 17 2022` | v143 |
 | VS 2026 (v18) | `Visual Studio 18 2026` | v145 |
 
-### 2.2 Boost
+### 3.2 Boost
 
 ObjectHandler depends on Boost. You need the **compiled** Boost libraries, not
 just the headers (the build links the Boost `filesystem` and `serialization`
@@ -93,11 +118,22 @@ environment.
 Like the QuantLibAddin and QuantLibXL cmake builds, ObjectHandler has a
 **single** Boost configuration point: you supply the include and library
 directories once, in a `CMakeUserPresets.json` file, and cmake applies them to
-the build. This is described in section 4.
+the build. This is described in section 5.
+
+### 3.3 Python 3 (Full build only)
+
+The **Full** build (`-DRUN_GENSRC=ON`) runs gensrc, which is a Python 3 script.
+Install Python 3 and make sure `python` is on the `PATH` (i.e. `python
+--version` works from a command prompt). See <https://www.python.org/>. When
+`RUN_GENSRC` is on, cmake locates the interpreter itself via `find_package`.
+
+The **Basic** build does not use Python or gensrc, so you can skip this section
+for a Basic build. Remember, though, that a fresh clone needs **one** Full build
+to create the generated `ohxl` sources (section 2).
 
 ---
 
-## 3 Acquire the source code
+## 4 Acquire the source code
 
 `ObjectHandler` is contained in the main repository, alongside its upstream
 `gensrc` build settings. Clone it:
@@ -112,11 +148,11 @@ sub-projects. No other repository is required to build ObjectHandler.
 
 ---
 
-## 4 Configure Boost (required)
+## 5 Configure Boost (required)
 
 Like the rest of the cmake build, ObjectHandler uses a **preset** to bundle the
 generator, architecture and runtime selection into a single named profile, so
-that configuring is a one-line `cmake --preset` command (section 5). Boost paths
+that configuring is a one-line `cmake --preset` command (section 6). Boost paths
 are machine-specific and are **not** baked into the shared `CMakePresets.json`;
 instead you supply them in a `CMakeUserPresets.json` file in the `ObjectHandler`
 directory (next to `CMakePresets.json`). That file is listed in `.gitignore` and
@@ -207,28 +243,45 @@ omitted entirely and the shared presets will work as-is.
 
 ---
 
-## 5 Configure
+## 6 Configure
 
 Open a **Developer PowerShell / Command Prompt** (or any shell where `cmake` is
 on the `PATH`), change to the **`ObjectHandler` directory** - the folder that
 contains `CMakePresets.json` - and run cmake with the preset you want. The
-preset's `binaryDir` puts the build under `build\<preset>\` automatically:
+preset's `binaryDir` puts the build under `build\<preset>\` automatically.
+
+On a **fresh clone**, or whenever you want to (re)generate the `ohxl` sources,
+add `-DRUN_GENSRC=ON` to configure a **Full** build, which runs gensrc first
+(this requires Python 3 - see section 3.3):
 
 ```powershell
 cd ObjectHandler
 
 # VS 2026, static CRT  (recommended for distribution)
-cmake --preset windows-vs2026-x64-static
+cmake --preset windows-vs2026-x64-static -DRUN_GENSRC=ON
 
 # VS 2026, dynamic CRT
-cmake --preset windows-vs2026-x64-dynamic
+cmake --preset windows-vs2026-x64-dynamic -DRUN_GENSRC=ON
 
 # VS 2022, static CRT
-cmake --preset windows-vs2022-x64-static
+cmake --preset windows-vs2022-x64-static -DRUN_GENSRC=ON
 
 # VS 2022, dynamic CRT
-cmake --preset windows-vs2022-x64-dynamic
+cmake --preset windows-vs2022-x64-dynamic -DRUN_GENSRC=ON
 ```
+
+gensrc runs once, during this configure step, and writes the generated sources
+into the source tree.
+
+Once the `ohxl` sources exist, drop `-DRUN_GENSRC=ON` to configure a **Basic**
+build (section 2) - the default - which skips gensrc:
+
+```powershell
+cmake --preset windows-vs2026-x64-static
+```
+
+After a successful configure you can build (section 7); unless you change the
+gensrc metadata, you only need a Full configure once.
 
 > Unlike the QuantLibAddin and QuantLibXL presets (which live at the repository
 > root and configure the whole add-in stack), the ObjectHandler presets live in
@@ -244,7 +297,7 @@ cmake --preset windows-vs2022-x64-dynamic
 
 ---
 
-## 6 Build
+## 7 Build
 
 The Visual Studio generator is multi-config, so the **same** build directory
 produces either Release or Debug. The simplest way to build is with a **build
@@ -275,7 +328,7 @@ program, add `--target ExampleCpp`.
 
 ---
 
-## 7 Output
+## 8 Output
 
 The build artifacts are written under the preset's build directory
 (`build\<preset>\`), in a per-configuration sub-folder. For the
@@ -309,14 +362,22 @@ in the per-config sub-folder.
 
 ---
 
-## 8 Troubleshooting
+## 9 Troubleshooting
+
+**CMake error: `Cannot find source file`** at configure time, naming a file
+under `ohxl\functions\` or `ohxl\register\` (for example
+`ohxl/register/register_all.cpp`). These sources are auto-generated by gensrc
+and are not present on a fresh clone. Configure a **Full** build once to
+add `-DRUN_GENSRC=ON` (section 6) - which also requires Python 3
+(section 3.3). After one Full configure the files exist and subsequent Basic
+builds work.
 
 **CMake error: `Could NOT find Boost`** at configure time. `BOOST_INCLUDEDIR`
 or `BOOST_LIBRARYDIR` is missing or wrong in your `CMakeUserPresets.json`, or
 your Boost build is missing the `filesystem` / `serialization` components.
 `BOOST_INCLUDEDIR` must point at the folder that contains the `boost\`
 sub-directory, and `BOOST_LIBRARYDIR` at the folder that contains the compiled
-`.lib` files (section 4).
+`.lib` files (section 5).
 
 **`error C1083: Cannot open include file: 'boost/config.hpp'`** during
 compilation. `BOOST_INCLUDEDIR` does not point at the directory that contains
@@ -340,9 +401,9 @@ re-configure.
 
 ---
 
-## 9 Verify the build
+## 10 Verify the build
 
-Confirm the build by the presence of the `.lib` files listed in section 7:
+Confirm the build by the presence of the `.lib` files listed in section 8:
 
 ```powershell
 Get-ChildItem build\windows-vs2026-x64-static\Release\*.lib
@@ -353,7 +414,7 @@ ObjectHandler is ready to be consumed by QuantLibAddin and QuantLibXL.
 
 You can also functionally exercise the libraries by running the example program,
 which stores, retrieves, serializes and deletes objects in the repository. Run
-the executable produced in section 7, for example (VS 2026, Release static):
+the executable produced in section 8, for example (VS 2026, Release static):
 
 ```powershell
 build\windows-vs2026-x64-static\examples\ExampleCpp-v145-x64-mt-s-1_42_0.exe
