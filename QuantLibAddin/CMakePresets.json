@@ -1,0 +1,117 @@
+{
+		"version": 6,
+		"configurePresets": [
+				{
+						"name": "windows-vs2026-x64-base",
+						"hidden": true,
+						"generator": "Visual Studio 18 2026",
+						"binaryDir": "${sourceDir}/build/${presetName}",
+						"architecture": {
+								"value": "x64",
+								"strategy": "set"
+						},
+						"condition": {
+								"type": "equals",
+								"lhs": "${hostSystemName}",
+								"rhs": "Windows"
+						},
+						"vendor": {
+								"microsoft.com/VisualStudioSettings/CMake/1.0": {
+										"intelliSenseMode": "windows-msvc-x64",
+										"hostOS": ["Windows"]
+								}
+						}
+				},
+				{
+						"name": "windows-vs2022-x64-base",
+						"hidden": true,
+						"generator": "Visual Studio 17 2022",
+						"binaryDir": "${sourceDir}/build/${presetName}",
+						"architecture": {
+								"value": "x64",
+								"strategy": "set"
+						},
+						"condition": {
+								"type": "equals",
+								"lhs": "${hostSystemName}",
+								"rhs": "Windows"
+						},
+						"vendor": {
+								"microsoft.com/VisualStudioSettings/CMake/1.0": {
+										"intelliSenseMode": "windows-msvc-x64",
+										"hostOS": ["Windows"]
+								}
+						}
+				},
+				{
+						"name": "windows-vs2026-x64-dynamic-base",
+						"hidden": true,
+						"inherits": "windows-vs2026-x64-base",
+						"cacheVariables": {
+								"MSVC_LINK_DYNAMIC_RUNTIME": true
+						}
+				},
+				{
+						"name": "windows-vs2026-x64-static-base",
+						"hidden": true,
+						"inherits": "windows-vs2026-x64-base",
+						"cacheVariables": {
+								"MSVC_LINK_DYNAMIC_RUNTIME": false,
+								"Boost_USE_STATIC_RUNTIME": true
+						}
+				},
+				{
+						"name": "windows-vs2022-x64-dynamic-base",
+						"hidden": true,
+						"inherits": "windows-vs2022-x64-base",
+						"cacheVariables": {
+								"MSVC_LINK_DYNAMIC_RUNTIME": true
+						}
+				},
+				{
+						"name": "windows-vs2022-x64-static-base",
+						"hidden": true,
+						"inherits": "windows-vs2022-x64-base",
+						"cacheVariables": {
+								"MSVC_LINK_DYNAMIC_RUNTIME": false,
+								"Boost_USE_STATIC_RUNTIME": true
+						}
+				},
+				{
+						"name": "linux-gcc",
+						"displayName": "Linux GCC (system Boost)",
+						"description": "Native Linux build using gcc and system Boost via find_package.",
+						"generator": "Unix Makefiles",
+						"binaryDir": "${sourceDir}/build/${presetName}",
+						"cacheVariables": {
+								"CMAKE_BUILD_TYPE": "Release",
+								"CMAKE_C_COMPILER": "gcc",
+								"CMAKE_CXX_COMPILER": "g++",
+								"CMAKE_CXX_STANDARD": "17",
+								"Boost_USE_STATIC_LIBS": false
+						},
+						"condition": {
+								"type": "equals",
+								"lhs": "${hostSystemName}",
+								"rhs": "Linux"
+						},
+						"vendor": {
+								"microsoft.com/VisualStudioSettings/CMake/1.0": {
+										"intelliSenseMode": "linux-gcc-x64",
+										"hostOS": ["Linux"]
+								}
+						}
+				}
+		],
+		"buildPresets": [
+				{
+						"name": "linux-gcc",
+						"configurePreset": "linux-gcc",
+						"condition": {
+								"type": "equals",
+								"lhs": "${hostSystemName}",
+								"rhs": "Linux"
+						}
+				}
+		]
+}

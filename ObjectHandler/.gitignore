@@ -18,3 +18,4 @@ oh/valueobjects/vo_*.hpp
 ohxl/functions/*.?pp
 !ohxl/functions/manual.cpp
 ohxl/register/register_*.cpp
+cmake/

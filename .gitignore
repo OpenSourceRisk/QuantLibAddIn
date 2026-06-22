@@ -37,6 +37,7 @@ QuantLibAddin/qlo/valueobjects/vo_*.cpp
 QuantLibAddin/qlo/valueobjects/vo_*.hpp
 !QuantLibAddin/qlo/valueobjects/vo_group.hpp
 !QuantLibAddin/qlo/valueobjects/vo_range.hpp
+QuantLibXL/build/
 QuantLibXL/qlxl/buildstatic/
 QuantLibXL/qlxl/functions/*.cpp
 !QuantLibXL/qlxl/functions/manual.cpp
@@ -60,6 +61,7 @@ CMakeUserPresets.json
 **/Release
 **/bin/*.xml
 **/bin/*.manifest
+/out
 
 # Artifacts created in multiple directories
 Makefile

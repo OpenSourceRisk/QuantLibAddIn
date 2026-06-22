@@ -4,10 +4,10 @@ This document explains how to build the QuantLibXL Excel add-in and its
 prerequisites from source code using the hand-maintained Visual Studio
 solution files.
 
-> **Last verified:** all 8 configurations (4 runtime variants × basic + full)
-> built successfully with VS 2026 (v145 toolset) and VS 2022 (v143 toolset),
-> x64 and Win32, producing XLLs in `QuantLibXL\xll\`. See sections 2.2
-> and 5 for full details.
+> **Scope.** This covers the hand-maintained Visual Studio solution files. For
+> the cmake build see [`README_cmake_build.md`](README_cmake_build.md). The build was tested with VS 2026
+> (v145 toolset) and VS 2022 (v143 toolset), x64 and Win32, producing XLLs in
+> `QuantLibXL\xll\`. See sections 2.2 and 5 for full details.
 
 ---
 
@@ -51,68 +51,89 @@ C:\Program Files\Microsoft Visual Studio\<version>\Professional\VC\Tools\MSVC\<t
 
 ### 2.2 Boost
 
-`boost.props` in the repository root controls Boost include and library
-paths. It is configuration-aware: each of the four runtime/build-type
-combinations points to a different Boost library directory. The include
-directory (headers) is shared across all configurations.
+The build depends on the **compiled** Boost libraries, not just the headers.
+Building Boost is outside the scope of this document; these instructions assume
+you already have a Boost build available.
 
-#### Dynamic-runtime configurations (Release and Debug, `/MD`/`/MDd`)
-
-These use a conan-cached Boost 1.83.0 build. The Release dynamic build
-has already been provisioned; the same conan package also contains the
-Debug dynamic (`-mt-gd-`) libraries.
-
-To check whether the package is already cached:
+The build requires **Boost 1.58 or later**. It was tested using **Boost 1.83**.
+For purposes of this HOWTO, it is assumed that you have installed Boost to:
 
 ```
-conan list boost/1.83.0
+C:\repos\boost_1_83_0
 ```
 
-If it is not cached, install it:
+with headers under `C:\repos\boost_1_83_0` (the folder that contains the
+`boost\` sub-directory) and the compiled libraries under
+`C:\repos\boost_1_83_0\stage\lib`. Modify that path as necessary for your own
+environment.
 
-```
-conan install . --output-folder=conan --build=missing -s build_type=Release
-```
+Boost is wired into the build through **two** machine-local property sheets,
+one per layer. Neither is part of the clone — you create both by hand — and
+both are git-ignored:
 
-Once cached, find its directory:
+| Layer | File you create | Used by |
+|---|---|---|
+| QuantLib | `QuantLib\MSVC\quantlib.x64.user.props` and `quantlib.Win32.user.props` | QuantLib only |
+| Add-in stack | `ObjectHandler\boost.props` | ObjectHandler, QuantLibAddin, QuantLibXL |
 
-```
-conan cache path boost/1.83.0:<package-id>
-```
+The add-in sheet lives under `ObjectHandler` (not at the repository root)
+because QuantLibAddin and QuantLibXL already depend on ObjectHandler; importing
+`..\ObjectHandler\boost.props` adds no new cross-project dependency, and no
+project references the repository root.
 
-where `<package-id>` is the hash shown by `conan list boost/1.83.0:*`.
-
-#### Static-runtime configurations (Release and Debug static, `/MT`/`/MTd`)
-
-Conan cannot download the static-runtime Boost packages when the corporate
-firewall blocks the package server. Instead, use a locally pre-built Boost
-snapshot. The snapshot at `C:\erik\junk\boost\boost_1_83_0` contains:
-
-- `stage\lib` — Debug dynamic (`-mt-gd-`) and static-runtime
-  (`libboost_*-mt-s-*`, `libboost_*-mt-sgd-*`) libraries built with vc143
-- `stage-mt\lib` — Static-runtime libraries with full vc143 decorated names
-  (`libboost_*-vc143-mt-s-*`, `libboost_*-vc143-mt-sgd-*`)
-
-#### Configuring boost.props
-
-Open `boost.props` in the repository root. It contains four
-configuration-conditional `BoostLibDir` blocks — one per build type — plus
-a single shared `BoostIncludeDir`. Update each path to match the actual
-locations on the machine being used:
+`QuantLib.vcxproj` imports both `QuantLib\MSVC` sheets **unconditionally**, so
+both must exist even if you build x64 only (an absent file triggers an `MSB4019`
+error before compilation). `quantlib.x64.user.props` (used for both **x64**
+configurations):
 
 ```xml
-<!-- shared headers -->
-<BoostIncludeDir>C:\Users\username\.conan2\p\boostXXXXXXXXXXXXX\p\include</BoostIncludeDir>
-
-<!-- Release  (/MD)  — conan cache -->
-<!-- Debug    (/MDd) — local snapshot stage\lib  -->
-<!-- Release (static runtime) (/MT)  — local snapshot stage-mt\lib -->
-<!-- Debug   (static runtime) (/MTd) — local snapshot stage-mt\lib -->
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludePath>C:\repos\boost_1_83_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\repos\boost_1_83_0\stage\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+</Project>
 ```
 
-`boost.props` is imported by every project in the solution via
-`QuantLib\QuantLib.props`. It also sets `<LanguageStandard>stdcpp17</LanguageStandard>`
-globally, which is required by the QuantLib headers.
+`quantlib.Win32.user.props` is the same, with `LibraryPath` pointing at your
+32-bit Boost libraries (or any valid content if you build x64 only).
+
+`ObjectHandler\boost.props` (used by ObjectHandler, QuantLibAddin and
+QuantLibXL) also sets `<LanguageStandard>stdcpp17</LanguageStandard>`, which is
+required by the QuantLib headers:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\repos\boost_1_83_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
+    <Link>
+      <AdditionalLibraryDirectories>C:\repos\boost_1_83_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
+    <Link>
+      <AdditionalLibraryDirectories>C:\path\to\boost\win32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>
+```
+
+> **Boost library / toolset compatibility.** QuantLib and Boost use Boost's
+> *auto-linking*: the name of the `.lib` it asks for encodes a compiler toolset
+> (e.g. `libboost_*-vc143-mt-s-x64-1_83.lib`). The toolset tag in the library
+> name must be one that your Boost build provides. Boost binaries are generally
+> forward-compatible across adjacent MSVC toolsets (for example a `vc143` build
+> links successfully from VS 2026 / v145), but if you ever see an
+> `LNK1104: cannot open file 'libboost_...'` error it means the auto-linked
+> library name does not exist in your library directory; provide a Boost build
+> whose toolset tag matches, or add the correct directory.
 
 ### 2.3 Python 3 (Full build only)
 
@@ -135,24 +156,43 @@ expected layout after cloning this repository is:
 
 ```
 QuantLibAddin\
-  boost.props           # Boost location settings — edit before building
-  conanfile.txt         # conan package descriptor (boost/1.83.0)
-  gensrc\               # code-generation framework 
-  ObjectHandler\        # object repository
-  QuantLib\             # QuantLib C++ analytics library (git submodule)
+  gensrc\               # code-generation framework
+  ObjectHandler\        # object repository (also holds boost.props — see section 2.2)
+  QuantLib\             # QuantLib C++ analytics library (cloned separately — see below)
   QuantLibAddin\        # QuantLib C++ wrapper
   QuantLibXL\           # Excel XLL
 ```
+
+QuantLib is maintained as a **separate** repository and is deliberately excluded
+from the main repository (it is listed in `.gitignore`). Clone it yourself into
+a sub-folder named exactly `QuantLib` inside the working tree:
+
+```
+cd QuantLibAddin
+git clone <quantlib-repository-url> QuantLib
+```
+
+The folder name `QuantLib` **is case sensitive** and must be spelled exactly as
+shown — `QuantLib`, not `quantlib` or `QUANTLIB`, and with no version suffix —
+because the solution files reference `..\QuantLib` explicitly. The explicit
+`QuantLib` argument on the `git clone` command above ensures this; without it
+git would create a folder named `quantlib` from the URL.
 
 ---
 
 ## 4 Build Steps
 
-### Step 1 — Edit `boost.props`
+### Step 1 — Create the Boost property sheets
 
-Open `boost.props` in the repository root and update `BoostIncludeDir` and
-`BoostLibDir` to the conan-cached Boost package on your machine, as
-described in section 2.2.
+Create the two machine-local Boost property sheets described in section 2.2,
+pointing them at your Boost build:
+
+- `QuantLib\MSVC\quantlib.x64.user.props` and `quantlib.Win32.user.props`
+  (used by QuantLib).
+- `ObjectHandler\boost.props` (used by ObjectHandler, QuantLibAddin and
+  QuantLibXL).
+
+Both files are git-ignored and are not part of the clone.
 
 ### Step 2 — Open the solution
 
@@ -190,14 +230,14 @@ encodes the toolset, platform, configuration and version:
 
 | Configuration | Platform | Output filename |
 |---|---|---|
-| Release | x64 | `QuantLibXL-v145-x64-mt-1_23_0.xll` |
-| Release (static runtime) | x64 | `QuantLibXL-v145-x64-mt-s-1_23_0.xll` |
-| Debug | x64 | `QuantLibXL-v145-x64-mt-gd-1_23_0.xll` |
-| Debug (static runtime) | x64 | `QuantLibXL-v145-x64-mt-sgd-1_23_0.xll` |
-| Release | Win32 | `QuantLibXL-v145-mt-1_23_0.xll` |
-| Release (static runtime) | Win32 | `QuantLibXL-v145-mt-s-1_23_0.xll` |
-| Debug | Win32 | `QuantLibXL-v145-mt-gd-1_23_0.xll` |
-| Debug (static runtime) | Win32 | `QuantLibXL-v145-mt-sgd-1_23_0.xll` |
+| Release | x64 | `QuantLibXL-v145-x64-mt-1_42_0.xll` |
+| Release (static runtime) | x64 | `QuantLibXL-v145-x64-mt-s-1_42_0.xll` |
+| Debug | x64 | `QuantLibXL-v145-x64-mt-gd-1_42_0.xll` |
+| Debug (static runtime) | x64 | `QuantLibXL-v145-x64-mt-sgd-1_42_0.xll` |
+| Release | Win32 | `QuantLibXL-v145-mt-1_42_0.xll` |
+| Release (static runtime) | Win32 | `QuantLibXL-v145-mt-s-1_42_0.xll` |
+| Debug | Win32 | `QuantLibXL-v145-mt-gd-1_42_0.xll` |
+| Debug (static runtime) | Win32 | `QuantLibXL-v145-mt-sgd-1_42_0.xll` |
 
 The toolset tag (`v145`, `v143`, …) is determined automatically from the
 Visual Studio version used to open the solution. Building with VS 2022
@@ -228,7 +268,7 @@ For VS 2026 (v145):
 $env:VisualStudioVersion = "18.0"
 $msbuild = "C:\Program Files\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\MSBuild.exe"
 
-&$msbuild "C:\erik\repos\QuantLibAddin\QuantLibXL\QuantLibXL_basic.sln" `
+&$msbuild "<repo>\QuantLibXL\QuantLibXL_basic.sln" `
     /p:Configuration="Release (static runtime)" /p:Platform=x64 /m /nologo
 ```
 
@@ -239,14 +279,16 @@ so that QuantLib.props selects the v143 toolset instead of v145:
 $env:VisualStudioVersion = "17.0"
 $msbuild = "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
 
-&$msbuild "C:\erik\repos\QuantLibAddin\QuantLibXL\QuantLibXL_basic.sln" `
+&$msbuild "<repo>\QuantLibXL\QuantLibXL_basic.sln" `
     /p:Configuration="Release (static runtime)" /p:Platform=x64 `
     /p:VisualStudioVersion=17.0 /m /nologo
 ```
 
-Configuration names with spaces (e.g. `"Release (static runtime)"`) must be
-quoted. The `/m` flag enables parallel compilation. Expected build times on
-this machine are roughly:
+Replace `<repo>` with the full path of your clone (the folder that contains
+`QuantLibXL`). Configuration names with spaces (e.g. `"Release (static
+runtime)"`) must be quoted. The `/m` flag enables parallel compilation. As a
+rough guide, incremental dynamic-runtime builds complete in about a minute,
+while a clean static-runtime build can take far longer:
 
 | Configuration | Basic | Full |
 |---|---|---|

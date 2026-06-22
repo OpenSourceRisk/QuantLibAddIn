@@ -1,2 +1,0 @@
-# Eric's cheat sheet for running configure
-DOXYGEN=/usr/bin/doxygen ./configure

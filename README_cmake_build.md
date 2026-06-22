@@ -2,7 +2,7 @@
 
 This document describes the cmake build for QuantLibXL.  It exists
 alongside the hand-maintained Visual Studio solution files documented in
-README_vs_build.md; both builds use the same source files and produce
+[README_vs_build.md](README_vs_build.md); both builds use the same source files and produce
 the same XLL output.
 
 ---
@@ -14,7 +14,7 @@ the same XLL output.
 | Platform | x64 only |
 | Compilers | VS 2026 (v145 toolset), VS 2022 (v143 toolset) |
 | Configurations | Release static, Debug static, Release dynamic, Debug dynamic |
-| XLL output | `build\<preset>\xll\QuantLibXL-<toolset>-x64-mt[-s|-gd|-sgd]-1_23_0.xll` |
+| XLL output | `build\<preset>\xll\QuantLibXL-<toolset>-x64-mt[-s|-gd|-sgd]-1_42_0.xll` |
 
 The XLL is written into the cmake binary directory (`build\<preset>\xll\`),
 which keeps it separate from the output of the hand-maintained solution
@@ -25,7 +25,7 @@ files (`QuantLibXL\xll\`).
 ## 2  Prerequisites
 
 The cmake build has the same prerequisites as the hand-maintained build
-(see README_vs_build.md sections 2.1 and 2.2) plus:
+(see [README_vs_build.md](README_vs_build.md) sections 2.1 and 2.2) plus:
 
 - **CMake 3.15+** - included with the "C++ CMake tools" component of the
   VS "Desktop development with C++" workload.
@@ -119,20 +119,22 @@ Each configure preset has a corresponding pair of build presets with
 
 ## 5  Configure
 
-After creating CMakeUserPresets.json (see section 3):
+After creating CMakeUserPresets.json (see section 3), run cmake from the root of
+your clone. In the commands below, replace `<repo>` with the full path of that
+clone (the folder that contains `QuantLibXL`):
 
 ```powershell
 # VS 2026, static CRT
-cmake --preset windows-vs2026-x64-static -S C:\erik\repos\QuantLibAddin -B C:\erik\repos\QuantLibAddin\build\windows-vs2026-x64-static
+cmake --preset windows-vs2026-x64-static -S <repo> -B <repo>\build\windows-vs2026-x64-static
 
 # VS 2026, dynamic CRT
-cmake --preset windows-vs2026-x64-dynamic -S C:\erik\repos\QuantLibAddin -B C:\erik\repos\QuantLibAddin\build\windows-vs2026-x64-dynamic
+cmake --preset windows-vs2026-x64-dynamic -S <repo> -B <repo>\build\windows-vs2026-x64-dynamic
 
 # VS 2022, static CRT
-cmake --preset windows-vs2022-x64-static -S C:\erik\repos\QuantLibAddin -B C:\erik\repos\QuantLibAddin\build\windows-vs2022-x64-static
+cmake --preset windows-vs2022-x64-static -S <repo> -B <repo>\build\windows-vs2022-x64-static
 
 # VS 2022, dynamic CRT
-cmake --preset windows-vs2022-x64-dynamic -S C:\erik\repos\QuantLibAddin -B C:\erik\repos\QuantLibAddin\build\windows-vs2022-x64-dynamic
+cmake --preset windows-vs2022-x64-dynamic -S <repo> -B <repo>\build\windows-vs2022-x64-dynamic
 ```
 
 ---
@@ -143,21 +145,21 @@ Pass `--config` and `--target QuantLibXL` to build a specific configuration.
 Examples using the VS 2026 static preset:
 
 ```powershell
-# Release static  ->  QuantLibXL-v145-x64-mt-s-1_23_0.xll
-cmake --build C:\erik\repos\QuantLibAddin\build\windows-vs2026-x64-static --config Release --target QuantLibXL
+# Release static  ->  QuantLibXL-v145-x64-mt-s-1_42_0.xll
+cmake --build <repo>\build\windows-vs2026-x64-static --config Release --target QuantLibXL
 
-# Debug static    ->  QuantLibXL-v145-x64-mt-sgd-1_23_0.xll
-cmake --build C:\erik\repos\QuantLibAddin\build\windows-vs2026-x64-static --config Debug --target QuantLibXL
+# Debug static    ->  QuantLibXL-v145-x64-mt-sgd-1_42_0.xll
+cmake --build <repo>\build\windows-vs2026-x64-static --config Debug --target QuantLibXL
 ```
 
 Examples using the VS 2022 static preset:
 
 ```powershell
-# Release static  ->  QuantLibXL-v143-x64-mt-s-1_23_0.xll
-cmake --build C:\erik\repos\QuantLibAddin\build\windows-vs2022-x64-static --config Release --target QuantLibXL
+# Release static  ->  QuantLibXL-v143-x64-mt-s-1_42_0.xll
+cmake --build <repo>\build\windows-vs2022-x64-static --config Release --target QuantLibXL
 
-# Debug static    ->  QuantLibXL-v143-x64-mt-sgd-1_23_0.xll
-cmake --build C:\erik\repos\QuantLibAddin\build\windows-vs2022-x64-static --config Debug --target QuantLibXL
+# Debug static    ->  QuantLibXL-v143-x64-mt-sgd-1_42_0.xll
+cmake --build <repo>\build\windows-vs2022-x64-static --config Debug --target QuantLibXL
 ```
 
 ---
@@ -166,14 +168,14 @@ cmake --build C:\erik\repos\QuantLibAddin\build\windows-vs2022-x64-static --conf
 
 | Preset                     | Config  | XLL filename |
 |----------------------------|---------|--------------|
-| windows-vs2026-x64-static  | Release | `build\windows-vs2026-x64-static\xll\QuantLibXL-v145-x64-mt-s-1_23_0.xll` |
-| windows-vs2026-x64-static  | Debug   | `build\windows-vs2026-x64-static\xll\QuantLibXL-v145-x64-mt-sgd-1_23_0.xll` |
-| windows-vs2026-x64-dynamic | Release | `build\windows-vs2026-x64-dynamic\xll\QuantLibXL-v145-x64-mt-1_23_0.xll` |
-| windows-vs2026-x64-dynamic | Debug   | `build\windows-vs2026-x64-dynamic\xll\QuantLibXL-v145-x64-mt-gd-1_23_0.xll` |
-| windows-vs2022-x64-static  | Release | `build\windows-vs2022-x64-static\xll\QuantLibXL-v143-x64-mt-s-1_23_0.xll` |
-| windows-vs2022-x64-static  | Debug   | `build\windows-vs2022-x64-static\xll\QuantLibXL-v143-x64-mt-sgd-1_23_0.xll` |
-| windows-vs2022-x64-dynamic | Release | `build\windows-vs2022-x64-dynamic\xll\QuantLibXL-v143-x64-mt-1_23_0.xll` |
-| windows-vs2022-x64-dynamic | Debug   | `build\windows-vs2022-x64-dynamic\xll\QuantLibXL-v143-x64-mt-gd-1_23_0.xll` |
+| windows-vs2026-x64-static  | Release | `build\windows-vs2026-x64-static\xll\QuantLibXL-v145-x64-mt-s-1_42_0.xll` |
+| windows-vs2026-x64-static  | Debug   | `build\windows-vs2026-x64-static\xll\QuantLibXL-v145-x64-mt-sgd-1_42_0.xll` |
+| windows-vs2026-x64-dynamic | Release | `build\windows-vs2026-x64-dynamic\xll\QuantLibXL-v145-x64-mt-1_42_0.xll` |
+| windows-vs2026-x64-dynamic | Debug   | `build\windows-vs2026-x64-dynamic\xll\QuantLibXL-v145-x64-mt-gd-1_42_0.xll` |
+| windows-vs2022-x64-static  | Release | `build\windows-vs2022-x64-static\xll\QuantLibXL-v143-x64-mt-s-1_42_0.xll` |
+| windows-vs2022-x64-static  | Debug   | `build\windows-vs2022-x64-static\xll\QuantLibXL-v143-x64-mt-sgd-1_42_0.xll` |
+| windows-vs2022-x64-dynamic | Release | `build\windows-vs2022-x64-dynamic\xll\QuantLibXL-v143-x64-mt-1_42_0.xll` |
+| windows-vs2022-x64-dynamic | Debug   | `build\windows-vs2022-x64-dynamic\xll\QuantLibXL-v143-x64-mt-gd-1_42_0.xll` |
 
 ---
 
@@ -249,7 +251,7 @@ standalone ObjectHandler.
 The ObjectHandler and QuantLibAddin sources include Boost-style auto-link
 headers (`oh/auto_link.hpp`, `qlo/auto_link.hpp`, `xlsdk/auto_link.hpp`)
 that emit `#pragma comment(lib, ...)` directives referencing tagged library
-names (e.g. `QuantLibObjects-v145-x64-mt-s-1_23_0.lib`).  These conflict
+names (e.g. `QuantLibObjects-v145-x64-mt-s-1_42_0.lib`).  These conflict
 with the cmake-managed link step.
 
 Each auto_link header has been guarded with a `#ifndef` macro:
@@ -283,7 +285,7 @@ The XLL `OUTPUT_NAME` uses cmake generator expressions to select the
 correct runtime tag per configuration:
 
 ```
-QuantLibXL-<toolset>-x64-<runtime-tag>-1_23_0.xll
+QuantLibXL-<toolset>-x64-<runtime-tag>-1_42_0.xll
 ```
 
 `<toolset>` is derived from `MSVC_TOOLSET_VERSION` at configure time
