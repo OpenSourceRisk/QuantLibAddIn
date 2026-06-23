@@ -35,6 +35,8 @@ variables:
 semgrep-scan:
     stage: scan
     extends: [.semgrep-sast-only]
+    variables:
+        SEMGREP_PRO_ENABLED: true
     tags:
         - LSEG
     script: semgrep ci --gitlab-sast --debug > gl-sast-report.json || true
