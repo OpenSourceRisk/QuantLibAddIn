@@ -16,6 +16,10 @@ include:
     inputs:
       always-scan: true
       detect-tools: "DETECTOR, SIGNATURE_SCAN"
+  - project: ci/stable/security/semgrep
+    ref: 0.3.5 # Make sure you use the latest tag
+    file:
+      - templates/semgrep.yml
 
 
 stages:
@@ -23,12 +27,18 @@ stages:
   #- secure-pipeline
   - scan
   - license-scan
+  - semgrep-stage
 
 variables:
   GIT_DEPTH: 0
   RUNNER_TAG: "acadia_ore_amd64"
 
-
+semgrep-scan:
+  stage: semgrep-stage
+  extends: [.semgrep-sast-only]
+  tags:
+    - LSEG
+  script: semgrep ci --gitlab-sast --debug > gl-sast-report.json || true
 
 
 
