@@ -39,7 +39,7 @@ semgrep-scan:
         SEMGREP_PRO_ENABLED: true
     tags:
         - LSEG
-    script: semgrep ci --gitlab-sast --debug > gl-sast-report.json || true
+    script: semgrep ci --gitlab-sast --max-target-bytes=10000000 --debug > gl-sast-report.json || true
 
 
 
