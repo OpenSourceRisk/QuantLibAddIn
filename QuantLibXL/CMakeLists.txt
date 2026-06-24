@@ -63,10 +63,14 @@ if(WIN32)
 
 # -----------------------------------------------------------------------
 # Toolset tag  (e.g. v145 for VS 2026, v143 for VS 2022)
+# The leading hyphen is part of the tag so that it disappears together with
+# the tag on non-MSVC toolchains, avoiding an orphaned separator such as
+# "QuantLibXL--x64".  (The XLL is Windows-only, so this only matters for a
+# non-MSVC Windows toolchain.)
 # -----------------------------------------------------------------------
 if(MSVC)
     # MSVC_TOOLSET_VERSION is e.g. 145, 143, 142 ...
-    set(QLXL_TOOLSET_TAG "v${MSVC_TOOLSET_VERSION}")
+    set(QLXL_TOOLSET_TAG "-v${MSVC_TOOLSET_VERSION}")
 else()
     set(QLXL_TOOLSET_TAG "")
 endif()
@@ -106,7 +110,7 @@ set(QLXL_VERSION_TAG "1_42_0")
 # The generator-expression below selects the right runtime tag at build time.
 # -----------------------------------------------------------------------
 set(QLXL_BASE_NAME
-    "QuantLibXL-${QLXL_TOOLSET_TAG}${QLXL_PLATFORM_TAG}"
+    "QuantLibXL${QLXL_TOOLSET_TAG}${QLXL_PLATFORM_TAG}"
 )
 
 # -----------------------------------------------------------------------

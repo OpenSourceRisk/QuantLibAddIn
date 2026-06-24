@@ -136,6 +136,14 @@ What was observed:
    though `sudo apt install` does not (no root).
 5. **No proxy env vars are set** (`HTTP_PROXY`/`HTTPS_PROXY` are empty); Zscaler is
    transparent/system-level, so you cannot route around it by unsetting a variable.
+6. **PyPI is being blocked over Zscaler (from end of next month, per PTS engineering).**
+   `pip` against the public index will then return a block page, not the package — so a
+   pip-based bootstrap (e.g. the `pip3 download cmake ninja` step in
+   [README_wsl_build.md](README_wsl_build.md)) stops working. Prefer the GitHub-hosted
+   binaries (rule 1), or repoint pip at the LSEG Artifactory PyPI proxy via a user-level
+   `~/.config/pip/pip.conf` (`index-url = https://USERNAME:TOKEN@artifactory.lseg.com/artifactory/api/pypi/python-remotes/simple`,
+   `trusted-host = artifactory.lseg.com`). See README_wsl_build.md for the full note and
+   <https://docs.devportal.lseg.com/dxone-developer-platform/artifactory/getting-started/package-managers>.
 
 ### winget caveat
 

@@ -13,13 +13,13 @@ The repo contains the following subdirectories/subprojects:
  QuantLibXL - deploys the QuantLibAddin inferface to Excel as an XLL addin
 ```
 There are two ways to build QuantLibAddin.  One approach uses visual studio solution files which are maintained manually.  This build is supported only on Windows.  This build  is documented here:
-```
- README_vs_build.md
-```
+
+[./README_vs_build.md](./README_vs_build.md)
+
 The other approach uses cmake.  This build is supported on both Windows and Linux.  This build is documented here:
-```
- README_cmake_build.md
-```
+
+[./README_cmake_build.md](./README_cmake_build.md)
+
 Other aspects of the build are documented in the `*.md` files in the QuantLibAddin directory.
 
 The Visual Studio and cmake builds both support two kinds of builds:

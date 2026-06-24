@@ -121,6 +121,47 @@ non-interactive `bash -c` scripts (which load no startup files — see gotchas
 
 (Write this file using the base64 trick above so the literal `$PATH` survives.)
 
+### Heads-up: PyPI is being blocked over Zscaler
+
+The `pip3 download` step above relies on PyPI, which **PTS engineering have
+announced will be blocked over Zscaler from end of next month**.  After the
+cutoff, `pip` against the public index returns a Zscaler block page instead of
+the package -- the same failure mode as the GitLab/GCS block in
+[INSTALLING_DOXYGEN_DOT_WSL.md](INSTALLING_DOXYGEN_DOT_WSL.md), not a real
+download.  This only affects (re)provisioning a fresh machine: an existing
+checkout already has cmake/ninja under `~/tools` and is unaffected, and gensrc
+plus the rest of the build use only the system `python3` and import nothing from
+PyPI, so they keep working regardless.
+
+Two ways to provision cmake/ninja after the cutoff:
+
+- **Preferred -- download the prebuilt binaries straight from GitHub releases.**
+  GitHub's release CDN is Zscaler-allowed (it is already the source used for
+  doxygen), and this needs no pip, no token and no PyPI at all:
+  - cmake: `cmake-<ver>-linux-x86_64.tar.gz` from
+	<https://github.com/Kitware/CMake/releases>
+  - ninja: `ninja-linux.zip` from
+	<https://github.com/ninja-build/ninja/releases>
+
+  Unpack each under `~/tools/...` and point `PATH` (and `~/qla_env.sh`) at the
+  resulting `bin` / binary directory, exactly as above.
+
+- **Alternative -- repoint pip at the LSEG Artifactory PyPI proxy** so the
+  existing `pip3 download` keeps working.  Create a user-level
+  `~/.config/pip/pip.conf` (no root needed):
+
+	[global]
+	index-url = https://USERNAME:TOKEN@artifactory.lseg.com/artifactory/api/pypi/python-remotes/simple
+	trusted-host = artifactory.lseg.com
+
+  Replace USERNAME/TOKEN with your LSEG username and Artifactory token;
+  `trusted-host` is required because Zscaler re-signs TLS with an internal CA.
+  `python-remotes` is a caching proxy of PyPI, so common packages such as
+  cmake/ninja resolve without a special request.  The file carries a secret
+  token, so keep it out of the repo and write it with the base64 trick so the
+  literal `$`/`@`/token survive.  Reference:
+  <https://docs.devportal.lseg.com/dxone-developer-platform/artifactory/getting-started/package-managers>.
+
 On a native Linux box just use the system cmake/ninja and ignore this section.
 
 ## Boost
@@ -237,10 +278,27 @@ agent (see gotcha #2 above), put it in a script and run that.  Example
 Configure, then build (the configure step runs gensrc automatically):
 
 	wsl.exe -- bash /home/developer/cfg.sh
-	wsl.exe -- bash -c 'source ~/qla_env.sh; cmake --build ~/qla_build --target QLADemo -j'
+	wsl.exe -- bash -c 'source ~/qla_env.sh; cmake --build ~/qla_build --target QLADemo -j 2'
 
 Use absolute /home/... paths in the -D cache variables (do not rely on ~/
 expansion inside cmake cache entries).
+
+Note (-j 2, not bare -j): keep the parallel job count modest.  QuantLib's
+template-heavy translation units each consume 1-2 GB of RAM while compiling, and
+an unbounded `-j` launches one compile per core at once.  Under WSL -- whose VM
+has a capped RAM/swap budget -- that exhausts memory and the Linux OOM killer
+terminates the compiler with `g++: fatal error: Killed signal terminated program
+cc1plus`.  A tell-tale sign that it is OOM and not a code error is that
+re-running the build resumes *past* the file that failed (finished .o files are
+kept) and stops on a *different* file each time.  Use roughly one job per ~2 GB
+of RAM (`-j 2` is safe on a default WSL VM), and/or raise the WSL limits in
+`C:\Users\<you>\.wslconfig` on the Windows side:
+
+	[wsl2]
+	memory=12GB
+	swap=16GB
+
+then apply it with `wsl --shutdown` (from Windows PowerShell) before rebuilding.
 
 Output executable: ~/qla_build/cpp/QLADemo--x64-mt-1_23_0 (ELF x86-64).
 
@@ -255,6 +313,39 @@ Running it (from a writable directory) prints:
 	INFO  End example program.
 
 and writes qlademo.log and option_demo.xml (the latter via Boost serialization, confirming the compiled Boost libs work). Exit code 0.
+
+## Building the documentation (doxygen)
+
+The Doxygen HTML docs are a separate, optional build, gated by the configure-time
+cmake option `BUILD_DOCS` (default OFF).  They need only Python 3 and doxygen
+(plus optional Graphviz dot for diagrams) -- no C++ compiler and no Boost -- so
+they build even on a machine that cannot compile the libraries.  See section 9
+of [build_cmake.md](build_cmake.md) for the cross-platform description; the
+WSL-specific points are below.
+
+Provision doxygen and dot in user space first (no root/apt) and put them on
+PATH -- that is documented in
+[INSTALLING_DOXYGEN_DOT_WSL.md](INSTALLING_DOXYGEN_DOT_WSL.md).  The tools are
+discovered when cmake *configures*, not when it builds, so they must be on PATH
+at configure time; a bare `wsl.exe -- bash -c '...'` sources no startup files,
+so `source ~/doxy_env.sh` (doxygen + dot) inside the script (gotchas #4/#5
+above).  If doxygen is missing the `-DBUILD_DOCS=ON` configure fails with
+`doxygen was not found on PATH`; if only dot is missing, configure prints
+`dot (Graphviz) not found; diagrams will be skipped` and continues.
+
+Add `-DBUILD_DOCS=ON` to the configure (it is a configure-time option, so a
+build-only invocation cannot add the targets), then build the aggregate `docs`
+target (or a single `*-docs` target):
+
+	source ~/qla_env.sh        # cmake + ninja
+	source ~/doxy_env.sh       # doxygen + dot
+	cmake -G Ninja -S ~/repos/QuantLibAddin -B ~/qla_build -DBUILD_DOCS=ON
+	cmake --build ~/qla_build --target docs
+
+Per-project targets are also available: `gensrc-docs`, `ObjectHandler-docs`,
+`QuantLibAddin-docs`, `QuantLibXL-docs` (the QuantLibXL docs build on Linux too,
+even though the XLL does not).  The generated HTML lands under the build tree,
+e.g. `~/qla_build/gensrc-docs/html/index.html`.
 
 ## Summary
 

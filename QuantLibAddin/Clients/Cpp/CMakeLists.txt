@@ -11,8 +11,11 @@
 # -----------------------------------------------------------------------
 # Toolset / platform / runtime tags  (same logic as QuantLibXL)
 # -----------------------------------------------------------------------
+# The leading hyphen is part of the toolset tag so that it disappears together
+# with the tag on non-MSVC toolchains (gcc/clang have no toolset tag); this
+# avoids an orphaned separator, e.g. "QLADemo--x64" on Linux.
 if(MSVC)
-    set(QLADEMO_TOOLSET_TAG "v${MSVC_TOOLSET_VERSION}")
+    set(QLADEMO_TOOLSET_TAG "-v${MSVC_TOOLSET_VERSION}")
 else()
     set(QLADEMO_TOOLSET_TAG "")
 endif()
@@ -34,7 +37,7 @@ endif()
 set(QLADEMO_VERSION_TAG "1_42_0")
 
 set(QLADEMO_BASE_NAME
-    "QLADemo-${QLADEMO_TOOLSET_TAG}${QLADEMO_PLATFORM_TAG}"
+    "QLADemo${QLADEMO_TOOLSET_TAG}${QLADEMO_PLATFORM_TAG}"
 )
 
 # -----------------------------------------------------------------------
