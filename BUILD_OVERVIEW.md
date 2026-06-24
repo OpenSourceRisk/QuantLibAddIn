@@ -46,6 +46,7 @@ There are two forms of end user documentation for the build:
 2) The second (in markdown format) explains how to compile the various projects from a git clone.  Here are the relevant files:
 ```
 QuantLibAddin/README.md
+QuantLibAddin/build_cmake.md
 QuantLibAddin/ObjectHandler/README.md
 QuantLibAddin/ObjectHandler/md/build_cmake.md
 QuantLibAddin/ObjectHandler/md/build_vs.md
