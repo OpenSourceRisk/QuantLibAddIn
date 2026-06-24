@@ -73,9 +73,7 @@ produces:
 
 The sections below are written around the Windows presets; the **Linux/WSL**
 specifics are called out inline - Boost in sections 3.2 and 5.1, the `linux-gcc`
-preset in sections 6.1 and 7.1, and the output in section 8. WSL-only
-provisioning (building Boost from source, user-space cmake, etc.) is documented
-separately in [README_wsl_build.md](README_wsl_build.md).
+preset in sections 6.1 and 7.1, and the output in section 8.
 
 ---
 
@@ -347,9 +345,6 @@ and a matching **build** preset in the same file:
 is fixed at configure time by `CMAKE_BUILD_TYPE`, which the `linux-gcc` base
 preset sets to `Release`.)
 
-Building Boost from source under WSL, and the other WSL-specific provisioning
-steps, are documented in [README_wsl_build.md](README_wsl_build.md).
-
 ---
 
 ## 6 Configure
@@ -576,10 +571,7 @@ not when you build:
   `dot (Graphviz) not found; diagrams will be skipped` and continues.
 
 So install Doxygen (and optionally Graphviz) and make sure they are on `PATH`
-*before* you re-configure. On WSL, where these tools are typically provisioned in
-user space, confirm with `doxygen --version` and `dot -V` first (see
-[README_wsl_build.md](README_wsl_build.md) and
-[INSTALLING_DOXYGEN_DOT_WSL.md](INSTALLING_DOXYGEN_DOT_WSL.md)).
+*before* you re-configure.
 
 ### 9.4 Output
 
