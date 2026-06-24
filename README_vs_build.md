@@ -6,7 +6,8 @@ solution files.
 
 > **Scope.** This covers the hand-maintained Visual Studio solution files. For
 > the cmake build see [`README_cmake_build.md`](README_cmake_build.md). The build was tested with VS 2026
-> (v145 toolset) and VS 2022 (v143 toolset), x64 and Win32, producing XLLs in
+> (v145 toolset) and VS 2022 (v143 toolset), **x64 only** (the Win32
+> configurations exist but are untested — see section 5), producing XLLs in
 > `QuantLibXL\xll\`. See sections 2.2 and 5 for full details.
 
 ---
@@ -204,12 +205,15 @@ Both files are git-ignored and are not part of the clone.
 In the Visual Studio toolbar select the desired configuration and platform
 (**x64** or **Win32**):
 
-| Goal | Configuration | Platform |
-|---|---|---|
-| Dynamic-runtime release XLL | **Release** | **x64** or **Win32** |
-| Dynamic-runtime debug XLL | **Debug** | **x64** or **Win32** |
-| Static-runtime release XLL | **Release (static runtime)** | **x64** or **Win32** |
-| Static-runtime debug XLL | **Debug (static runtime)** | **x64** or **Win32** |
+| Goal | Configuration | Runtime | Platform |
+|---|---|---|---|
+| Dynamic-runtime release XLL | **Release** | Dynamic (`/MD`) | **x64** or **Win32** |
+| Dynamic-runtime debug XLL | **Debug** | Dynamic (`/MDd`) | **x64** or **Win32** |
+| Static-runtime release XLL | **Release (static runtime)** | Static (`/MT`) | **x64** or **Win32** |
+| Static-runtime debug XLL | **Debug (static runtime)** | Static (`/MTd`) | **x64** or **Win32** |
+
+Use **x64** unless you specifically need a 32-bit add-in: the Win32
+configurations are present but untested (see section 5).
 
 ### Step 4 — Build
 
@@ -253,6 +257,17 @@ switching to the other.
 
 The basic and full builds share the same output filenames and overwrite each
 other. Build full only when gensrc metadata has changed; use basic otherwise.
+
+> **Win32 (32-bit) configurations are untested.** Both solutions declare the
+> four Win32 configurations alongside the x64 ones (hence the Win32 rows in the
+> table above), but only the x64 configurations have been built and tested, and
+> x64 is what this project uses in practice. This is a **QuantLibAddin-project
+> choice, not a QuantLib limitation**: the bundled QuantLib snapshot still
+> supports 32-bit in both its own hand-maintained Visual Studio project files
+> (which declare build-enabled Win32 platforms) and its architecture-agnostic
+> CMake build, and its sources keep a live 32-bit auto-linking path
+> (`QuantLib\ql\auto_link.hpp`). If you do build Win32, point the `Win32` Boost
+> property sheets (section 2.2) at 32-bit Boost libraries.
 
 ---
 
