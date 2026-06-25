@@ -6,9 +6,10 @@ solution files.
 
 > **Scope.** This covers the hand-maintained Visual Studio solution files. For
 > the cmake build see [`README_cmake_build.md`](README_cmake_build.md). The build was tested with VS 2026
-> (v145 toolset) and VS 2022 (v143 toolset), **x64 only** (the Win32
-> configurations exist but are untested — see section 5), producing XLLs in
-> `QuantLibXL\xll\`. See sections 2.2 and 5 for full details.
+> (v145 toolset) and VS 2022 (v143 toolset). Both **x64** and **Win32**
+> (32-bit) platforms build successfully; x64 is the default used in practice
+> (see section 5). Output XLLs are written to `QuantLibXL\xll\`. See sections
+> 2.2 and 5 for full details.
 
 ---
 
@@ -213,7 +214,8 @@ In the Visual Studio toolbar select the desired configuration and platform
 | Static-runtime debug XLL | **Debug (static runtime)** | Static (`/MTd`) | **x64** or **Win32** |
 
 Use **x64** unless you specifically need a 32-bit add-in: the Win32
-configurations are present but untested (see section 5).
+configurations build successfully but require 32-bit Boost libraries, and the
+resulting 32-bit XLL can only be loaded by a 32-bit Excel (see section 5).
 
 ### Step 4 — Build
 
@@ -258,16 +260,23 @@ switching to the other.
 The basic and full builds share the same output filenames and overwrite each
 other. Build full only when gensrc metadata has changed; use basic otherwise.
 
-> **Win32 (32-bit) configurations are untested.** Both solutions declare the
-> four Win32 configurations alongside the x64 ones (hence the Win32 rows in the
-> table above), but only the x64 configurations have been built and tested, and
-> x64 is what this project uses in practice. This is a **QuantLibAddin-project
-> choice, not a QuantLib limitation**: the bundled QuantLib snapshot still
-> supports 32-bit in both its own hand-maintained Visual Studio project files
-> (which declare build-enabled Win32 platforms) and its architecture-agnostic
-> CMake build, and its sources keep a live 32-bit auto-linking path
-> (`QuantLib\ql\auto_link.hpp`). If you do build Win32, point the `Win32` Boost
-> property sheets (section 2.2) at 32-bit Boost libraries.
+> **Win32 (32-bit) build.** Both solutions declare the four Win32
+> configurations alongside the x64 ones (hence the Win32 rows in the table
+> above). The Win32 build has been verified: the `Release (static runtime)`
+> configuration of both the basic and full solutions builds successfully with
+> VS 2026 (v145), producing a genuine 32-bit (PE32) XLL. x64 nonetheless
+> remains the default this project uses in practice. Two caveats if you build
+> Win32:
+>
+> - Point the `Win32` Boost property sheets (section 2.2) at 32-bit Boost
+>   libraries (e.g. `libboost_*-vc143-mt-s-x32-1_83.lib`).
+> - A 32-bit XLL can only be loaded by a 32-bit Excel; 64-bit Excel cannot load
+>   it.
+>
+> This Win32 support applies to the **hand-maintained Visual Studio solution
+> files only**. The cmake build is currently **x64 only** (see
+> [`README_cmake_build.md`](README_cmake_build.md)); use the Visual Studio
+> solutions if you need a 32-bit add-in.
 
 ---
 
