@@ -38,7 +38,7 @@ n  is an ordinal number \n
 For example, the number identifying the latest version of %ObjectHandler is
 1.42.0f0.
 
-The corresponding release my be referred to in the format Rxxyyzzsn, where R
+The corresponding release may be referred to in the format Rxxyyzzsn, where R
 stands for release.  For example, the release corresponding to version 1.42.0f0
 is R014200f0.
 
@@ -49,35 +49,39 @@ are named according to the conventions specified by the boost project:
 
 <a href="http://www.boost.org/more/getting_started/windows.html#library-naming">http://www.boost.org/more/getting_started/windows.html#library-naming</a>
 
-For example, when you compile %ObjectHandler version 1.42.0 using VC8 solution
-file ObjectHandler_vc8.sln, project ohlib, configuration Release (static runtime), the output
-file is ObjectHandler\lib\ObjectHandler-vc80-mt-s-1_42_0.lib.
+For example, when you compile %ObjectHandler version 1.42.0 using Visual Studio
+solution file %ObjectHandler.sln, project ohxllib, configuration Release (static
+runtime), platform x64, the output file is
+ObjectHandler\lib\ObjectHandler-xllib-v145-x64-mt-s-1_42_0.lib.
 
-\section conv_vc Visual C++ Versions and Files
+\section conv_builds Build Systems
 
-The table below summarizes the supported versions of Visual C++, the
-abbreviation given to each version, and the names used for solution and project
-files corresponding to that version:
+Three build systems are used across the projects.  The table below summarizes
+the platforms and compilers that each one currently supports.  In this table
+<b>QuantLib</b> refers to the QuantLib library, which is maintained separately
+(upstream), while <b>QuantLibAddin et al</b> refers to the four projects that are
+distributed together in this repository: gensrc, %ObjectHandler, QuantLibAddin
+and QuantLibXL.
 
 <table border="1">
-<tr><td><b>Version</b></td><td><b>Abbreviation</b></td><td><b>Solution Files<br>Project Files</b></td></tr>
-<tr><td>Visual C++ 2005</td><td>VC8</td><td>xxx_vc8.sln<br>xxx_vc8.vcproj</td></tr>
-<tr><td>Visual C++ 2008</td><td>VC9</td><td>xxx_vc9.sln<br>xxx_vc9.vcproj</td></tr>
-<tr><td>Visual C++ 2010</td><td>VC10</td><td>xxx_vc10.sln<br>xxx_vc10.vcxproj</td></tr>
-<tr><td>Visual C++ 2012</td><td>VC11</td><td>xxx_vc11.sln<br>xxx_vc11.vcxproj</td></tr>
-<tr><td>Visual C++ 2013</td><td>VC12</td><td>xxx_vc12.sln<br>xxx_vc12.vcxproj</td></tr>
+<tr><td><b>Build system</b></td><td><b>QuantLib</b></td><td><b>QuantLibAddin et al</b></td></tr>
+<tr><td>Visual Studio solution files (Windows)</td><td>VS 2010 - 2026 (toolsets v100 - v145)</td><td>VS 2022 and 2026 only (v143, v145)</td></tr>
+<tr><td>CMake (Windows and POSIX)</td><td>Win32 and x64</td><td>x64 only (at present)</td></tr>
+<tr><td>Automake / Autoconf (POSIX)</td><td>Still maintained (builds the C++ libraries)</td><td>Present, but not updated for the latest release</td></tr>
 </table>
 
-Be sure to open the files that correspond to the version of Visual C++ that you
-are using.  If by mistake you open the files for an older version of VC, the
-project will be upgraded, but the dependencies will be wrong and the build will
-fail.
+The Visual Studio solution files are maintained by hand.  Each project now
+provides a single solution file (for example <tt>%ObjectHandler.sln</tt>); the
+platform toolset is selected automatically from the version of Visual Studio used
+to open it, so there is no longer a separate solution file per compiler version.
 
-In the installation instructions, solution files may be referred to as
-xxx_vc?.sln, where ? corresponds to 8, 9, 10, 11, or 12 depending on the version of
-Visual C++ that you are using.
+\section conv_boost Boost
 
-\section conv_vc Visual C++ Runtime Libraries
+All of the projects depend on Boost.  The minimum version of Boost required by
+QuantLib is <b>1.58.0</b>.  This release of QuantLibAddin was tested using Boost
+<b>1.83.0</b>.
+
+\section conv_runtime Visual C++ Runtime Libraries
 
 The runtime library is a setting in Visual C++, found under Project Properties /
 Configuration Properties / C/C++ / Code Generation / Runtime Library:
