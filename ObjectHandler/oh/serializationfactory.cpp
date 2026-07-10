@@ -185,7 +185,7 @@ namespace ObjectHandler {
 
         // If a parent directory has been specified then ensure it exists.
         if ( !boostPath.parent_path().empty() ) {
-            OH_REQUIRE(boost::filesystem::exists(boostPath.branch_path()),
+            OH_REQUIRE(boost::filesystem::exists(boostPath.parent_path()),
                        "Invalid parent path : " << path);
         }
 
@@ -278,11 +278,11 @@ namespace ObjectHandler {
             for (boost::filesystem::recursive_directory_iterator itr(boostPath);
                 itr != boost::filesystem::recursive_directory_iterator(); ++itr) {
 #if BOOST_VERSION < 105000
-                    if (regex_match(itr->path().leaf(), r) &&
+                    if (regex_match(itr->path().filename(), r) &&
 #else
-                    if (regex_match(itr->path().leaf().string(), r) &&
+                    if (regex_match(itr->path().filename().string(), r) &&
 #endif
-                                    boost::filesystem::is_regular(itr->status())) {
+                                    boost::filesystem::is_regular_file(itr->status())) {
                         fileFound = true;
                         processPath(itr->path().string(), overwriteExisting, returnValue);
                     }
@@ -293,11 +293,11 @@ namespace ObjectHandler {
             for (boost::filesystem::directory_iterator itr(boostPath);
                 itr != boost::filesystem::directory_iterator(); ++itr) {
 #if BOOST_VERSION < 105000
-                    if (regex_match(itr->path().leaf(), r) &&
+                    if (regex_match(itr->path().filename(), r) &&
 #else
-                    if (regex_match(itr->path().leaf().string(), r) &&
+                    if (regex_match(itr->path().filename().string(), r) &&
 #endif
-                                    boost::filesystem::is_regular(itr->status())) {
+                                    boost::filesystem::is_regular_file(itr->status())) {
                         fileFound = true;
                         processPath(itr->path().string(), overwriteExisting, returnValue);
                     }
