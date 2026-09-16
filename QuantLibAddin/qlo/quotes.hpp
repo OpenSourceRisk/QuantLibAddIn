@@ -27,7 +27,6 @@
 
 #include <ql/option.hpp>
 #include <ql/types.hpp>
-#include <ql/experimental/risk/sensitivityanalysis.hpp>
 
 namespace QuantLib {
     class Index;
@@ -131,31 +130,6 @@ namespace QuantLibAddin {
                         bool permanent);
     };
 
-    std::vector<std::vector<QuantLib::Real> >
-    bucketAnalysis(const std::vector<std::vector<QuantLib::Handle<QuantLib::Quote> > >&,
-                   const std::vector<boost::shared_ptr<QuantLib::Instrument> >&,
-                   const std::vector<QuantLib::Real>& quant,
-                   QuantLib::Real shift,
-                   QuantLib::SensitivityAnalysis type);
-
-    inline std::vector<QuantLib::Real>
-    bucketAnalysisDelta(const QuantLib::Handle<QuantLib::SimpleQuote>& quote,
-                        const std::vector<QuantLib::Handle<QuantLib::Quote> >& parameters,
-                        QuantLib::Real shift,
-                        QuantLib::SensitivityAnalysis type) {
-        std::vector<QuantLib::Real> deltaVector;
-        std::vector<QuantLib::Real> gammaVector;
-        std::vector<QuantLib::Real> refVals;
-        QuantLib::bucketAnalysis(deltaVector, gammaVector, refVals,
-                                 quote, parameters, shift, type);
-        return deltaVector;
     }
 
-    std::vector<std::vector<QuantLib::Real> >
-    bucketAnalysisDelta2(const std::vector<QuantLib::Handle<QuantLib::Quote> >& quotes,
-                         const std::vector<QuantLib::Handle<QuantLib::Quote> >& parameters,
-                         QuantLib::Real shift,
-                         QuantLib::SensitivityAnalysis type);
-}
-
-#endif
+    #endif

@@ -24,6 +24,7 @@ QuantLibAddin/qlo/enumerations/register/register_classes.cpp
 QuantLibAddin/qlo/enumerations/register/register_pairs.cpp
 QuantLibAddin/qlo/enumerations/register/register_types.cpp
 QuantLibAddin/qlo/loop/loop_*.hpp
+!QuantLibAddin/qlo/loop/loop_calendar_manual.hpp
 !QuantLibAddin/qlo/loop/loop_valueobjects.hpp
 QuantLibAddin/qlo/serialization/create/create_*.cpp
 QuantLibAddin/qlo/serialization/create/create_*.hpp
@@ -36,6 +37,7 @@ QuantLibAddin/qlo/valueobjects/vo_*.cpp
 QuantLibAddin/qlo/valueobjects/vo_*.hpp
 !QuantLibAddin/qlo/valueobjects/vo_group.hpp
 !QuantLibAddin/qlo/valueobjects/vo_range.hpp
+QuantLibXL/build/
 QuantLibXL/qlxl/buildstatic/
 QuantLibXL/qlxl/functions/*.cpp
 !QuantLibXL/qlxl/functions/manual.cpp
@@ -51,12 +53,15 @@ XL-Launcher/bin/Release/
 XL-Launcher/obj/
 
 # Build outputs
+/build
+CMakeUserPresets.json
 **/x64/Debug
 **/x64/Release
 **/Debug
 **/Release
 **/bin/*.xml
 **/bin/*.manifest
+/out
 
 # Artifacts created in multiple directories
 Makefile
@@ -108,3 +113,8 @@ QuantLibAddin/Docs/doxywarnings.txt
 QuantLibXL/Docs/*.chm
 QuantLibXL/Docs/doxywarnings.txt
 
+
+# Local machine build overrides
+QuantLib/Build.props
+boost.props
+conanfile.txt

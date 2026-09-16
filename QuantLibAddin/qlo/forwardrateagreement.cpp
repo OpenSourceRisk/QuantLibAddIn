@@ -39,12 +39,12 @@ namespace QuantLibAddin {
             bool permanent) : Instrument(properties, permanent)
     {
             libraryObject_ = boost::shared_ptr<QuantLib::Instrument>(
-                new QuantLib::ForwardRateAgreement(valueDate,
+                new QuantLib::ForwardRateAgreement(index,
+                                                   valueDate,
                                                    maturityDate,
                                                    type,
                                                    strike,
                                                    notional,
-                                                   index,
                                                    hYTS));
     }
 

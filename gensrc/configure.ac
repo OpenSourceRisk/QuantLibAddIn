@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT([gensrc], [1.23.0],
+AC_INIT([gensrc], [1.42.0],
         [quantlib-dev@lists.sourceforge.net],
         [gensrc])
 AC_PREREQ(2.50)
@@ -42,9 +42,6 @@ AC_PROG_INSTALL
 #AC_LANG([C++])
 
 # confirm existence of dependencies
-
-#AC_CHECK_HEADER([log4cxx/logger.h],[],
-#    [AC_MSG_ERROR([ObjectHandler depends on log4cxx which cannot be found])])
 
 # Check for tools needed for building documentation
 AC_PATH_PROG([DOXYGEN], [doxygen])

@@ -75,8 +75,7 @@ namespace QuantLibAddin {
                                 method,
                                 guess,
                                 isMeanReversionFixed);
-        auto t_end = std::chrono::steady_clock::now();
-        elapsed_ = std::chrono::duration<double>(t_end - t_start).count();
+        elapsed_ = std::chrono::duration<double>(std::chrono::steady_clock::now() - t_start).count();
         return result;
    }
 

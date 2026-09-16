@@ -23,7 +23,8 @@
     <ProjectGuid>{F89760C1-CD0C-4138-A6A7-A8528A1B0D6F}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="..\..\..\QuantLib\QuantLib.props" />
+  <Import Project="..\..\toolset.props" />
+  <Import Project="..\..\boost.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
@@ -78,14 +79,14 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\xll\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ExampleXllDynamic2-$(PlatformToolset)-mt-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ExampleXllDynamic2-$(PlatformToolset)-x64-mt-1_23_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ExampleXllDynamic2-$(PlatformToolset)-mt-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ExampleXllDynamic2-$(PlatformToolset)-x64-mt-1_42_0</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.xll</TargetExt>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.xll</TargetExt>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ExampleXllDynamic2-$(PlatformToolset)-mt-gd-1_23_0</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ExampleXllDynamic2-$(PlatformToolset)-x64-mt-gd-1_23_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ExampleXllDynamic2-$(PlatformToolset)-mt-gd-1_42_0</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ExampleXllDynamic2-$(PlatformToolset)-x64-mt-gd-1_42_0</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -100,7 +101,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..;..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WIN32;XLL_IMPORTS;LOG4CXX_STATIC;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WIN32;XLL_IMPORTS;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -108,7 +109,7 @@
       <PrecompiledHeaderOutputFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllDynamic2.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -124,11 +125,11 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\lib;..\..\xll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-gd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-gd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-gd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-gd-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -149,14 +150,14 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..;..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WIN32;XLL_IMPORTS;LOG4CXX_STATIC;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;WIN32;XLL_IMPORTS;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeaderOutputFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXllDynamic2.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -172,11 +173,11 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\lib;..\..\xll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-gd-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-gd-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-x64-mt-gd-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-x64-mt-gd-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
@@ -198,7 +199,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>..;..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WIN32;XLL_IMPORTS;LOG4CXX_STATIC;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WIN32;XLL_IMPORTS;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -220,11 +221,11 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\lib;..\..\xll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-1_42_0.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -246,7 +247,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>..;..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WIN32;XLL_IMPORTS;LOG4CXX_STATIC;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WIN32;XLL_IMPORTS;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -268,11 +269,11 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\lib;..\..\xll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-1_23_0.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-mt-1_42_0.pdb</ProgramDatabaseFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-x64-mt-1_23_0.lib</ImportLibrary>
+      <ImportLibrary>.\buildXllDynamic2\$(PlatformToolset)\$(Platform)\$(Configuration)\ExampleXLLDynamic2-$(PlatformToolset)-x64-mt-1_42_0.lib</ImportLibrary>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>

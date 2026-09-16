@@ -8,14 +8,6 @@ ROOT_DIR = "C:/Users/spams/projects/QuantLibAddin-Old/"
 
 FILES = (
 
-#    "log4cxx/msvc/apr_vcxx.vcxproj",
-#    "log4cxx/msvc/apr_vcxx.vcxproj.filters",
-#    "log4cxx/msvc/aprutil_vcxx.vcxproj",
-#    "log4cxx/msvc/aprutil_vcxx.vcxproj.filters",
-#    "log4cxx/msvc/log4cxx_vcxx.sln",
-#    "log4cxx/msvc/log4cxx_vcxx.vcxproj",
-#    "log4cxx/msvc/log4cxx_vcxx.vcxproj.filters",
-#
 #    "ObjectHandler/Docs/docs_vcxx.vcxproj",
 #    "ObjectHandler/Docs/docs_vcxx.vcxproj.filters",
 #    "ObjectHandler/Examples/C++/ExampleCpp_vcxx.vcxproj",

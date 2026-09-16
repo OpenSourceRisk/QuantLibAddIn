@@ -22,7 +22,7 @@
 
 #include <ql/patterns/singleton.hpp>
 #include <oh/exception.hpp>
-#include <ohxl/conversions.hpp>
+#include <ohxl/conversions/all.hpp>
 #include <ohxl/functioncall.hpp>
 #include <exception>
 #include <sstream>
@@ -34,9 +34,12 @@ namespace QuantLibAddin {
 
         // get the name of the current book
 
-        const XLOPER *xReftext = ObjectHandler::FunctionCall::instance().getCallerAddress();
+        const XLOPER *xReftext = ObjectHandler::FunctionCall::instance().callerAddress();
         std::string callerAddress;
-        ObjectHandler::operToScalar(callerAddress, *xReftext);
+        if (xReftext && xReftext->xltype == xltypeStr) {
+            int len = (unsigned char)xReftext->val.str[0];
+            callerAddress = std::string(xReftext->val.str + 1, len);
+        }
         std::string callerBook = bookFromAddress(callerAddress);
 
         // get session id from map, adding new entry if necessary
@@ -89,8 +92,13 @@ namespace QuantLibAddin {
 
 }
 
-QuantLib::Integer QuantLib::sessionId() {
-    return QuantLibAddin::Session::instance().getSessionId();
+namespace QuantLib {
+    // Forward declaration needed for ORE fork which does not declare sessionId()
+    // in any header — the Singleton uses thread_local instead.
+    Integer sessionId();
+    Integer sessionId() {
+        return QuantLibAddin::Session::instance().getSessionId();
+    }
 }
 
 #endif

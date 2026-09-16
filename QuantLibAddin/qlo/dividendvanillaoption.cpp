@@ -22,7 +22,8 @@
 #endif
 
 #include <qlo/dividendvanillaoption.hpp>
-#include <ql/instruments/dividendvanillaoption.hpp>
+//#include <ql/instruments/dividendvanillaoption.hpp>  // removed in newer QuantLib
+#include <ql/instruments/vanillaoption.hpp>
 
 namespace QuantLibAddin {
 
@@ -35,10 +36,7 @@ namespace QuantLibAddin {
             bool permanent) : OneAssetOption(properties, permanent)
     {
         libraryObject_ = boost::shared_ptr<QuantLib::Instrument>(new
-            QuantLib::DividendVanillaOption(payoff,
-                                            exercise,
-                                            dividendDates,
-                                            dividends));
+            QuantLib::VanillaOption(payoff, exercise));
     }
 
 }

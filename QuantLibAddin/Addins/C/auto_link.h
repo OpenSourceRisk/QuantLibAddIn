@@ -32,6 +32,14 @@
 #  define LIB_TOOLSET "vc80"
 #elif (_MSC_VER == 1500)
 #  define LIB_TOOLSET "vc90"
+#elif (_MSC_VER >= 1940)
+#  define LIB_TOOLSET "v143"
+#elif (_MSC_VER >= 1924)
+#  define LIB_TOOLSET "v142"
+#elif (_MSC_VER >= 1910)
+#  define LIB_TOOLSET "v141"
+#elif (_MSC_VER >= 1900)
+#  define LIB_TOOLSET "v140"
 #else
 #  error "unknown Microsoft compiler"
 #endif
@@ -60,8 +68,8 @@
 #  endif
 #endif
 
-#define OH_LIB_NAME "ObjectHandler-" LIB_TOOLSET LIB_THREAD_OPT LIB_RT_OPT "-1_23_0.lib"
-#define QL_LIB_NAME "QuantLib-" LIB_TOOLSET LIB_THREAD_OPT LIB_RT_OPT "-1_23_0.lib"
+#define OH_LIB_NAME "ObjectHandler-" LIB_TOOLSET LIB_THREAD_OPT LIB_RT_OPT "-1_42_0.lib"
+#define QL_LIB_NAME "QuantLib-" LIB_TOOLSET LIB_THREAD_OPT LIB_RT_OPT "-1_42_0.lib"
 
 #pragma message("Linking to lib file: " OH_LIB_NAME)
 #pragma comment(lib, OH_LIB_NAME)

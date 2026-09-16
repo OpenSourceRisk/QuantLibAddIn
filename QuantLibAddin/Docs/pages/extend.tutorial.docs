@@ -237,14 +237,14 @@ Build solution <tt>QuantLibXL_full_vc?.sln</tt>, configuration
 are compiled and the binaries are linked.
 
 The build process creates the %QuantLibAddin XLL file
-<tt>QuantLibXL\\xll\\QuantLibXL-vc??-mt-s-1_23_0.xll</tt>.
+<tt>QuantLibXL\\xll\\QuantLibXL-vc??-mt-s-1_42_0.xll</tt>.
 
 \section extend_test 5 Test the New Functions
 
 Start Excel and load the XLL.  Enter the new constructor into cell A1:
 
 \verbatim
-=qlStock("my_stock",1.23)
+=qlStock("my_stock",1.42)
 \endverbatim
 
 This should return the ID of the newly created object.  Try invoking a member
@@ -254,7 +254,7 @@ function on the object.  In cell A2, enter:
 =qlInstrumentNPV(A1)
 \endverbatim
 
-This should return the value 1.23.
+This should return the value 1.42.
 
 \section extend_notes 6 Notes
 

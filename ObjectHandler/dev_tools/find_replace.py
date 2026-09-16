@@ -43,12 +43,10 @@ import shutil
 # ROOT_DIRS - The list of root folders from which
 # you want the find/replace to begin.
 ROOT_DIRS = (
-    '/home/erik/projects/QuantLibAddin-Old/log4cxx/src/main/include/log4cxx',
     '/home/erik/projects/QuantLibAddin-Old/gensrc',
     '/home/erik/projects/QuantLibAddin-Old/ObjectHandler',
     '/home/erik/projects/QuantLibAddin-Old/QuantLibAddin',
     '/home/erik/projects/QuantLibAddin-Old/QuantLibXL',
-    #'C:/projects/QuantLibAddin-Old4/log4cxx',
     #'C:/projects/QuantLibAddin-Old4/gensrc',
     #'C:/projects/QuantLibAddin-Old4/ObjectHandler',
     #'C:/projects/QuantLibAddin-Old4/QuantLibAddin',
@@ -112,10 +110,10 @@ SUBSTITUTIONS = (
 
 ##  Frequently used
 
-    (re.compile('1_22_0'), '1_23_0'),
-    (re.compile('1\.22'), '1.23'),
-    (re.compile('0x012200'), '0x012300'),
-    (re.compile('R012200f0'), 'R012300f0'),
+    (re.compile('1_23_0'), '1_42_0'),
+    (re.compile('1\.23'), '1.42'),
+    (re.compile('0x012300'), '0x014200'),
+    (re.compile('R012300f0'), 'R014200f0'),
     (re.compile('0\.10\.0f14'), '0.10.0f15'),
     (re.compile('0x001000f14'), '0x001000f15'),
 
@@ -192,7 +190,6 @@ IGNORE_DIRS = (
     re.compile('^html-online$'),
     re.compile('^Launcher$'),
     re.compile('^lib$'),
-    #re.compile('^log4cxx$'),
     re.compile('^Workbooks$'),
 )
 

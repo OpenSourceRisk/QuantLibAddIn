@@ -110,16 +110,12 @@ namespace ObjectHandler {
 
     protected:
         const typename RegistryClass::TypeMapPtr &getTypeMap() {
-            static typename RegistryClass::TypeMapPtr typeMap;
-            if(!typeMap) {
-                typename RegistryClass::AllTypeMap::const_iterator i =
-                    RegistryClass::instance().getAllTypesMap().find(typeid(T).name());
-                OH_REQUIRE(i != RegistryClass::instance().getAllTypesMap().end(),
-                    "Error retrieving Enumeration from Registry - the type '"
-                    << typeid(T).name() << "' is not available!");
-                typeMap = i->second;
-            }
-            return typeMap;
+            typename RegistryClass::AllTypeMap::const_iterator i =
+                RegistryClass::instance().getAllTypesMap().find(typeid(T).name());
+            OH_REQUIRE(i != RegistryClass::instance().getAllTypesMap().end(),
+                "Error retrieving Enumeration from Registry - the type '"
+                << typeid(T).name() << "' is not available!");
+            return i->second;
         }
     };
 

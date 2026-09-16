@@ -27,9 +27,6 @@ EXTRA_DIST = \
 
 lib_LTLIBRARIES = libObjectHandler.la
 LDFLAGS = -lboost_filesystem -lboost_regex -lboost_serialization -release $(PACKAGE_VERSION)
-if OH_LINK_LOG4CXX
-LDFLAGS += -llog4cxx
-endif
 
 libObjectHandler_la_SOURCES = \
     logger.cpp \

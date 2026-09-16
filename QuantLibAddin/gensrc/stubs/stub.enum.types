@@ -13,7 +13,7 @@
 #include <ql/cashflows/conundrumpricer.hpp>
 #include <ql/cashflows/digitalcoupon.hpp>
 #include <ql/currencies/all.hpp>
-#include <ql/experimental/risk/sensitivityanalysis.hpp>
+#include <qlo/quotes.hpp>
 #include <ql/instruments/asianoption.hpp>
 #include <ql/instruments/barrieroption.hpp>
 #include <ql/instruments/capfloor.hpp>

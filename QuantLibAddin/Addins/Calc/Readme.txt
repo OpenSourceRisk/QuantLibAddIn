@@ -15,9 +15,9 @@ Environment variables
    installation. This involves in particular setting OO_SDK_HOME and 
    OO_SDK_OUT.
 2) Set environment variables 
-   QL_PATH, QA_PATH, OH_PATH, LG_PATH, respectively, to the full path 
+   QL_PATH, QA_PATH, OH_PATH, respectively, to the full path 
    to the  
-   QuantLib, QuantLibAddin, ObjectHandler, log4cxx 
+   QuantLib, QuantLibAddin, ObjectHandler
    directories.
 
 "make -f Makefile.ooo" should then compile and deploy the Calc addin 

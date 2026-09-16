@@ -3,7 +3,7 @@ autom4te.cache/
 Clients/CppInstrumentIn/instrument_in
 Clients/Cpp/QLADemo
 Clients/CppSwapOut/swap_out
-config/
+/config/
 config.status
 configure
 Docs/.time-stamp-html
@@ -14,3 +14,4 @@ qlo/config.hpp
 qlo/config.hpp.in
 qlo/stamp-h1
 x64
+cmake

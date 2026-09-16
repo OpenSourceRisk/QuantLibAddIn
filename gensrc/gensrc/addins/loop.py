@@ -31,11 +31,14 @@ class Loop(addin.Addin):
     # class variables
     #############################################
 
+    # Use a type-erased boost::function to name the type of the object
+    # returned by boost::bind.  Naming the concrete boost::bind return type
+    # (boost::_bi::bind_t / boost::_mfi::cmfN / boost::_bi::listN) relies on
+    # Boost implementation details that changed in newer Boost releases, so
+    # boost::function<ReturnType (InputType)> is used instead.  The loop()
+    # template only ever invokes the bound object, so type erasure is safe.
     FUNC_BIND = '''\
-    typedef     boost::_bi::bind_t<
-                %(returnType)s,
-                %(bindPointer)s,
-                %(bindList)s
+    typedef     boost::function<%(returnType)s (%(inputType)s)>
                 %(functionName)sBind;'''
 
     FUNC_SIG = '''\
@@ -66,10 +69,10 @@ class Loop(addin.Addin):
     def generateLoop(self, func):
         """Generate loop typedefs for given function."""
         returnType = self.loopDatatype_.apply(func.returnValue())
+        inputType = self.loopDatatype_.apply(func.behavior().loopParamRef_)
         functionBind = Loop.FUNC_BIND % {
-            'bindList' : func.behavior().bindList(self.bindList_),
-            'bindPointer' : func.behavior().bindPointer(self.bindPointer_, returnType),
             'functionName' : func.name(),
+            'inputType' : inputType,
             'returnType' : returnType }
         if func.behavior().functionSignature_:
             if func.const():

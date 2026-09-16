@@ -29,7 +29,6 @@
 #include <ql/quotes/futuresconvadjustmentquote.hpp>
 #include <ql/quotes/impliedstddevquote.hpp>
 #include <ql/quotes/lastfixingquote.hpp>
-#include <ql/experimental/risk/sensitivityanalysis.hpp>
 #include <ql/termstructures/volatility/optionlet/optionletstripper.hpp>
 
 using std::vector;
@@ -194,46 +193,4 @@ namespace QuantLibAddin {
             QuantLib::LastFixingQuote(index));
     }
 
-    vector<vector<Real> >
-    bucketAnalysis(const vector<vector<QuantLib::Handle<QuantLib::Quote> > >& q,
-                   const vector<shared_ptr<QuantLib::Instrument> >& instr,
-                   const std::vector<QuantLib::Real>& quant,
-                   Real shift,
-                   QuantLib::SensitivityAnalysis type)
-    {
-        pair<vector<vector<Real> >, vector<vector<Real> > > result;
-        vector<vector<QuantLib::Handle<QuantLib::SimpleQuote> > > sq(q.size());
-        for (QuantLib::Size i=0; i<q.size(); ++i) {
-            sq[i] = vector<QuantLib::Handle<QuantLib::SimpleQuote> >(q[i].size());
-            for (QuantLib::Size j=0; j<q[i].size(); ++j) {
-                boost::shared_ptr<QuantLib::Quote> t(q[i][j].currentLink());
-                boost::shared_ptr<QuantLib::SimpleQuote> tt =
-                    boost::dynamic_pointer_cast<QuantLib::SimpleQuote>(t);
-                sq[i][j] = QuantLib::Handle<QuantLib::SimpleQuote>(tt);
-            }
-        }
-        result = QuantLib::bucketAnalysis(sq, instr, quant, shift, type);
-        return result.first;
     }
-
-    std::vector<std::vector<QuantLib::Real> >
-    bucketAnalysisDelta2(const std::vector<QuantLib::Handle<QuantLib::Quote> >& quotes,
-                         const std::vector<QuantLib::Handle<QuantLib::Quote> >& parameters,
-                         QuantLib::Real shift,
-                         QuantLib::SensitivityAnalysis type) {
-        std::vector<std::vector<QuantLib::Real> > deltaMatrix;
-        std::vector<std::vector<QuantLib::Real> > gammamatrix;
-
-        QuantLib::Size n = quotes.size();
-        std::vector<QuantLib::Handle<QuantLib::SimpleQuote> > simpleQuotes(n);
-        for (QuantLib::Size i=0; i<n;  ++i) {
-            boost::shared_ptr<QuantLib::SimpleQuote> sq = 
-                boost::dynamic_pointer_cast<QuantLib::SimpleQuote>(quotes[i].currentLink());
-            simpleQuotes[i] = QuantLib::Handle<QuantLib::SimpleQuote>(sq);
-        }
-        QuantLib::bucketAnalysis(deltaMatrix, gammamatrix,
-                                 simpleQuotes, parameters, shift, type);
-        return deltaMatrix;
-    }
-
-}
