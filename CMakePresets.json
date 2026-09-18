@@ -28,6 +28,32 @@
             }
         },
         {
+            "name": "windows-vs2026-Win32-base",
+            "hidden": true,
+            "generator": "Visual Studio 18 2026",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "architecture": {
+                "value": "Win32",
+                "strategy": "set"
+            },
+            "cacheVariables": {
+                "QL_BUILD_EXAMPLES":   false,
+                "QL_BUILD_TEST_SUITE": false,
+                "QL_ENABLE_SESSIONS":  true
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "intelliSenseMode": "windows-msvc-x86",
+                    "hostOS": ["Windows"]
+                }
+            }
+        },
+        {
             "name": "windows-vs2022-x64-base",
             "hidden": true,
             "generator": "Visual Studio 17 2022",
@@ -71,6 +97,15 @@
             }
         },
         {
+            "name": "windows-vs2026-Win32-static-base",
+            "hidden": true,
+            "inherits": "windows-vs2026-Win32-base",
+            "cacheVariables": {
+                "MSVC_LINK_DYNAMIC_RUNTIME": false,
+                "Boost_USE_STATIC_RUNTIME": true
+            }
+        },
+        {
             "name": "windows-vs2022-x64-dynamic-base",
             "hidden": true,
             "inherits": "windows-vs2022-x64-base",
@@ -82,6 +117,41 @@
             "name": "windows-vs2022-x64-static-base",
             "hidden": true,
             "inherits": "windows-vs2022-x64-base",
+            "cacheVariables": {
+                "MSVC_LINK_DYNAMIC_RUNTIME": false,
+                "Boost_USE_STATIC_RUNTIME": true
+            }
+        },
+        {
+            "name": "windows-vs2022-Win32-base",
+            "hidden": true,
+            "generator": "Visual Studio 17 2022",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "architecture": {
+                "value": "Win32",
+                "strategy": "set"
+            },
+            "cacheVariables": {
+                "QL_BUILD_EXAMPLES":   false,
+                "QL_BUILD_TEST_SUITE": false,
+                "QL_ENABLE_SESSIONS":  true
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "intelliSenseMode": "windows-msvc-x86",
+                    "hostOS": ["Windows"]
+                }
+            }
+        },
+        {
+            "name": "windows-vs2022-Win32-static-base",
+            "hidden": true,
+            "inherits": "windows-vs2022-Win32-base",
             "cacheVariables": {
                 "MSVC_LINK_DYNAMIC_RUNTIME": false,
                 "Boost_USE_STATIC_RUNTIME": true

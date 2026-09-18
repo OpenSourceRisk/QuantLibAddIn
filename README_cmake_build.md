@@ -11,10 +11,14 @@ the same XLL output.
 
 | Property | Value |
 |----------|-------|
-| Platform | x64 only |
+| Platform | x64 and Win32 (x86) |
 | Compilers | VS 2026 (v145 toolset), VS 2022 (v143 toolset) |
 | Configurations | Release static, Debug static, Release dynamic, Debug dynamic |
-| XLL output | `build\<preset>\xll\QuantLibXL-<toolset>-x64-mt[-s|-gd|-sgd]-1_42_0.xll` |
+| XLL output | `build\<preset>\xll\QuantLibXL-<toolset>[-x64]-mt[-s|-gd|-sgd]-1_42_0.xll` |
+
+The platform tag `-x64` is present only for x64 builds; Win32 builds omit it
+(e.g. `QuantLibXL-v145-mt-s-1_42_0.xll`), matching the hand-maintained Win32
+solution output name.  Win32 requires a Boost built for x86 (see section 3).
 
 The XLL is written into the cmake binary directory (`build\<preset>\xll\`),
 which keeps it separate from the output of the hand-maintained solution
@@ -64,6 +68,15 @@ the paths to match your local Boost installation:
             }
         },
         {
+            "name": "windows-vs2026-Win32-static",
+            "displayName": "VS 2026 Win32 — static CRT (Release+Debug)",
+            "inherits": "windows-vs2026-Win32-static-base",
+            "cacheVariables": {
+                "BOOST_INCLUDEDIR": "C:/path/to/boost/include",
+                "BOOST_LIBRARYDIR": "C:/path/to/boost/lib-mt-x86"
+            }
+        },
+        {
             "name": "windows-vs2022-x64-dynamic",
             "displayName": "VS 2022 x64 — dynamic CRT (Release+Debug)",
             "inherits": "windows-vs2022-x64-dynamic-base",
@@ -87,6 +100,8 @@ the paths to match your local Boost installation:
         { "name": "windows-vs2026-x64-dynamic-debug",   "configurePreset": "windows-vs2026-x64-dynamic", "configuration": "Debug"   },
         { "name": "windows-vs2026-x64-static-release",  "configurePreset": "windows-vs2026-x64-static",  "configuration": "Release" },
         { "name": "windows-vs2026-x64-static-debug",    "configurePreset": "windows-vs2026-x64-static",  "configuration": "Debug"   },
+        { "name": "windows-vs2026-Win32-static-release","configurePreset": "windows-vs2026-Win32-static","configuration": "Release" },
+        { "name": "windows-vs2026-Win32-static-debug",  "configurePreset": "windows-vs2026-Win32-static","configuration": "Debug"   },
         { "name": "windows-vs2022-x64-dynamic-release", "configurePreset": "windows-vs2022-x64-dynamic", "configuration": "Release" },
         { "name": "windows-vs2022-x64-dynamic-debug",   "configurePreset": "windows-vs2022-x64-dynamic", "configuration": "Debug"   },
         { "name": "windows-vs2022-x64-static-release",  "configurePreset": "windows-vs2022-x64-static",  "configuration": "Release" },
@@ -103,17 +118,20 @@ omitted and the shared presets will work as-is.
 
 ## 4  Presets
 
-Eight configure presets are provided - one per compiler x CRT combination:
+Configure presets are provided per compiler x platform x CRT combination:
 
-| Configure preset             | Compiler | CRT   |
-|------------------------------|----------|-------|
-| `windows-vs2026-x64-dynamic` | VS 2026  | `/MD` |
-| `windows-vs2026-x64-static`  | VS 2026  | `/MT` |
-| `windows-vs2022-x64-dynamic` | VS 2022  | `/MD` |
-| `windows-vs2022-x64-static`  | VS 2022  | `/MT` |
+| Configure preset              | Compiler | Platform | CRT   |
+|-------------------------------|----------|----------|-------|
+| `windows-vs2026-x64-dynamic`  | VS 2026  | x64      | `/MD` |
+| `windows-vs2026-x64-static`   | VS 2026  | x64      | `/MT` |
+| `windows-vs2026-Win32-static` | VS 2026  | Win32    | `/MT` |
+| `windows-vs2022-x64-dynamic`  | VS 2022  | x64      | `/MD` |
+| `windows-vs2022-x64-static`   | VS 2022  | x64      | `/MT` |
 
-Each configure preset has a corresponding pair of build presets with
-`-release` and `-debug` suffixes.
+The shared CMakePresets.json also defines the hidden base presets
+`windows-vs2026-Win32-base` and `windows-vs2026-Win32-static-base` that the
+Win32 user preset inherits from.  Each configure preset has a corresponding pair
+of build presets with `-release` and `-debug` suffixes.
 
 ---
 
@@ -135,6 +153,9 @@ cmake --preset windows-vs2022-x64-static -S <repo> -B <repo>\build\windows-vs202
 
 # VS 2022, dynamic CRT
 cmake --preset windows-vs2022-x64-dynamic -S <repo> -B <repo>\build\windows-vs2022-x64-dynamic
+
+# VS 2026, Win32 (x86), static CRT
+cmake --preset windows-vs2026-Win32-static -S <repo> -B <repo>\build\windows-vs2026-Win32-static
 ```
 
 ---
@@ -162,6 +183,13 @@ cmake --build <repo>\build\windows-vs2022-x64-static --config Release --target Q
 cmake --build <repo>\build\windows-vs2022-x64-static --config Debug --target QuantLibXL
 ```
 
+Example using the VS 2026 Win32 static preset (note the name has no `-x64` tag):
+
+```powershell
+# Release static  ->  QuantLibXL-v145-mt-s-1_42_0.xll
+cmake --build <repo>\build\windows-vs2026-Win32-static --config Release --target QuantLibXL
+```
+
 ---
 
 ## 7  Output locations
@@ -176,6 +204,8 @@ cmake --build <repo>\build\windows-vs2022-x64-static --config Debug --target Qua
 | windows-vs2022-x64-static  | Debug   | `build\windows-vs2022-x64-static\xll\QuantLibXL-v143-x64-mt-sgd-1_42_0.xll` |
 | windows-vs2022-x64-dynamic | Release | `build\windows-vs2022-x64-dynamic\xll\QuantLibXL-v143-x64-mt-1_42_0.xll` |
 | windows-vs2022-x64-dynamic | Debug   | `build\windows-vs2022-x64-dynamic\xll\QuantLibXL-v143-x64-mt-gd-1_42_0.xll` |
+| windows-vs2026-Win32-static| Release | `build\windows-vs2026-Win32-static\xll\QuantLibXL-v145-mt-s-1_42_0.xll` |
+| windows-vs2026-Win32-static| Debug   | `build\windows-vs2026-Win32-static\xll\QuantLibXL-v145-mt-sgd-1_42_0.xll` |
 
 ---
 
@@ -285,13 +315,15 @@ The XLL `OUTPUT_NAME` uses cmake generator expressions to select the
 correct runtime tag per configuration:
 
 ```
-QuantLibXL-<toolset>-x64-<runtime-tag>-1_42_0.xll
+QuantLibXL-<toolset>[-x64]-<runtime-tag>-1_42_0.xll
 ```
 
 `<toolset>` is derived from `MSVC_TOOLSET_VERSION` at configure time
-(e.g. `v145` for VS 2026, `v143` for VS 2022).  `<runtime-tag>` is
-`-mt-s` / `-mt-sgd` (static CRT) or `-mt` / `-mt-gd` (dynamic CRT)
-depending on `MSVC_LINK_DYNAMIC_RUNTIME`.
+(e.g. `v145` for VS 2026, `v143` for VS 2022).  The `-x64` platform tag is
+added only for 64-bit builds (`CMAKE_SIZEOF_VOID_P EQUAL 8`) and omitted for
+Win32, matching the hand-maintained solution's Win32 output name.
+`<runtime-tag>` is `-mt-s` / `-mt-sgd` (static CRT) or `-mt` / `-mt-gd`
+(dynamic CRT) depending on `MSVC_LINK_DYNAMIC_RUNTIME`.
 
 ---
 
@@ -407,3 +439,47 @@ A per-project `doxywarnings.txt` is written next to each `html` directory.
 - The older `.doxy` files predate Doxygen 1.9, so Doxygen emits a number of
   "obsolete tag" warnings; these are harmless.  `WARN_AS_ERROR` is `NO`, so
   content warnings do not fail the build.
+
+---
+
+## 11  Continuous integration (GitHub Actions)
+
+The workflow `.github/workflows/build-xll.yml` builds the **static-CRT Release**
+XLL for **both x64 and Win32** on a GitHub-hosted `windows-latest` runner and
+uploads each XLL as a build artifact.
+
+| Property | Value |
+|----------|-------|
+| Trigger | `workflow_dispatch` (manual) only |
+| Runner | `windows-latest` (Visual Studio 2022, toolset **v143**) |
+| Variants | static-CRT Release, `x64` and `Win32` (matrix) |
+| Inputs | `quantlib_ref` (default `master`), `boost_version` (default `1.83.0`) |
+| Output | artifacts `QuantLibXL-x64` and `QuantLibXL-Win32` |
+
+Because the runner uses VS 2022, the CI XLLs are tagged `v143`
+(`QuantLibXL-v143-x64-mt-s-1_42_0.xll` and `QuantLibXL-v143-mt-s-1_42_0.xll`),
+not the `v145` produced by a local VS 2026 build.
+
+The workflow is self-contained and needs no `CMakeUserPresets.json`.  Each
+matrix leg:
+
+1. **Clones QuantLib** from `https://github.com/<owner>/QuantLib` where
+   `<owner>` is the owner of the repository running the workflow — so
+   `OpenSourceRisk/QuantLibAddIn` clones `OpenSourceRisk/QuantLib` and
+   `eehlers/QuantLibAddIn` clones `eehlers/QuantLib`.  The sources are placed
+   in the camel-case `QuantLib\` folder the build expects (QuantLib is
+   `.gitignore`'d and never committed here).
+2. **Builds Boost** (from source, only the required components, static runtime)
+   for the leg's architecture — x64 staged to `boost\stage\lib`, Win32 staged
+   to `boost\stage32\lib` and built from an x86 developer environment.  The
+   result is cached with `actions/cache` keyed on version + architecture, so the
+   slow Boost build happens only on the first run.
+3. **Configures and builds** with `-DRUN_GENSRC=ON` (a Full build; the
+   generated sources are `.gitignore`'d) passing `BOOST_INCLUDEDIR` /
+   `BOOST_LIBRARYDIR` on the cmake command line, then builds the `QuantLibXL`
+   target in `Release`.
+4. **Verifies and uploads** the expected XLL, failing the job if it is missing.
+
+The workflow is being validated on `OpenSourceRisk/QuantLibAddIn`; the public
+release is intended to run unchanged on the personal fork
+`eehlers/QuantLibAddIn`.

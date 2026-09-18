@@ -1,0 +1,159 @@
+﻿name: Build QuantLibXL XLL
+
+# Manually-triggered build of the QuantLibXL Excel add-in (.xll) as a
+# static-CRT Release for both x64 and Win32 (x86).  Runs on GitHub-hosted
+# windows-latest runners (Visual Studio 2022, toolset v143) and uploads each
+# XLL as a build artifact.
+#
+# QuantLib is not committed to this repository (it is .gitignore'd), so it is
+# cloned at build time from the same owner as this repository:
+#   OpenSourceRisk/QuantLibAddIn  -> clones OpenSourceRisk/QuantLib
+#   eehlers/QuantLibAddIn         -> clones eehlers/QuantLib
+# The add-in build always expects the sources in a camel-case "QuantLib"
+# folder at the repository root.
+
+on:
+  workflow_dispatch:
+    inputs:
+      quantlib_ref:
+        description: "QuantLib git ref (branch, tag or SHA) to build against"
+        required: true
+        default: "master"
+      boost_version:
+        description: "Boost version to build (dotted, e.g. 1.83.0)"
+        required: true
+        default: "1.83.0"
+
+permissions:
+  contents: read
+
+jobs:
+  build-xll:
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x64
+            address_model: "64"
+            vcvars_arch: amd64
+            boost_stage: stage
+            xll_name: QuantLibXL-v143-x64-mt-s-1_42_0.xll
+          - arch: Win32
+            address_model: "32"
+            vcvars_arch: x86
+            boost_stage: stage32
+            xll_name: QuantLibXL-v143-mt-s-1_42_0.xll
+
+    env:
+      BOOST_ROOT_DIR: ${{ github.workspace }}\boost
+      BUILD_DIR: ${{ github.workspace }}\build\ci-vs2022-${{ matrix.arch }}-static
+
+    steps:
+      - name: Checkout QuantLibAddin
+        uses: actions/checkout@v4
+
+      - name: Clone QuantLib (same owner as this repo)
+        shell: pwsh
+        run: |
+          $owner = "${{ github.repository_owner }}"
+          $url   = "https://github.com/$owner/QuantLib.git"
+          Write-Host "Cloning $url @ ${{ github.event.inputs.quantlib_ref }} into QuantLib/"
+          git clone --depth 1 --branch "${{ github.event.inputs.quantlib_ref }}" $url QuantLib
+          if ($LASTEXITCODE -ne 0) {
+              Write-Host "Branch/tag clone failed; falling back to default branch + checkout"
+              git clone $url QuantLib
+              if ($LASTEXITCODE -ne 0) { throw "git clone of $url failed" }
+              git -C QuantLib checkout "${{ github.event.inputs.quantlib_ref }}"
+              if ($LASTEXITCODE -ne 0) { throw "git checkout of ${{ github.event.inputs.quantlib_ref }} failed" }
+          }
+          if (-not (Test-Path "QuantLib/ql/version.hpp")) {
+              throw "QuantLib sources not found after clone (QuantLib/ql/version.hpp missing)"
+          }
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compute Boost identifiers
+        id: boost
+        shell: pwsh
+        run: |
+          $v = "${{ github.event.inputs.boost_version }}"
+          $u = $v -replace '\.', '_'
+          "version=$v"          | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "underscore=$u"       | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "libdir=$env:BOOST_ROOT_DIR\${{ matrix.boost_stage }}\lib" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+      - name: Cache Boost (${{ matrix.arch }})
+        id: boost-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.BOOST_ROOT_DIR }}
+          key: boost-${{ steps.boost.outputs.version }}-${{ matrix.arch }}-vc143-static-v1
+
+      - name: Build Boost (${{ matrix.arch }})
+        if: steps.boost-cache.outputs.cache-hit != 'true'
+        shell: cmd
+        run: |
+          setlocal enabledelayedexpansion
+          set BOOST_V=${{ steps.boost.outputs.version }}
+          set BOOST_U=${{ steps.boost.outputs.underscore }}
+          set BOOST_DIR=%BOOST_ROOT_DIR%
+          echo Downloading Boost %BOOST_V%
+          curl -L -o boost.7z https://archives.boost.io/release/%BOOST_V%/source/boost_%BOOST_U%.7z || exit /b 1
+          7z x boost.7z -o"%GITHUB_WORKSPACE%" >nul || exit /b 1
+          move "%GITHUB_WORKSPACE%\boost_%BOOST_U%" "%BOOST_DIR%" || exit /b 1
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.vcvars_arch }} || exit /b 1
+          cd /d "%BOOST_DIR%"
+          call bootstrap.bat || exit /b 1
+          .\b2 -j%NUMBER_OF_PROCESSORS% ^
+              toolset=msvc-14.3 ^
+              address-model=${{ matrix.address_model }} ^
+              architecture=x86 ^
+              link=static runtime-link=static threading=multi variant=release ^
+              --stagedir=${{ matrix.boost_stage }} ^
+              --with-filesystem --with-serialization --with-system ^
+              --with-thread --with-date_time --with-chrono --with-atomic ^
+              stage || exit /b 1
+
+      - name: Configure (CMake, VS 2022 ${{ matrix.arch }}, static Release)
+        shell: cmd
+        run: |
+          cmake -S "%GITHUB_WORKSPACE%" -B "%BUILD_DIR%" ^
+              -G "Visual Studio 17 2022" -A ${{ matrix.arch }} ^
+              -DRUN_GENSRC=ON ^
+              -DMSVC_LINK_DYNAMIC_RUNTIME=OFF ^
+              -DBoost_USE_STATIC_RUNTIME=ON ^
+              -DQL_BUILD_EXAMPLES=OFF ^
+              -DQL_BUILD_TEST_SUITE=OFF ^
+              -DQL_ENABLE_SESSIONS=ON ^
+              -DBOOST_INCLUDEDIR="%BOOST_ROOT_DIR%" ^
+              -DBOOST_LIBRARYDIR="${{ steps.boost.outputs.libdir }}" || exit /b 1
+
+      - name: Build QuantLibXL (Release)
+        shell: cmd
+        run: |
+          cmake --build "%BUILD_DIR%" --config Release --target QuantLibXL || exit /b 1
+
+      - name: Verify XLL output
+        shell: pwsh
+        run: |
+          $xll = Join-Path $env:BUILD_DIR "xll\${{ matrix.xll_name }}"
+          if (-not (Test-Path $xll)) {
+              Write-Host "Expected XLL not found: $xll"
+              Get-ChildItem -Recurse (Join-Path $env:BUILD_DIR "xll") -ErrorAction SilentlyContinue |
+                  Select-Object FullName, Length
+              throw "XLL not produced"
+          }
+          $item = Get-Item $xll
+          Write-Host "Produced $($item.FullName) ($([math]::Round($item.Length/1MB,2)) MB)"
+
+      - name: Upload XLL artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: QuantLibXL-${{ matrix.arch }}
+          path: ${{ env.BUILD_DIR }}\xll\${{ matrix.xll_name }}
+          if-no-files-found: error
