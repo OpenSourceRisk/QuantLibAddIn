@@ -7,18 +7,34 @@ This repo contains source code and examples for the QuantLibXL, QuantLibAddin, O
 
 The four projects are documented at the links below:
 
-https://www.quantlib.org/quantlibxl  
-https://www.quantlib.org/quantlibaddin  
-https://www.quantlib.org/objecthandler  
-https://www.quantlib.org/gensrc
+https://www.quantlibxl.org  
+https://www.quantlibaddin.org  
+https://www.objecthandler.org  
+https://www.gensrc.org  
 
-Here are the instructions for downloading QuantLibXL:
+Compiled XLLs, example spreadsheets, and documentation are available for download at this link:
 
-https://www.quantlib.org/quantlibxl/installation.html
+https://github.com/eehlers/QuantLibAddIn/releases/tag/v1.42.0
 
-Here are the instructions for compiling QuantLibXL from source, using released source code:
+Below are instructions for building QuantLibXL (and other incarnations of QuantLibAddin) from source code.
 
-https://www.quantlib.org/quantlibaddin/build_qlxl.html
+NB: QuantLibAddin now depends not on the official QuantLib repo but on the OpenSourceRisk fork of QuantLib.
+
+## Repository references
+
+Throughout this documentation:
+
+- `<repo-host>` refers to the host serving the repository you are currently reading (for example, the site you cloned this repository from).
+- `<owner>` refers to the owner of the repository you are currently reading.  For example, if you are reading this in the repository at `<repo-host>/<owner>/QuantLibAddIn`, then use that same `<owner>` for the companion `QuantLib` repository.  If you fork the project, `<owner>` becomes your own account name.
+
+
+## Building using GitHub Actions
+
+- Fork <owner>/QuantLib (NB: This is derived not from the official QuantLib repo but from the OpenSourceRisk fork of QuantLib)
+- Fork <owner>/QuantLibAddin
+- The two forks must be named exactly `QuantLib` and `QuantLibAddin` (this is what the "Build QuantLibXL XLL" workflow expects)
+- In your copy of QuantLibAddin, under Actions, run "Build QuantLibXL XLL"
+- If all goes well, the job should produce a zip file containing compiled XLLs and example spreadsheets
 
 ## Building from a git clone
 
