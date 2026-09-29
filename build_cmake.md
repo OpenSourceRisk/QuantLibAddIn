@@ -183,10 +183,19 @@ you like; it is where `CMakeLists.txt`, `CMakePresets.json` and this
 QuantLibAddin\         (the repository root - the outer folder)
   gensrc\
   ObjectHandler\
-  QuantLib\            (cloned separately - see below)
+  ore\                 (submodule - see below)
+    QuantLib\          (nested submodule; supplies ql_library)
+    QuantExt\          (supplies the QuantExt library)
   QuantLibAddin\
   QuantLibXL\
 ```
+
+QuantLib is **no longer cloned standalone** into a top-level `QuantLib\`
+folder. It is supplied as a nested submodule of ORE (the OpenSourceRisk
+fork of QuantLib) at `ore\QuantLib`, and QuantExt is supplied by the same
+ORE submodule at `ore\QuantExt`. The root `CMakeLists.txt` adds QuantLib
+via `add_subdirectory(ore/QuantLib ...)` and pulls QuantExt in through the
+shim `cmake/quantext.cmake`.
 
 ### 4.1 Clone the main repository
 
@@ -194,30 +203,35 @@ QuantLibAddin\         (the repository root - the outer folder)
 this single repository. Clone it:
 
 ```
-git clone <repo-host>/<owner>/QuantLibAddIn.git
+git clone --recurse-submodules <repo-host>/<owner>/QuantLibAddIn.git
 ```
 
-This creates the `QuantLibAddin` folder containing the four sub-projects above.
+This creates the `QuantLibAddin` folder containing the four sub-projects above,
+and `--recurse-submodules` also fetches the ORE submodule (with its nested
+QuantLib and QuantExt). If you omit that flag, fetch the submodules separately
+as described in section 4.2.
 
-### 4.2 Clone QuantLib into the working tree
+### 4.2 Fetch the ORE submodule (QuantLib + QuantExt)
 
-QuantLib is maintained as a **separate** repository and is deliberately excluded
-from this one (it is listed in `.gitignore`), so the root build expects you to
-clone it yourself into a sub-folder named exactly `QuantLib` inside the working
-tree you just cloned:
+QuantLib and QuantExt are supplied together by the **ORE** submodule at
+`ore\`. ORE carries QuantLib as its own nested submodule (via a relative URL,
+so it resolves to the OpenSourceRisk fork automatically), so a single
+**recursive** submodule update brings in the whole dependency chain.
+
+If you cloned the main repository with `--recurse-submodules`, `ore\`,
+`ore\QuantLib\` and `ore\QuantExt\` are already populated and you can skip
+this step. Otherwise, initialise the submodules recursively from the
+repository root:
 
 ```
 cd QuantLibAddin
-git clone <repo-host>/<owner>/QuantLib QuantLib
+git submodule update --init --recursive
 ```
 
-The folder name `QuantLib` **is case sensitive** and must be spelled exactly as
-shown - `QuantLib`, not `quantlib` or `QUANTLIB`, and with no version suffix -
-because the root `CMakeLists.txt` adds the sub-directory by that name with
-`add_subdirectory(QuantLib)`. The explicit `QuantLib` argument at the end of the
-`git clone` command ensures the folder is named `QuantLib` (without it git would
-create a folder whose name matches the source repository, for example
-`quantlib`, or another name if you are cloning a fork).
+This populates `ore\` and, nested inside it, `ore\QuantLib\` and
+`ore\QuantExt\`. The root `CMakeLists.txt` consumes them by relative path
+(`add_subdirectory(ore/QuantLib ...)` for QuantLib and `include(cmake/quantext.cmake)`
+for QuantExt), so no manual renaming is required.
 
 After this step the layout in section 4 should be in place.
 
@@ -590,10 +604,11 @@ browser to read the generated documentation.
 
 ## 10 Troubleshooting
 
-**CMake error: `add_subdirectory given source "QuantLib" which is not an
-existing directory`** (or `Cannot find source file` for QuantLib sources) at
-configure time. The `QuantLib` folder is missing or misnamed. Clone it as
-described in section 4.2 - remember the name is case sensitive.
+**CMake error: `add_subdirectory given source "ore/QuantLib" which is not an
+existing directory`** (or `Cannot find source file` for QuantLib / QuantExt
+sources) at configure time. The ORE submodule is not populated. Run
+`git submodule update --init --recursive` from the repository root as described
+in section 4.2.
 
 **CMake error: `Cannot find source file`** for one of the `qlo\valueobjects\*`,
 `qlo\serialization\**`, `Addins\Cpp\*`, `ohxl\**` or `qlxl\**` files at configure
