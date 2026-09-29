@@ -4,6 +4,7 @@
   <xlFunctionWizardCategory>QuantLib - Financial</xlFunctionWizardCategory>
   <serializationIncludes>
     <include>qlo/ratehelpers.hpp</include>
+    <include>qlo/qxratehelpers.hpp</include>
     <include>qlo/indexes/swapindex.hpp</include>
     <include>qlo/schedule.hpp</include>
     <include>qlo/bonds.hpp</include>
@@ -17,6 +18,7 @@
   </serializationIncludes>
   <addinIncludes>
     <include>qlo/ratehelpers.hpp</include>
+    <include>qlo/qxratehelpers.hpp</include>
     <include>qlo/indexes/swapindex.hpp</include>
     <include>qlo/schedule.hpp</include>
     <include>qlo/bonds.hpp</include>
@@ -207,6 +209,41 @@
             <superType>libToHandle</superType>
             <tensorRank>scalar</tensorRank>
             <description>deposit quote.</description>
+          </Parameter>
+          <Parameter name='IborIndex' exampleValue='Euribor6M'>
+            <type>QuantLib::IborIndex</type>
+            <tensorRank>scalar</tensorRank>
+            <description>IborIndex object ID.</description>
+          </Parameter>
+        </Parameters>
+      </ParameterList>
+    </Constructor>
+
+    <Constructor name='qlImmFraRateHelper'>
+      <libraryFunction>ImmFraRateHelper</libraryFunction>
+      <SupportedPlatforms>
+        <!--SupportedPlatform name='Excel' calcInWizard='false'/-->
+        <SupportedPlatform name='Excel'/>
+        <SupportedPlatform name='Calc'/>
+        <SupportedPlatform name='Cpp'/>
+      </SupportedPlatforms>
+      <ParameterList>
+        <Parameters>
+          <Parameter name='Rate' exampleValue='0.036565'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>FRA quote.</description>
+          </Parameter>
+          <Parameter name='Imm1' exampleValue='1'>
+            <type>QuantLib::Size</type>
+            <tensorRank>scalar</tensorRank>
+            <description>index of the IMM date at which the FRA starts (1 for the next IMM date).</description>
+          </Parameter>
+          <Parameter name='Imm2' exampleValue='2'>
+            <type>QuantLib::Size</type>
+            <tensorRank>scalar</tensorRank>
+            <description>index of the IMM date at which the FRA ends (must be greater than Imm1).</description>
           </Parameter>
           <Parameter name='IborIndex' exampleValue='Euribor6M'>
             <type>QuantLib::IborIndex</type>
