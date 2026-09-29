@@ -63,6 +63,13 @@ if(MSVC)
 endif()
 
 # -----------------------------------------------------------------------
+# QuantExt (adds target QuantExt, aliased as QuantExt::QuantExt / Ore::QuantExt)
+# Pulled from the nested ORE submodule via a shim that supplies just the ORE
+# variables qle needs, without dragging in ORE's global commonSettings.cmake.
+# -----------------------------------------------------------------------
+include(cmake/quantext.cmake)
+
+# -----------------------------------------------------------------------
 # ObjectHandler static libs (ohlib + ohxllib) and xlsdk
 # -----------------------------------------------------------------------
 add_subdirectory(ObjectHandler)
