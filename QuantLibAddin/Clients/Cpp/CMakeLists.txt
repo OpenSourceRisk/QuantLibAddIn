@@ -58,7 +58,7 @@ set_target_properties(QLADemo PROPERTIES
 target_include_directories(QLADemo PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../..
     ${CMAKE_CURRENT_SOURCE_DIR}/../../../ObjectHandler
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../QuantLib
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../../ore/QuantLib
 )
 
 target_link_libraries(QLADemo PRIVATE

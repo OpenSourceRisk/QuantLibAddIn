@@ -33,7 +33,10 @@ set(QL_BUILD_TEST_SUITE OFF CACHE BOOL "" FORCE)
 # ql_library.  We therefore turn the flag OFF here so that only
 # ql_library gets its postfix set (we do that explicitly below).
 set(QL_TAGGED_LAYOUT OFF CACHE BOOL "" FORCE)
-add_subdirectory(QuantLib)
+# QuantLib is no longer cloned standalone into ./QuantLib; it is supplied as a
+# nested submodule of ORE at ore/QuantLib (ORE fork of QuantLib).  An explicit
+# binary directory keeps its build tree out of the ore/ source subtree.
+add_subdirectory(ore/QuantLib "${CMAKE_BINARY_DIR}/QuantLib")
 
 # Apply tagged layout postfixes to ql_library only, mirroring what
 # QL_TAGGED_LAYOUT would have done, so the library filename matches

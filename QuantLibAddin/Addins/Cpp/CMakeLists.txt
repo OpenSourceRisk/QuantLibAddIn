@@ -63,7 +63,7 @@ add_library(AddinCpp STATIC
 target_include_directories(AddinCpp PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../../ObjectHandler>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../../QuantLib>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../../ore/QuantLib>
 )
 
 target_compile_definitions(AddinCpp PRIVATE

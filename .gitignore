@@ -1,5 +1,4 @@
 # Compilation artifacts
-QuantLib/
 ObjectHandler/Docs/auto.pages/
 ObjectHandler/build/
 ObjectHandler/gensrc/build/
@@ -98,9 +97,6 @@ testCaseCollection.xml
 
 # Outputs
 ObjectHandler/xll/
-QuantLib/test-suite/bin/*.exp
-QuantLib/test-suite/bin/*.lib
-QuantLib/test-suite/bin/*.pdb
 QuantLibAddin/Docs/.quantlibaddin.doxy
 QuantLibAddin/Docs/build/
 QuantLibAddin/Docs/html/
@@ -115,6 +111,5 @@ QuantLibXL/Docs/doxywarnings.txt
 
 
 # Local machine build overrides
-QuantLib/Build.props
 boost.props
 conanfile.txt

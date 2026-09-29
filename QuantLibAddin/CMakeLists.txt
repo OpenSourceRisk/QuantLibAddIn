@@ -386,7 +386,7 @@ add_library(QuantLibObjects STATIC
 target_include_directories(QuantLibObjects PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../ObjectHandler>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../QuantLib>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../ore/QuantLib>
 )
 
 target_compile_definitions(QuantLibObjects PRIVATE

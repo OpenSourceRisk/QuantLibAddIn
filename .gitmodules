@@ -1,0 +1,3 @@
+[submodule "ore"]
+	path = ore
+	url = https://gitlab.dx1.lseg.com/app/app-51172/qs/ore.git
