@@ -178,6 +178,7 @@ add_library(QuantLibObjects STATIC
     qlo/valueobjects/vo_volatility.cpp
     qlo/piecewiseyieldcurve.cpp
     qlo/ratehelpers.cpp
+    qlo/qxratehelpers.cpp
     qlo/yieldtermstructures.cpp
     qlo/extrapolator.cpp
     qlo/getcovariance.cpp
