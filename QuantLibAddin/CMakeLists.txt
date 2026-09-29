@@ -411,6 +411,15 @@ target_link_libraries(QuantLibObjects PUBLIC
     Boost::serialization
 )
 
+# QuantExt (from the nested ORE submodule) is available only in the integrated
+# (root) build, where the shim in cmake/quantext.cmake defines the target.  Link
+# it PUBLIC so consumers of QuantLibObjects (e.g. the XLL) can call into the
+# QuantExt wrappers.  Guarded so the standalone build (which has no QuantExt) is
+# unaffected.
+if(TARGET QuantExt::QuantExt)
+    target_link_libraries(QuantLibObjects PUBLIC QuantExt::QuantExt)
+endif()
+
 # Namespaced alias so consumers (e.g. QuantLibXL) can link the same
 # QuantLibAddin::QuantLibObjects name whether QuantLibAddin is added in-tree or
 # imported via find_package(QuantLibAddin CONFIG) in a standalone build.
