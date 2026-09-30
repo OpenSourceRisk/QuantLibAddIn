@@ -23,6 +23,11 @@
 
 /*! \page history Version History
 
+<strong>Release X.YZ - MMMM YYYY</strong>
+
+- Added QuantExt support via a nested ORE submodule and exported the
+  qlImmFraRateHelper rate helper
+
 <strong>Release 1.42 - September 2026</strong>
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate
