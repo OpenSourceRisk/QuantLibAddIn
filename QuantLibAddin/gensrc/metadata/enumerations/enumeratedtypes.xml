@@ -2098,6 +2098,21 @@
       </EnumeratedTypes>
     </EnumeratedTypeGroup>
 
+    <EnumeratedTypeGroup type='QuantExt::SubPeriodsCoupon1::Type'>
+      <includeFile>qle/cashflows/subperiodscoupon.hpp</includeFile>
+      <constructor>true</constructor>
+      <EnumeratedTypes>
+        <EnumeratedType>
+          <string>Averaging</string>
+          <value>QuantExt::SubPeriodsCoupon1::Averaging</value>
+        </EnumeratedType>
+        <EnumeratedType>
+          <string>Compounding</string>
+          <value>QuantExt::SubPeriodsCoupon1::Compounding</value>
+        </EnumeratedType>
+      </EnumeratedTypes>
+    </EnumeratedTypeGroup>
+
   </EnumeratedTypeGroups>
 
 </root>

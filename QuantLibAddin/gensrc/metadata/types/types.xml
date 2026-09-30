@@ -24,6 +24,7 @@
     <DataType defaultSuperType='enumeration'>QuantLib::VolatilityType</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::Position::Type</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::RateAveraging::Type</DataType>
+    <DataType defaultSuperType='enumeration'>QuantExt::SubPeriodsCoupon1::Type</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::Replication::Type</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::SalvagingAlgorithm::Type</DataType>
     <DataType defaultSuperType='enumeration'>QuantLib::Settlement::Type</DataType>

@@ -27,11 +27,21 @@
 #include <qlo/ratehelpers.hpp>
 
 #include <ql/time/date.hpp>
+#include <ql/time/period.hpp>
+#include <ql/time/calendar.hpp>
+#include <ql/time/daycounter.hpp>
+#include <ql/time/businessdayconvention.hpp>
+#include <ql/time/frequency.hpp>
+#include <ql/time/dategenerationrule.hpp>
 #include <ql/termstructures/bootstraphelper.hpp>
+
+#include <qle/cashflows/subperiodscoupon.hpp>
 
 namespace QuantLib {
 		class Quote;
 		class IborIndex;
+		class OvernightIndex;
+		class YieldTermStructure;
 		template <class T>
 		class Handle;
 }
@@ -51,6 +61,128 @@ namespace QuantLibAddin {
 						QuantLib::Size imm1,
 						QuantLib::Size imm2,
 						const boost::shared_ptr<QuantLib::IborIndex>& iborIndex,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::OISRateHelper.
+		class QxOISRateHelper : public RateHelper {
+			public:
+				QxOISRateHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Period& swapTenor,
+						const QuantLib::Handle<QuantLib::Quote>& fixedRate,
+						const boost::shared_ptr<QuantLib::OvernightIndex>& overnightIndex,
+						const QuantLib::DayCounter& fixedDayCounter,
+						const QuantLib::Calendar& fixedCalendar,
+						QuantLib::Natural paymentLag,
+						QuantLib::Frequency paymentFrequency,
+						QuantLib::BusinessDayConvention fixedConvention,
+						QuantLib::BusinessDayConvention paymentAdjustment,
+						QuantLib::DateGeneration::Rule rule,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
+						bool telescopicValueDates,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::DatedOISRateHelper.
+		class QxDatedOISRateHelper : public RateHelper {
+			public:
+				QxDatedOISRateHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Date& startDate,
+						const QuantLib::Date& endDate,
+						const QuantLib::Handle<QuantLib::Quote>& fixedRate,
+						const boost::shared_ptr<QuantLib::OvernightIndex>& overnightIndex,
+						const QuantLib::DayCounter& fixedDayCounter,
+						const QuantLib::Calendar& fixedCalendar,
+						QuantLib::Natural paymentLag,
+						QuantLib::Frequency paymentFrequency,
+						QuantLib::BusinessDayConvention fixedConvention,
+						QuantLib::BusinessDayConvention paymentAdjustment,
+						QuantLib::DateGeneration::Rule rule,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
+						bool telescopicValueDates,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::AverageOISRateHelper.
+		class AverageOISRateHelper : public RateHelper {
+			public:
+				AverageOISRateHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& fixedRate,
+						const QuantLib::Period& spotLagTenor,
+						const QuantLib::Period& swapTenor,
+						const QuantLib::Period& fixedTenor,
+						const QuantLib::DayCounter& fixedDayCounter,
+						const QuantLib::Calendar& fixedCalendar,
+						QuantLib::BusinessDayConvention fixedConvention,
+						QuantLib::BusinessDayConvention fixedPaymentAdjustment,
+						const boost::shared_ptr<QuantLib::OvernightIndex>& overnightIndex,
+						const QuantLib::Period& onTenor,
+						const QuantLib::Handle<QuantLib::Quote>& onSpread,
+						QuantLib::Natural rateCutoff,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountCurve,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::BasisTwoSwapHelper.
+		class BasisTwoSwapHelper : public RateHelper {
+			public:
+				BasisTwoSwapHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& spread,
+						const QuantLib::Period& swapTenor,
+						const QuantLib::Calendar& calendar,
+						QuantLib::Frequency longFixedFrequency,
+						QuantLib::BusinessDayConvention longFixedConvention,
+						const QuantLib::DayCounter& longFixedDayCount,
+						const boost::shared_ptr<QuantLib::IborIndex>& longIndex,
+						QuantLib::Frequency shortFixedFrequency,
+						QuantLib::BusinessDayConvention shortFixedConvention,
+						const QuantLib::DayCounter& shortFixedDayCount,
+						const boost::shared_ptr<QuantLib::IborIndex>& shortIndex,
+						bool longMinusShort,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::SubPeriodsSwapHelper.
+		class SubPeriodsSwapHelper : public RateHelper {
+			public:
+				SubPeriodsSwapHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& spread,
+						const QuantLib::Period& swapTenor,
+						const QuantLib::Period& fixedTenor,
+						const QuantLib::Calendar& fixedCalendar,
+						const QuantLib::DayCounter& fixedDayCount,
+						QuantLib::BusinessDayConvention fixedConvention,
+						const QuantLib::Period& floatPayTenor,
+						const boost::shared_ptr<QuantLib::IborIndex>& iborIndex,
+						const QuantLib::DayCounter& floatDayCount,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
+						QuantExt::SubPeriodsCoupon1::Type type,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::TenorBasisSwapHelper.
+		class TenorBasisSwapHelper : public RateHelper {
+			public:
+				TenorBasisSwapHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& spread,
+						const QuantLib::Period& swapTenor,
+						const boost::shared_ptr<QuantLib::IborIndex>& payIndex,
+						const boost::shared_ptr<QuantLib::IborIndex>& receiveIndex,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
+						bool spreadOnRec,
+						bool includeSpread,
+						const QuantLib::Period& payFrequency,
+						const QuantLib::Period& recFrequency,
+						bool telescopicValueDates,
+						QuantExt::SubPeriodsCoupon1::Type type,
 						bool permanent);
 		};
 

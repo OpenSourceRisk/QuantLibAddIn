@@ -31,6 +31,8 @@
 #include <ql/default.hpp> // RL ADD 2010-07-15
 #include <ql/experimental/credit/defaulttype.hpp>
 
+#include <qle/cashflows/subperiodscoupon.hpp>
+
 #include <oh/enumerations/typefactory.hpp>
 
 namespace QuantLibAddin {
