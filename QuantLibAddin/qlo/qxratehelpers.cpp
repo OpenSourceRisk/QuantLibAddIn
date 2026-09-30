@@ -24,6 +24,7 @@
 #include <qlo/qxratehelpers.hpp>
 
 #include <ql/indexes/iborindex.hpp>
+#include <ql/currency.hpp>
 
 #include <qle/termstructures/immfraratehelper.hpp>
 #include <qle/termstructures/oisratehelper.hpp>
@@ -31,6 +32,10 @@
 #include <qle/termstructures/basistwoswaphelper.hpp>
 #include <qle/termstructures/subperiodsswaphelper.hpp>
 #include <qle/termstructures/tenorbasisswaphelper.hpp>
+#include <qle/termstructures/crossccybasisswaphelper.hpp>
+#include <qle/termstructures/crossccybasismtmresetswaphelper.hpp>
+#include <qle/termstructures/crossccyfixfloatswaphelper.hpp>
+#include <qle/termstructures/crossccyfixfloatmtmresetswaphelper.hpp>
 
 #include <oh/repository.hpp>
 
@@ -216,6 +221,114 @@ namespace QuantLibAddin {
 								spreadOnRec, includeSpread, payFrequency, recFrequency,
 								telescopicValueDates, type));
 				quoteName_ = quoteId(properties->getSystemProperty("Spread"));
+		}
+
+		CrossCcyBasisSwapHelper::CrossCcyBasisSwapHelper(
+						const shared_ptr<ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& spreadQuote,
+						const QuantLib::Handle<QuantLib::Quote>& spotFX,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Calendar& settlementCalendar,
+						const QuantLib::Period& swapTenor,
+						QuantLib::BusinessDayConvention rollConvention,
+						const shared_ptr<QuantLib::IborIndex>& flatIndex,
+						const shared_ptr<QuantLib::IborIndex>& spreadIndex,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& flatDiscountCurve,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& spreadDiscountCurve,
+						bool eom,
+						bool flatIsDomestic,
+						bool permanent)
+		: RateHelper(properties, permanent) {
+				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
+						QuantExt::CrossCcyBasisSwapHelper(spreadQuote, spotFX,
+								settlementDays, settlementCalendar, swapTenor, rollConvention,
+								flatIndex, spreadIndex, flatDiscountCurve, spreadDiscountCurve,
+								flatIndex != nullptr, spreadIndex != nullptr,
+								!flatDiscountCurve.empty(), !spreadDiscountCurve.empty(),
+								eom, flatIsDomestic));
+				quoteName_ = quoteId(properties->getSystemProperty("SpreadQuote"));
+		}
+
+		CrossCcyBasisMtMResetSwapHelper::CrossCcyBasisMtMResetSwapHelper(
+						const shared_ptr<ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& spreadQuote,
+						const QuantLib::Handle<QuantLib::Quote>& spotFX,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Calendar& settlementCalendar,
+						const QuantLib::Period& swapTenor,
+						QuantLib::BusinessDayConvention rollConvention,
+						const shared_ptr<QuantLib::IborIndex>& foreignCcyIndex,
+						const shared_ptr<QuantLib::IborIndex>& domesticCcyIndex,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& foreignCcyDiscountCurve,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& domesticCcyDiscountCurve,
+						bool eom,
+						bool spreadOnForeignCcy,
+						bool permanent)
+		: RateHelper(properties, permanent) {
+				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
+						QuantExt::CrossCcyBasisMtMResetSwapHelper(spreadQuote, spotFX,
+								settlementDays, settlementCalendar, swapTenor, rollConvention,
+								foreignCcyIndex, domesticCcyIndex, foreignCcyDiscountCurve,
+								domesticCcyDiscountCurve, foreignCcyIndex != nullptr,
+								domesticCcyIndex != nullptr, !foreignCcyDiscountCurve.empty(),
+								!domesticCcyDiscountCurve.empty(),
+								QuantLib::Handle<QuantLib::YieldTermStructure>(),
+								QuantLib::Handle<QuantLib::YieldTermStructure>(),
+								eom, spreadOnForeignCcy));
+				quoteName_ = quoteId(properties->getSystemProperty("SpreadQuote"));
+		}
+
+		CrossCcyFixFloatSwapHelper::CrossCcyFixFloatSwapHelper(
+						const shared_ptr<ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& rate,
+						const QuantLib::Handle<QuantLib::Quote>& spotFx,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Calendar& paymentCalendar,
+						QuantLib::BusinessDayConvention paymentConvention,
+						const QuantLib::Period& tenor,
+						const QuantLib::Currency& fixedCurrency,
+						QuantLib::Frequency fixedFrequency,
+						QuantLib::BusinessDayConvention fixedConvention,
+						const QuantLib::DayCounter& fixedDayCount,
+						const shared_ptr<QuantLib::IborIndex>& index,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& floatDiscount,
+						const QuantLib::Handle<QuantLib::Quote>& spread,
+						bool endOfMonth,
+						bool permanent)
+		: RateHelper(properties, permanent) {
+				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
+						QuantExt::CrossCcyFixFloatSwapHelper(rate, spotFx, settlementDays,
+								paymentCalendar, paymentConvention, tenor, fixedCurrency,
+								fixedFrequency, fixedConvention, fixedDayCount, index,
+								floatDiscount, spread, endOfMonth));
+				quoteName_ = quoteId(properties->getSystemProperty("Rate"));
+		}
+
+		CrossCcyFixFloatMtMResetSwapHelper::CrossCcyFixFloatMtMResetSwapHelper(
+						const shared_ptr<ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& rate,
+						const QuantLib::Handle<QuantLib::Quote>& spotFx,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Calendar& paymentCalendar,
+						QuantLib::BusinessDayConvention paymentConvention,
+						const QuantLib::Period& tenor,
+						const QuantLib::Currency& fixedCurrency,
+						QuantLib::Frequency fixedFrequency,
+						QuantLib::BusinessDayConvention fixedConvention,
+						const QuantLib::DayCounter& fixedDayCount,
+						const shared_ptr<QuantLib::IborIndex>& index,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& floatDiscount,
+						const QuantLib::Handle<QuantLib::Quote>& spread,
+						bool endOfMonth,
+						bool resetsOnFloatLeg,
+						bool permanent)
+		: RateHelper(properties, permanent) {
+				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
+						QuantExt::CrossCcyFixFloatMtMResetSwapHelper(rate, spotFx,
+								settlementDays, paymentCalendar, paymentConvention, tenor,
+								fixedCurrency, fixedFrequency, fixedConvention, fixedDayCount,
+								index, floatDiscount, spread, endOfMonth, resetsOnFloatLeg));
+				quoteName_ = quoteId(properties->getSystemProperty("Rate"));
 		}
 
 }

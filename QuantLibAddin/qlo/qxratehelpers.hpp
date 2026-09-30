@@ -42,6 +42,7 @@ namespace QuantLib {
 		class IborIndex;
 		class OvernightIndex;
 		class YieldTermStructure;
+		class Currency;
 		template <class T>
 		class Handle;
 }
@@ -183,6 +184,91 @@ namespace QuantLibAddin {
 						const QuantLib::Period& recFrequency,
 						bool telescopicValueDates,
 						QuantExt::SubPeriodsCoupon1::Type type,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::CrossCcyBasisSwapHelper.
+		class CrossCcyBasisSwapHelper : public RateHelper {
+			public:
+				CrossCcyBasisSwapHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& spreadQuote,
+						const QuantLib::Handle<QuantLib::Quote>& spotFX,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Calendar& settlementCalendar,
+						const QuantLib::Period& swapTenor,
+						QuantLib::BusinessDayConvention rollConvention,
+						const boost::shared_ptr<QuantLib::IborIndex>& flatIndex,
+						const boost::shared_ptr<QuantLib::IborIndex>& spreadIndex,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& flatDiscountCurve,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& spreadDiscountCurve,
+						bool eom,
+						bool flatIsDomestic,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::CrossCcyBasisMtMResetSwapHelper.
+		class CrossCcyBasisMtMResetSwapHelper : public RateHelper {
+			public:
+				CrossCcyBasisMtMResetSwapHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& spreadQuote,
+						const QuantLib::Handle<QuantLib::Quote>& spotFX,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Calendar& settlementCalendar,
+						const QuantLib::Period& swapTenor,
+						QuantLib::BusinessDayConvention rollConvention,
+						const boost::shared_ptr<QuantLib::IborIndex>& foreignCcyIndex,
+						const boost::shared_ptr<QuantLib::IborIndex>& domesticCcyIndex,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& foreignCcyDiscountCurve,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& domesticCcyDiscountCurve,
+						bool eom,
+						bool spreadOnForeignCcy,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::CrossCcyFixFloatSwapHelper.
+		class CrossCcyFixFloatSwapHelper : public RateHelper {
+			public:
+				CrossCcyFixFloatSwapHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& rate,
+						const QuantLib::Handle<QuantLib::Quote>& spotFx,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Calendar& paymentCalendar,
+						QuantLib::BusinessDayConvention paymentConvention,
+						const QuantLib::Period& tenor,
+						const QuantLib::Currency& fixedCurrency,
+						QuantLib::Frequency fixedFrequency,
+						QuantLib::BusinessDayConvention fixedConvention,
+						const QuantLib::DayCounter& fixedDayCount,
+						const boost::shared_ptr<QuantLib::IborIndex>& index,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& floatDiscount,
+						const QuantLib::Handle<QuantLib::Quote>& spread,
+						bool endOfMonth,
+						bool permanent);
+		};
+
+		//! Wrapper for QuantExt::CrossCcyFixFloatMtMResetSwapHelper.
+		class CrossCcyFixFloatMtMResetSwapHelper : public RateHelper {
+			public:
+				CrossCcyFixFloatMtMResetSwapHelper(
+						const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+						const QuantLib::Handle<QuantLib::Quote>& rate,
+						const QuantLib::Handle<QuantLib::Quote>& spotFx,
+						QuantLib::Natural settlementDays,
+						const QuantLib::Calendar& paymentCalendar,
+						QuantLib::BusinessDayConvention paymentConvention,
+						const QuantLib::Period& tenor,
+						const QuantLib::Currency& fixedCurrency,
+						QuantLib::Frequency fixedFrequency,
+						QuantLib::BusinessDayConvention fixedConvention,
+						const QuantLib::DayCounter& fixedDayCount,
+						const boost::shared_ptr<QuantLib::IborIndex>& index,
+						const QuantLib::Handle<QuantLib::YieldTermStructure>& floatDiscount,
+						const QuantLib::Handle<QuantLib::Quote>& spread,
+						bool endOfMonth,
+						bool resetsOnFloatLeg,
 						bool permanent);
 		};
 

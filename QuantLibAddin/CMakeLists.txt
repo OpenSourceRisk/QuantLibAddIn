@@ -419,6 +419,13 @@ target_link_libraries(QuantLibObjects PUBLIC
 # unaffected.
 if(TARGET QuantExt::QuantExt)
     target_link_libraries(QuantLibObjects PUBLIC QuantExt::QuantExt)
+
+    # A handful of QuantExt public headers consumed by the qxratehelpers
+    # wrappers (e.g. qle/time/fxdategeneration.hpp) use C++20 features such as
+    # defaulted three-way comparison operators.  ORE mandates C++20 for its own
+    # sources; match that here so QuantLibObjects can include those headers.
+    set_target_properties(QuantLibObjects PROPERTIES
+        CXX_STANDARD 20 CXX_STANDARD_REQUIRED ON)
 endif()
 
 # Namespaced alias so consumers (e.g. QuantLibXL) can link the same

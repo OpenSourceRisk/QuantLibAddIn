@@ -715,6 +715,339 @@
       </ParameterList>
     </Constructor>
 
+    <Constructor name='qlCrossCcyBasisSwapHelper'>
+      <libraryFunction>CrossCcyBasisSwapHelper</libraryFunction>
+      <SupportedPlatforms>
+        <SupportedPlatform name='Excel'/>
+        <SupportedPlatform name='Calc'/>
+        <SupportedPlatform name='Cpp'/>
+      </SupportedPlatforms>
+      <ParameterList>
+        <Parameters>
+          <Parameter name='SpreadQuote' exampleValue='0.001'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>basis spread quote.</description>
+          </Parameter>
+          <Parameter name='SpotFX' exampleValue='1.25'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>spot FX quote.</description>
+          </Parameter>
+          <Parameter name='SettlementDays' exampleValue='2'>
+            <type>QuantLib::Natural</type>
+            <tensorRank>scalar</tensorRank>
+            <description>settlement days.</description>
+          </Parameter>
+          <Parameter name='SettlementCalendar' exampleValue='TARGET'>
+            <type>QuantLib::Calendar</type>
+            <tensorRank>scalar</tensorRank>
+            <description>settlement holiday calendar.</description>
+          </Parameter>
+          <Parameter name='SwapTenor' exampleValue='10Y'>
+            <type>QuantLib::Period</type>
+            <tensorRank>scalar</tensorRank>
+            <description>swap length.</description>
+          </Parameter>
+          <Parameter name='RollConvention' exampleValue='Following'>
+            <type>QuantLib::BusinessDayConvention</type>
+            <tensorRank>scalar</tensorRank>
+            <description>roll business day convention.</description>
+          </Parameter>
+          <Parameter name='FlatIndex' exampleValue='Euribor3M'>
+            <type>QuantLib::IborIndex</type>
+            <tensorRank>scalar</tensorRank>
+            <description>flat leg IborIndex object ID.</description>
+          </Parameter>
+          <Parameter name='SpreadIndex' exampleValue='UsdLibor3M'>
+            <type>QuantLib::IborIndex</type>
+            <tensorRank>scalar</tensorRank>
+            <description>spread leg IborIndex object ID.</description>
+          </Parameter>
+          <Parameter name='FlatDiscountCurve' exampleValue='EURYC' default='""'>
+            <type>QuantLib::YieldTermStructure</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>flat leg discounting YieldTermStructure object ID.</description>
+          </Parameter>
+          <Parameter name='SpreadDiscountCurve' exampleValue='USDYC' default='""'>
+            <type>QuantLib::YieldTermStructure</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>spread leg discounting YieldTermStructure object ID.</description>
+          </Parameter>
+          <Parameter name='EndOfMonth' exampleValue='false' default='false'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>end of month rule?</description>
+          </Parameter>
+          <Parameter name='FlatIsDomestic' exampleValue='true' default='true'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>is the flat leg the domestic leg?</description>
+          </Parameter>
+        </Parameters>
+      </ParameterList>
+    </Constructor>
+
+    <Constructor name='qlCrossCcyBasisMtMResetSwapHelper'>
+      <libraryFunction>CrossCcyBasisMtMResetSwapHelper</libraryFunction>
+      <SupportedPlatforms>
+        <SupportedPlatform name='Excel'/>
+        <SupportedPlatform name='Calc'/>
+        <SupportedPlatform name='Cpp'/>
+      </SupportedPlatforms>
+      <ParameterList>
+        <Parameters>
+          <Parameter name='SpreadQuote' exampleValue='0.001'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>basis spread quote.</description>
+          </Parameter>
+          <Parameter name='SpotFX' exampleValue='1.25'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>spot FX quote.</description>
+          </Parameter>
+          <Parameter name='SettlementDays' exampleValue='2'>
+            <type>QuantLib::Natural</type>
+            <tensorRank>scalar</tensorRank>
+            <description>settlement days.</description>
+          </Parameter>
+          <Parameter name='SettlementCalendar' exampleValue='TARGET'>
+            <type>QuantLib::Calendar</type>
+            <tensorRank>scalar</tensorRank>
+            <description>settlement holiday calendar.</description>
+          </Parameter>
+          <Parameter name='SwapTenor' exampleValue='10Y'>
+            <type>QuantLib::Period</type>
+            <tensorRank>scalar</tensorRank>
+            <description>swap length.</description>
+          </Parameter>
+          <Parameter name='RollConvention' exampleValue='Following'>
+            <type>QuantLib::BusinessDayConvention</type>
+            <tensorRank>scalar</tensorRank>
+            <description>roll business day convention.</description>
+          </Parameter>
+          <Parameter name='ForeignCcyIndex' exampleValue='UsdLibor3M'>
+            <type>QuantLib::IborIndex</type>
+            <tensorRank>scalar</tensorRank>
+            <description>foreign currency IborIndex object ID.</description>
+          </Parameter>
+          <Parameter name='DomesticCcyIndex' exampleValue='Euribor3M'>
+            <type>QuantLib::IborIndex</type>
+            <tensorRank>scalar</tensorRank>
+            <description>domestic currency IborIndex object ID.</description>
+          </Parameter>
+          <Parameter name='ForeignCcyDiscountCurve' exampleValue='USDYC' default='""'>
+            <type>QuantLib::YieldTermStructure</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>foreign currency discounting YieldTermStructure object ID.</description>
+          </Parameter>
+          <Parameter name='DomesticCcyDiscountCurve' exampleValue='EURYC' default='""'>
+            <type>QuantLib::YieldTermStructure</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>domestic currency discounting YieldTermStructure object ID.</description>
+          </Parameter>
+          <Parameter name='EndOfMonth' exampleValue='false' default='false'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>end of month rule?</description>
+          </Parameter>
+          <Parameter name='SpreadOnForeignCcy' exampleValue='true' default='true'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>is the spread on the foreign currency leg?</description>
+          </Parameter>
+        </Parameters>
+      </ParameterList>
+    </Constructor>
+
+    <Constructor name='qlCrossCcyFixFloatSwapHelper'>
+      <libraryFunction>CrossCcyFixFloatSwapHelper</libraryFunction>
+      <SupportedPlatforms>
+        <SupportedPlatform name='Excel'/>
+        <SupportedPlatform name='Calc'/>
+        <SupportedPlatform name='Cpp'/>
+      </SupportedPlatforms>
+      <ParameterList>
+        <Parameters>
+          <Parameter name='Rate' exampleValue='0.02'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed rate quote.</description>
+          </Parameter>
+          <Parameter name='SpotFx' exampleValue='1.25'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>spot FX quote.</description>
+          </Parameter>
+          <Parameter name='SettlementDays' exampleValue='2'>
+            <type>QuantLib::Natural</type>
+            <tensorRank>scalar</tensorRank>
+            <description>settlement days.</description>
+          </Parameter>
+          <Parameter name='PaymentCalendar' exampleValue='TARGET'>
+            <type>QuantLib::Calendar</type>
+            <tensorRank>scalar</tensorRank>
+            <description>payment holiday calendar.</description>
+          </Parameter>
+          <Parameter name='PaymentConvention' exampleValue='Following'>
+            <type>QuantLib::BusinessDayConvention</type>
+            <tensorRank>scalar</tensorRank>
+            <description>payment business day convention.</description>
+          </Parameter>
+          <Parameter name='Tenor' exampleValue='10Y'>
+            <type>QuantLib::Period</type>
+            <tensorRank>scalar</tensorRank>
+            <description>swap length.</description>
+          </Parameter>
+          <Parameter name='FixedCurrency' exampleValue='USD'>
+            <type>QuantLib::Currency</type>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed leg currency.</description>
+          </Parameter>
+          <Parameter name='FixedFrequency' exampleValue='Annual'>
+            <type>QuantLib::Frequency</type>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed leg frequency.</description>
+          </Parameter>
+          <Parameter name='FixedConvention' exampleValue='Following'>
+            <type>QuantLib::BusinessDayConvention</type>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed leg business day convention.</description>
+          </Parameter>
+          <Parameter name='FixedDayCount' exampleValue='Actual/360'>
+            <type>QuantLib::DayCounter</type>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed leg DayCounter ID.</description>
+          </Parameter>
+          <Parameter name='Index' exampleValue='Euribor3M'>
+            <type>QuantLib::IborIndex</type>
+            <tensorRank>scalar</tensorRank>
+            <description>floating leg IborIndex object ID.</description>
+          </Parameter>
+          <Parameter name='FloatDiscount' exampleValue='EURYC' default='""'>
+            <type>QuantLib::YieldTermStructure</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>floating leg discounting YieldTermStructure object ID.</description>
+          </Parameter>
+          <Parameter name='Spread' exampleValue='0.0'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>floating leg spread quote.</description>
+          </Parameter>
+          <Parameter name='EndOfMonth' exampleValue='false' default='false'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>end of month rule?</description>
+          </Parameter>
+        </Parameters>
+      </ParameterList>
+    </Constructor>
+
+    <Constructor name='qlCrossCcyFixFloatMtMResetSwapHelper'>
+      <libraryFunction>CrossCcyFixFloatMtMResetSwapHelper</libraryFunction>
+      <SupportedPlatforms>
+        <SupportedPlatform name='Excel'/>
+        <SupportedPlatform name='Calc'/>
+        <SupportedPlatform name='Cpp'/>
+      </SupportedPlatforms>
+      <ParameterList>
+        <Parameters>
+          <Parameter name='Rate' exampleValue='0.02'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed rate quote.</description>
+          </Parameter>
+          <Parameter name='SpotFx' exampleValue='1.25'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>spot FX quote.</description>
+          </Parameter>
+          <Parameter name='SettlementDays' exampleValue='2'>
+            <type>QuantLib::Natural</type>
+            <tensorRank>scalar</tensorRank>
+            <description>settlement days.</description>
+          </Parameter>
+          <Parameter name='PaymentCalendar' exampleValue='TARGET'>
+            <type>QuantLib::Calendar</type>
+            <tensorRank>scalar</tensorRank>
+            <description>payment holiday calendar.</description>
+          </Parameter>
+          <Parameter name='PaymentConvention' exampleValue='Following'>
+            <type>QuantLib::BusinessDayConvention</type>
+            <tensorRank>scalar</tensorRank>
+            <description>payment business day convention.</description>
+          </Parameter>
+          <Parameter name='Tenor' exampleValue='10Y'>
+            <type>QuantLib::Period</type>
+            <tensorRank>scalar</tensorRank>
+            <description>swap length.</description>
+          </Parameter>
+          <Parameter name='FixedCurrency' exampleValue='USD'>
+            <type>QuantLib::Currency</type>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed leg currency.</description>
+          </Parameter>
+          <Parameter name='FixedFrequency' exampleValue='Annual'>
+            <type>QuantLib::Frequency</type>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed leg frequency.</description>
+          </Parameter>
+          <Parameter name='FixedConvention' exampleValue='Following'>
+            <type>QuantLib::BusinessDayConvention</type>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed leg business day convention.</description>
+          </Parameter>
+          <Parameter name='FixedDayCount' exampleValue='Actual/360'>
+            <type>QuantLib::DayCounter</type>
+            <tensorRank>scalar</tensorRank>
+            <description>fixed leg DayCounter ID.</description>
+          </Parameter>
+          <Parameter name='Index' exampleValue='Euribor3M'>
+            <type>QuantLib::IborIndex</type>
+            <tensorRank>scalar</tensorRank>
+            <description>floating leg IborIndex object ID.</description>
+          </Parameter>
+          <Parameter name='FloatDiscount' exampleValue='EURYC' default='""'>
+            <type>QuantLib::YieldTermStructure</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>floating leg discounting YieldTermStructure object ID.</description>
+          </Parameter>
+          <Parameter name='Spread' exampleValue='0.0'>
+            <type>QuantLib::Quote</type>
+            <superType>libToHandle</superType>
+            <tensorRank>scalar</tensorRank>
+            <description>floating leg spread quote.</description>
+          </Parameter>
+          <Parameter name='EndOfMonth' exampleValue='false' default='false'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>end of month rule?</description>
+          </Parameter>
+          <Parameter name='ResetsOnFloatLeg' exampleValue='true' default='true'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>does the notional reset on the floating leg?</description>
+          </Parameter>
+        </Parameters>
+      </ParameterList>
+    </Constructor>
+
     <Constructor name='qlDepositRateHelper2'>
       <libraryFunction>DepositRateHelper</libraryFunction>
       <SupportedPlatforms>
