@@ -28,6 +28,13 @@
 - Added QuantExt support via a nested ORE submodule and exported the
   qlImmFraRateHelper rate helper
 
+- Exported ten further QuantExt rate helpers: the overnight-indexed-swap
+  helpers qlQxOISRateHelper, qlQxDatedOISRateHelper and qlAverageOISRateHelper;
+  the basis helpers qlBasisTwoSwapHelper, qlSubPeriodsSwapHelper and
+  qlTenorBasisSwapHelper; and the cross-currency helpers
+  qlCrossCcyBasisSwapHelper, qlCrossCcyBasisMtMResetSwapHelper,
+  qlCrossCcyFixFloatSwapHelper and qlCrossCcyFixFloatMtMResetSwapHelper
+
 <strong>Release 1.42 - September 2026</strong>
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate
