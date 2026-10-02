@@ -35,6 +35,9 @@
   qlCrossCcyBasisSwapHelper, qlCrossCcyBasisMtMResetSwapHelper,
   qlCrossCcyFixFloatSwapHelper and qlCrossCcyFixFloatMtMResetSwapHelper
 
+- Added the StandaloneExamples/Analytics/QuantExtRateHelpers.xlsx example
+  workbook exercising the ten newly exported QuantExt rate helpers
+
 <strong>Release 1.42 - September 2026</strong>
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate
