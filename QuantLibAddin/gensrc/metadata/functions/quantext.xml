@@ -80,6 +80,36 @@
 			</ParameterList>
 		</Constructor>
 
+		<Member name='qlFxIndexSourceCurrency' type='QuantExt::FxIndex'>
+			<description>Returns the source currency (e.g. EUR) for the given FxIndex object.</description>
+			<libraryFunction>sourceCurrency</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+			</SupportedPlatforms>
+			<ParameterList>
+				<Parameters/>
+			</ParameterList>
+			<ReturnValue>
+				<type>QuantLib::Currency</type>
+				<tensorRank>scalar</tensorRank>
+			</ReturnValue>
+		</Member>
+
+		<Member name='qlFxIndexTargetCurrency' type='QuantExt::FxIndex'>
+			<description>Returns the target currency (e.g. USD) for the given FxIndex object.</description>
+			<libraryFunction>targetCurrency</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+			</SupportedPlatforms>
+			<ParameterList>
+				<Parameters/>
+			</ParameterList>
+			<ReturnValue>
+				<type>QuantLib::Currency</type>
+				<tensorRank>scalar</tensorRank>
+			</ReturnValue>
+		</Member>
+
 		<Constructor name='qlFXLinkedCashFlowLeg'>
 			<libraryFunction>FXLinkedCashFlowLeg</libraryFunction>
 			<SupportedPlatforms>
@@ -107,6 +137,39 @@
 						<type>QuantExt::FxIndex</type>
 						<tensorRank>scalar</tensorRank>
 						<description>FxIndex object ID converting the foreign amounts into the leg currency.</description>
+					</Parameter>
+				</Parameters>
+			</ParameterList>
+		</Constructor>
+
+		<Constructor name='qlFloatingRateFXLinkedNotionalLeg'>
+			<libraryFunction>FloatingRateFXLinkedNotionalLeg</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+				<SupportedPlatform name='Cpp'/>
+			</SupportedPlatforms>
+			<ParameterList>
+				<Parameters>
+					<Parameter name='UnderlyingLeg'>
+						<type>QuantLib::Leg</type>
+						<superType>underlyingClass</superType>
+						<tensorRank>scalar</tensorRank>
+						<description>floating rate Leg object ID (e.g. from qlIborLeg); every cashflow must be a floating rate coupon. Its nominals are ignored.</description>
+					</Parameter>
+					<Parameter name='FxFixingDates'>
+						<type>QuantLib::Date</type>
+						<tensorRank>vector</tensorRank>
+						<description>FX fixing dates, one per coupon of the underlying leg.</description>
+					</Parameter>
+					<Parameter name='ForeignAmount' exampleValue='100000000'>
+						<type>double</type>
+						<tensorRank>scalar</tensorRank>
+						<description>notional in the FX index source (foreign) currency; each coupon nominal is ForeignAmount x FxIndex fixing.</description>
+					</Parameter>
+					<Parameter name='FxIndex'>
+						<type>QuantExt::FxIndex</type>
+						<tensorRank>scalar</tensorRank>
+						<description>FxIndex object ID converting the foreign notional into the leg currency.</description>
 					</Parameter>
 				</Parameters>
 			</ParameterList>

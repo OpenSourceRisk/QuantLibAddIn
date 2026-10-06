@@ -50,6 +50,10 @@
 - Added qlFXLinkedCashFlowLeg, building a Leg of QuantExt::FXLinkedCashFlow
   (foreign amounts converted at FxIndex fixings)
 
+- Added qlFloatingRateFXLinkedNotionalLeg, wrapping each coupon of a floating
+  rate Leg as a QuantExt::FloatingRateFXLinkedNotionalCoupon, and the
+  qlFxIndexSourceCurrency and qlFxIndexTargetCurrency inspectors
+
 <strong>Release 1.42
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate

@@ -50,6 +50,10 @@
 - Added qlFXLinkedCashFlowLeg, building a Leg of QuantExt::FXLinkedCashFlow
   (foreign amounts converted at FxIndex fixings)
 
+- Added qlFloatingRateFXLinkedNotionalLeg, wrapping each coupon of a floating
+  rate Leg as a QuantExt::FloatingRateFXLinkedNotionalCoupon, and the
+  qlFxIndexSourceCurrency and qlFxIndexTargetCurrency inspectors
+
 - gensrc: datatypes qualified with a non-QuantLib library namespace (e.g.
   QuantExt::FxIndex) now generate references in that namespace
 

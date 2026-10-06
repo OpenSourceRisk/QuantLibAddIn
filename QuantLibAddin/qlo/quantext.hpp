@@ -48,6 +48,17 @@ namespace QuantLibAddin {
             bool permanent);
     };
 
+    class FloatingRateFXLinkedNotionalLeg : public Leg {
+      public:
+        FloatingRateFXLinkedNotionalLeg(
+            const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+            const QuantLib::Leg& underlying,
+            const std::vector<QuantLib::Date>& fxFixingDates,
+            QuantLib::Real foreignAmount,
+            const boost::shared_ptr<QuantExt::FxIndex>& fxIndex,
+            bool permanent);
+    };
+
 }
 
 #endif

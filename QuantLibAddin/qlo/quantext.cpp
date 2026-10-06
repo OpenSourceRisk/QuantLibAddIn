@@ -8,6 +8,7 @@
 
 #include <qle/indexes/fxindex.hpp>
 #include <qle/cashflows/fxlinkedcashflow.hpp>
+#include <qle/cashflows/floatingratefxlinkednotionalcoupon.hpp>
 
 namespace QuantLibAddin {
 
@@ -59,6 +60,32 @@ namespace QuantLibAddin {
             libraryObject_->push_back(boost::shared_ptr<QuantLib::CashFlow>(
                 new QuantExt::FXLinkedCashFlow(
                     cashFlowDates[i], fixingDates[i], foreignAmounts[i], fxIndex)));
+    }
+
+    FloatingRateFXLinkedNotionalLeg::FloatingRateFXLinkedNotionalLeg(
+            const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+            const QuantLib::Leg& underlying,
+            const std::vector<QuantLib::Date>& fxFixingDates,
+            QuantLib::Real foreignAmount,
+            const boost::shared_ptr<QuantExt::FxIndex>& fxIndex,
+            bool permanent)
+    : Leg(properties, permanent)
+    {
+        QL_REQUIRE(underlying.size() == fxFixingDates.size(),
+                   "Underlying leg size (" << underlying.size() <<
+                   ") and FxFixingDates size (" << fxFixingDates.size() <<
+                   ") must be equal");
+
+        libraryObject_ = boost::shared_ptr<QuantLib::Leg>(new QuantLib::Leg());
+        for (QuantLib::Size i = 0; i < underlying.size(); ++i) {
+            boost::shared_ptr<QuantLib::FloatingRateCoupon> coupon =
+                boost::dynamic_pointer_cast<QuantLib::FloatingRateCoupon>(underlying[i]);
+            QL_REQUIRE(coupon, "underlying leg cashflow #" << i <<
+                       " is not a floating rate coupon");
+            libraryObject_->push_back(boost::shared_ptr<QuantLib::CashFlow>(
+                new QuantExt::FloatingRateFXLinkedNotionalCoupon(
+                    fxFixingDates[i], foreignAmount, fxIndex, coupon)));
+        }
     }
 
 }
