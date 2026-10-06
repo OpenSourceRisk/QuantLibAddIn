@@ -59,6 +59,14 @@
   resettable flags), with the qlCurrencySwapLegNPV, qlCurrencySwapInCcyLegNPV
   and qlCurrencySwapLegCurrency inspectors
 
+- Added qlDiscountingCurrencySwapEngine, wrapping
+  QuantExt::DiscountingCurrencySwapEngine (one discount curve and FX quote per
+  currency, and the NPV currency)
+
+- gensrc: Excel vector parameters of libToHandle type other than Quote now
+  generate a vector of Handles (as the C++ and serialization addins already
+  did) instead of a vector of shared pointers
+
 - gensrc: datatypes qualified with a non-QuantLib library namespace (e.g.
   QuantExt::FxIndex) now generate references in that namespace
 

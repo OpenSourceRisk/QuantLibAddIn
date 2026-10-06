@@ -59,6 +59,10 @@
   resettable flags), with the qlCurrencySwapLegNPV, qlCurrencySwapInCcyLegNPV
   and qlCurrencySwapLegCurrency inspectors
 
+- Added qlDiscountingCurrencySwapEngine, wrapping
+  QuantExt::DiscountingCurrencySwapEngine (one discount curve and FX quote per
+  currency, and the NPV currency)
+
 <strong>Release 1.42
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate

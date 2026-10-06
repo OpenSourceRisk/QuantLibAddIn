@@ -10,6 +10,7 @@
 #include <qle/cashflows/fxlinkedcashflow.hpp>
 #include <qle/cashflows/floatingratefxlinkednotionalcoupon.hpp>
 #include <qle/instruments/currencyswap.hpp>
+#include <qle/pricingengines/discountingcurrencyswapengine.hpp>
 
 namespace QuantLibAddin {
 
@@ -116,6 +117,20 @@ namespace QuantLibAddin {
         libraryObject_ = boost::shared_ptr<QuantLib::Instrument>(
             new QuantExt::CurrencySwap(
                 legs, payer, currencies, isPhysicallySettled, isResettable));
+    }
+
+    DiscountingCurrencySwapEngine::DiscountingCurrencySwapEngine(
+            const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+            const std::vector<QuantLib::Handle<QuantLib::YieldTermStructure> >& discountCurves,
+            const std::vector<QuantLib::Handle<QuantLib::Quote> >& fxQuotes,
+            const std::vector<QuantLib::Currency>& currencies,
+            const QuantLib::Currency& npvCurrency,
+            bool permanent)
+    : PricingEngine(properties, permanent)
+    {
+        libraryObject_ = boost::shared_ptr<QuantLib::PricingEngine>(
+            new QuantExt::DiscountingCurrencySwapEngine(
+                discountCurves, fxQuotes, currencies, npvCurrency));
     }
 
 }

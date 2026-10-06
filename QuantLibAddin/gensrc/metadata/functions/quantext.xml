@@ -215,6 +215,40 @@
 			</ParameterList>
 		</Constructor>
 
+		<Constructor name='qlDiscountingCurrencySwapEngine'>
+			<libraryFunction>DiscountingCurrencySwapEngine</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+				<SupportedPlatform name='Cpp'/>
+			</SupportedPlatforms>
+			<ParameterList>
+				<Parameters>
+					<Parameter name='DiscountCurves'>
+						<type>QuantLib::YieldTermStructure</type>
+						<superType>libToHandle</superType>
+						<tensorRank>vector</tensorRank>
+						<description>discounting yield term structure object IDs, one per currency.</description>
+					</Parameter>
+					<Parameter name='FxQuotes'>
+						<type>QuantLib::Quote</type>
+						<superType>libToHandle</superType>
+						<tensorRank>vector</tensorRank>
+						<description>FX spot quote object IDs, one per currency, each giving units of NpvCurrency per unit of that currency (use a quote of 1 for NpvCurrency itself).</description>
+					</Parameter>
+					<Parameter name='Currencies' exampleValue='EUR,USD'>
+						<type>QuantLib::Currency</type>
+						<tensorRank>vector</tensorRank>
+						<description>currencies (e.g. EUR) matching DiscountCurves and FxQuotes.</description>
+					</Parameter>
+					<Parameter name='NpvCurrency' exampleValue='USD'>
+						<type>QuantLib::Currency</type>
+						<tensorRank>scalar</tensorRank>
+						<description>currency in which the swap NPV is reported.</description>
+					</Parameter>
+				</Parameters>
+			</ParameterList>
+		</Constructor>
+
 		<Member name='qlCurrencySwapLegNPV' type='QuantExt::CurrencySwap'>
 			<description>Returns the NPV, in the engine NPV currency, of the i-th leg of the given CurrencySwap object.</description>
 			<libraryFunction>legNPV</libraryFunction>

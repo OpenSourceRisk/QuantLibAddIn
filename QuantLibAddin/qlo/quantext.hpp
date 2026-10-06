@@ -6,6 +6,7 @@
 #include <qlo/index.hpp>
 #include <qlo/leg.hpp>
 #include <qlo/baseinstruments.hpp>
+#include <qlo/pricingengines.hpp>
 #include <ql/currency.hpp>
 #include <ql/handle.hpp>
 #include <ql/quote.hpp>
@@ -72,6 +73,17 @@ namespace QuantLibAddin {
             bool permanent);
       protected:
         OH_OBJ_CTOR(CurrencySwap, Instrument);
+    };
+
+    class DiscountingCurrencySwapEngine : public PricingEngine {
+      public:
+        DiscountingCurrencySwapEngine(
+            const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+            const std::vector<QuantLib::Handle<QuantLib::YieldTermStructure> >& discountCurves,
+            const std::vector<QuantLib::Handle<QuantLib::Quote> >& fxQuotes,
+            const std::vector<QuantLib::Currency>& currencies,
+            const QuantLib::Currency& npvCurrency,
+            bool permanent);
     };
 
 }

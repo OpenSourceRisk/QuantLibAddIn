@@ -144,9 +144,8 @@ code39 = '''\
             %(namespaceObjects)s::%(classname)s, %(namespaceLibrary)s::%(classname)s)\n'''
 
 code42 = '''\
-        std::vector<boost::shared_ptr<%(namespaceLibrary)s::%(classname)s> > %(nameConverted)s =
-            ObjectHandler::operToObjectVector<%(namespaceLibrary)s::%(classname)s, %(namespaceObjects)s::%(classname)s>(
-            *%(name)s, "%(name)s");\n'''
+        std::vector<QuantLib::Handle<%(namespaceLibrary)s::%(classname)s> > %(nameConverted)s =
+            QuantLibAddin::coerceHandleVector<%(namespaceObjects)s::%(classname)s, %(namespaceLibrary)s::%(classname)s>(%(name)sCpp);\n'''
 
 code43 = '''\
         std::vector<QuantLib::Handle<QuantLib::Quote> > %(nameConverted)s =
