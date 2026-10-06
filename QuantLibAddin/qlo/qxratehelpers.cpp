@@ -85,11 +85,12 @@ namespace QuantLibAddin {
 						QuantLib::DateGeneration::Rule rule,
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
 						bool telescopicValueDates,
+						bool onIndexGiven,
 						bool permanent)
 		: RateHelper(properties, permanent) {
 				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
 						QuantExt::OISRateHelper(settlementDays, swapTenor, fixedRate,
-								overnightIndex, overnightIndex != nullptr,
+								overnightIndex, onIndexGiven,
 								fixedDayCounter, fixedCalendar, paymentLag,
 								false, paymentFrequency, fixedConvention,
 								paymentAdjustment, rule, discountingCurve,
@@ -139,13 +140,14 @@ namespace QuantLibAddin {
 						const QuantLib::Handle<QuantLib::Quote>& onSpread,
 						QuantLib::Natural rateCutoff,
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountCurve,
+						bool onIndexGiven,
 						bool permanent)
 		: RateHelper(properties, permanent) {
 				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
 						QuantExt::AverageOISRateHelper(fixedRate, spotLagTenor, swapTenor,
 								fixedTenor, fixedDayCounter, fixedCalendar, fixedConvention,
 								fixedPaymentAdjustment, overnightIndex,
-								overnightIndex != nullptr, onTenor, onSpread, rateCutoff,
+								onIndexGiven, onTenor, onSpread, rateCutoff,
 								discountCurve, !discountCurve.empty()));
 				quoteName_ = quoteId(properties->getSystemProperty("FixedRate"));
 		}

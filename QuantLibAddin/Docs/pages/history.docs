@@ -38,7 +38,12 @@
 - Added the StandaloneExamples/Analytics/QuantExtRateHelpers.xlsx example
   workbook exercising the ten newly exported QuantExt rate helpers
 
-<strong>Release 1.42 - September 2026</strong>
+- Added an OnIndexGiven argument to qlQxOISRateHelper and qlAverageOISRateHelper
+  (default TRUE preserves prior behaviour); passing FALSE lets the helper forecast
+  the overnight index off the curve being bootstrapped, enabling self-discounting
+  OIS curves
+
+<strong>Release 1.42
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate
   to qlFraForwardRate; removed qlFixedRateBond2: deleted the QuantLibAddin wrapper constructor that accepted

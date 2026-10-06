@@ -83,6 +83,7 @@ namespace QuantLibAddin {
 						QuantLib::DateGeneration::Rule rule,
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
 						bool telescopicValueDates,
+						bool onIndexGiven,
 						bool permanent);
 		};
 
@@ -125,6 +126,7 @@ namespace QuantLibAddin {
 						const QuantLib::Handle<QuantLib::Quote>& onSpread,
 						QuantLib::Natural rateCutoff,
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountCurve,
+						bool onIndexGiven,
 						bool permanent);
 		};
 
