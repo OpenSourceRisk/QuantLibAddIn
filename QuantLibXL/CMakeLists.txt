@@ -165,6 +165,7 @@ set(QLXL_SRC
     qlxl/register/register_pricingengines.cpp
     qlxl/register/register_processes.cpp
     qlxl/register/register_products.cpp
+    qlxl/register/register_quantext.cpp
     qlxl/register/register_quotes.cpp
     qlxl/register/register_randomsequencegenerator.cpp
     qlxl/register/register_rangeaccrual.cpp
@@ -231,6 +232,7 @@ set(QLXL_SRC
     qlxl/functions/pricingengines.cpp
     qlxl/functions/processes.cpp
     qlxl/functions/products.cpp
+    qlxl/functions/quantext.cpp
     qlxl/functions/quotes.cpp
     qlxl/functions/randomsequencegenerator.cpp
     qlxl/functions/rangeaccrual.cpp

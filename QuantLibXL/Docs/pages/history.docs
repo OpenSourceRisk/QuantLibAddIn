@@ -43,6 +43,10 @@
   the overnight index off the curve being bootstrapped, enabling self-discounting
   OIS curves
 
+- Added new category quantext for QuantExt exports, and the qlFxIndex constructor
+  wrapping QuantExt::FxIndex (FX spot quote, optional source/target discount curves
+  for forecasting); fixings are managed with the existing qlIndex functions
+
 <strong>Release 1.42
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate

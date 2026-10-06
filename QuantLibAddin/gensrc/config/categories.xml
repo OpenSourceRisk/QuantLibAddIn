@@ -47,6 +47,7 @@
     <categoryName>pricingengines</categoryName>
     <categoryName>processes</categoryName>
     <categoryName>products</categoryName>
+    <categoryName>quantext</categoryName>
     <categoryName>randomsequencegenerator</categoryName>
     <categoryName>rangeaccrual</categoryName>
     <categoryName>ratehelpers</categoryName>

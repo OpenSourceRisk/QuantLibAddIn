@@ -159,6 +159,7 @@ add_library(QuantLibObjects STATIC
     qlo/valueobjects/vo_pricingengines.cpp
     qlo/valueobjects/vo_processes.cpp
     qlo/valueobjects/vo_products.cpp
+    qlo/valueobjects/vo_quantext.cpp
     qlo/valueobjects/vo_quotes.cpp
     qlo/valueobjects/vo_randomsequencegenerator.cpp
     qlo/valueobjects/vo_rangeaccrual.cpp
@@ -179,6 +180,7 @@ add_library(QuantLibObjects STATIC
     qlo/piecewiseyieldcurve.cpp
     qlo/ratehelpers.cpp
     qlo/qxratehelpers.cpp
+    qlo/quantext.cpp
     qlo/yieldtermstructures.cpp
     qlo/extrapolator.cpp
     qlo/getcovariance.cpp
@@ -280,6 +282,7 @@ add_library(QuantLibObjects STATIC
     qlo/serialization/create/create_pricingengines.cpp
     qlo/serialization/create/create_processes.cpp
     qlo/serialization/create/create_products.cpp
+    qlo/serialization/create/create_quantext.cpp
     qlo/serialization/create/create_quotes.cpp
     qlo/serialization/create/create_randomsequencegenerator.cpp
     qlo/serialization/create/create_rangeaccrual.cpp
@@ -337,6 +340,7 @@ add_library(QuantLibObjects STATIC
     qlo/serialization/register/serialization_pricingengines.cpp
     qlo/serialization/register/serialization_processes.cpp
     qlo/serialization/register/serialization_products.cpp
+    qlo/serialization/register/serialization_quantext.cpp
     qlo/serialization/register/serialization_quotes.cpp
     qlo/serialization/register/serialization_randomsequencegenerator.cpp
     qlo/serialization/register/serialization_rangeaccrual.cpp
