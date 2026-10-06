@@ -4,12 +4,18 @@
 #define qla_quantext_hpp
 
 #include <qlo/index.hpp>
+#include <qlo/leg.hpp>
 #include <ql/currency.hpp>
 #include <ql/handle.hpp>
 #include <ql/quote.hpp>
 #include <ql/termstructures/yieldtermstructure.hpp>
 #include <ql/time/calendar.hpp>
 #include <string>
+#include <vector>
+
+namespace QuantExt {
+    class FxIndex;
+}
 
 namespace QuantLibAddin {
 
@@ -29,6 +35,17 @@ namespace QuantLibAddin {
             bool permanent);
       protected:
         OH_OBJ_CTOR(FxIndex, Index);
+    };
+
+    class FXLinkedCashFlowLeg : public Leg {
+      public:
+        FXLinkedCashFlowLeg(
+            const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+            const std::vector<QuantLib::Date>& cashFlowDates,
+            const std::vector<QuantLib::Date>& fixingDates,
+            const std::vector<QuantLib::Real>& foreignAmounts,
+            const boost::shared_ptr<QuantExt::FxIndex>& fxIndex,
+            bool permanent);
     };
 
 }

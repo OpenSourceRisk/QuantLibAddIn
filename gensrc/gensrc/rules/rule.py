@@ -186,6 +186,14 @@ class RuleGroup(serializable.Serializable):
 
     def invokeRule(self):
 
+        # By default the library namespace comes from the configuration (e.g. QuantLib).
+        # A datatype qualified with some other library namespace (e.g. QuantExt::FxIndex)
+        # overrides that default, so that classes from more than one library can be exported.
+        namespaceLibrary = environment.config().namespaceLibrary()
+        typeNamespace = self.param_.fullType().namespace()
+        if typeNamespace and typeNamespace != environment.config().namespaceObjects():
+            namespaceLibrary = typeNamespace
+
         return self.ruleResult_ % {
             'classname' : self.param_.fullType().classname(),
             common.DEFAULT_VALUE : self.param_.default(),
@@ -197,7 +205,7 @@ class RuleGroup(serializable.Serializable):
             common.NAME : self.param_.name(),
             common.NAME_CONVERTED : self.param_.nameConverted(),
             common.NAME_UPPER : self.param_.name().upper(),
-            common.NAMESPACE_LIB : environment.config().namespaceLibrary(),
+            common.NAMESPACE_LIB : namespaceLibrary,
             common.NAMESPACE_OBJ : environment.config().namespaceObjects(),
             common.NATIVE_TYPE : self.param_.fullType().nativeType(),
             common.OBJECT_REFERENCE : self.param_.fullType().objectReference(),

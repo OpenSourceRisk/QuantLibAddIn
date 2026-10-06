@@ -320,6 +320,20 @@ endif()
 # -----------------------------------------------------------------------
 add_library(QuantLibXL SHARED ${QLXL_SRC})
 
+# The generated quantext wrappers include QuantExt headers (e.g. qle/indexes/fxindex.hpp
+# via qle/time/fxdategeneration.hpp) which use C++20 defaulted comparison operators.
+# Compile just that file as C++20, matching QuantLibObjects.  On MSVC /std:c++20 implies
+# /permissive- (strict two-phase lookup), which rejects an uninstantiated ObjectHandler template
+# (ohxl/conversions/opertovector.hpp references the undefined VariantToScalarObject); /permissive
+# restores the lookup rules used by the rest of QuantLibXL.
+if(MSVC)
+    set_source_files_properties(qlxl/functions/quantext.cpp
+        PROPERTIES COMPILE_OPTIONS "/std:c++20;/permissive")
+else()
+    set_source_files_properties(qlxl/functions/quantext.cpp
+        PROPERTIES COMPILE_OPTIONS "-std=c++20")
+endif()
+
 # Output filename: QuantLibXL-v145-x64-mt-s-1_42_0  (no lib prefix on Windows)
 # We use generator expressions to select the runtime tag per config.
 set_target_properties(QuantLibXL PROPERTIES

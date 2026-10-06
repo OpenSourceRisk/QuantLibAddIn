@@ -47,6 +47,9 @@
   wrapping QuantExt::FxIndex (FX spot quote, optional source/target discount curves
   for forecasting); fixings are managed with the existing qlIndex functions
 
+- Added qlFXLinkedCashFlowLeg, building a Leg of QuantExt::FXLinkedCashFlow
+  (foreign amounts converted at FxIndex fixings)
+
 <strong>Release 1.42
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate

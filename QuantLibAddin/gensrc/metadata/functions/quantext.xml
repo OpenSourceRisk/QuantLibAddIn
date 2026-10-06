@@ -12,6 +12,7 @@
 		<include>qlo/quantext.hpp</include>
 		<include>qlo/quote.hpp</include>
 		<include>qlo/yieldtermstructures.hpp</include>
+		<include>qle/indexes/fxindex.hpp</include>
 	</addinIncludes>
 	<copyright>
 		Copyright (C) 2026
@@ -74,6 +75,38 @@
 						<type>bool</type>
 						<tensorRank>scalar</tensorRank>
 						<description>TRUE to allow fixings to be derived by inversion/triangulation of other FX index fixings.</description>
+					</Parameter>
+				</Parameters>
+			</ParameterList>
+		</Constructor>
+
+		<Constructor name='qlFXLinkedCashFlowLeg'>
+			<libraryFunction>FXLinkedCashFlowLeg</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+				<SupportedPlatform name='Cpp'/>
+			</SupportedPlatforms>
+			<ParameterList>
+				<Parameters>
+					<Parameter name='CashFlowDates' exampleValue='43866,44047'>
+						<type>QuantLib::Date</type>
+						<tensorRank>vector</tensorRank>
+						<description>payment dates, one per QuantExt::FXLinkedCashFlow.</description>
+					</Parameter>
+					<Parameter name='FixingDates' exampleValue='43678,43864'>
+						<type>QuantLib::Date</type>
+						<tensorRank>vector</tensorRank>
+						<description>FX fixing dates, one per cashflow.</description>
+					</Parameter>
+					<Parameter name='ForeignAmounts' exampleValue='-100000000,100000000'>
+						<type>double</type>
+						<tensorRank>vector</tensorRank>
+						<description>amounts in the FX index source (foreign) currency, one per cashflow; each cashflow pays ForeignAmount x FxIndex fixing.</description>
+					</Parameter>
+					<Parameter name='FxIndex'>
+						<type>QuantExt::FxIndex</type>
+						<tensorRank>scalar</tensorRank>
+						<description>FxIndex object ID converting the foreign amounts into the leg currency.</description>
 					</Parameter>
 				</Parameters>
 			</ParameterList>
