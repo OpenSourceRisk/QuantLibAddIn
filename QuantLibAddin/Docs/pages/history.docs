@@ -54,6 +54,11 @@
   rate Leg as a QuantExt::FloatingRateFXLinkedNotionalCoupon, and the
   qlFxIndexSourceCurrency and qlFxIndexTargetCurrency inspectors
 
+- Added qlCurrencySwap, wrapping the multi-leg QuantExt::CurrencySwap
+  constructor (legs, payer flags, leg currencies, physical settlement and
+  resettable flags), with the qlCurrencySwapLegNPV, qlCurrencySwapInCcyLegNPV
+  and qlCurrencySwapLegCurrency inspectors
+
 - gensrc: datatypes qualified with a non-QuantLib library namespace (e.g.
   QuantExt::FxIndex) now generate references in that namespace
 

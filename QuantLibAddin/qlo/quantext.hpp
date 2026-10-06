@@ -5,6 +5,7 @@
 
 #include <qlo/index.hpp>
 #include <qlo/leg.hpp>
+#include <qlo/baseinstruments.hpp>
 #include <ql/currency.hpp>
 #include <ql/handle.hpp>
 #include <ql/quote.hpp>
@@ -57,6 +58,20 @@ namespace QuantLibAddin {
             QuantLib::Real foreignAmount,
             const boost::shared_ptr<QuantExt::FxIndex>& fxIndex,
             bool permanent);
+    };
+
+    class CurrencySwap : public Instrument {
+      public:
+        CurrencySwap(
+            const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+            const std::vector<boost::shared_ptr<Leg> >& legs,
+            const std::vector<bool>& payer,
+            const std::vector<QuantLib::Currency>& currencies,
+            bool isPhysicallySettled,
+            bool isResettable,
+            bool permanent);
+      protected:
+        OH_OBJ_CTOR(CurrencySwap, Instrument);
     };
 
 }

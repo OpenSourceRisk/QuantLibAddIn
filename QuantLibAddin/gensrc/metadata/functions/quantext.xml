@@ -7,12 +7,14 @@
 		<include>qlo/quote.hpp</include>
 		<include>qlo/yieldtermstructures.hpp</include>
 		<include>qle/indexes/fxindex.hpp</include>
+		<include>qle/instruments/currencyswap.hpp</include>
 	</serializationIncludes>
 	<addinIncludes>
 		<include>qlo/quantext.hpp</include>
 		<include>qlo/quote.hpp</include>
 		<include>qlo/yieldtermstructures.hpp</include>
 		<include>qle/indexes/fxindex.hpp</include>
+		<include>qle/instruments/currencyswap.hpp</include>
 	</addinIncludes>
 	<copyright>
 		Copyright (C) 2026
@@ -174,6 +176,107 @@
 				</Parameters>
 			</ParameterList>
 		</Constructor>
+
+		<Constructor name='qlCurrencySwap'>
+			<libraryFunction>CurrencySwap</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+				<SupportedPlatform name='Cpp'/>
+			</SupportedPlatforms>
+			<processorName>InstrumentProcessor</processorName>
+			<ParameterList>
+				<Parameters>
+					<Parameter name='LegIDs'>
+						<type>QuantLibAddin::Leg</type>
+						<tensorRank>vector</tensorRank>
+						<description>leg object IDs.</description>
+					</Parameter>
+					<Parameter name='Payer'>
+						<type>bool</type>
+						<tensorRank>vector</tensorRank>
+						<description>TRUE for payed leg, one per leg.</description>
+					</Parameter>
+					<Parameter name='Currencies' exampleValue='EUR,USD'>
+						<type>QuantLib::Currency</type>
+						<tensorRank>vector</tensorRank>
+						<description>leg currencies (e.g. EUR), one per leg.</description>
+					</Parameter>
+					<Parameter name='IsPhysicallySettled' exampleValue='TRUE' default='true'>
+						<type>bool</type>
+						<tensorRank>scalar</tensorRank>
+						<description>TRUE if the swap is physically settled.</description>
+					</Parameter>
+					<Parameter name='IsResettable' exampleValue='FALSE' default='false'>
+						<type>bool</type>
+						<tensorRank>scalar</tensorRank>
+						<description>TRUE if the swap has a resetting (mark-to-market) notional.</description>
+					</Parameter>
+				</Parameters>
+			</ParameterList>
+		</Constructor>
+
+		<Member name='qlCurrencySwapLegNPV' type='QuantExt::CurrencySwap'>
+			<description>Returns the NPV, in the engine NPV currency, of the i-th leg of the given CurrencySwap object.</description>
+			<libraryFunction>legNPV</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+			</SupportedPlatforms>
+			<ParameterList>
+				<Parameters>
+					<Parameter name='LegNumber' exampleValue='0'>
+						<type>long</type>
+						<tensorRank>scalar</tensorRank>
+						<description>zero based leg number.</description>
+					</Parameter>
+				</Parameters>
+			</ParameterList>
+			<ReturnValue>
+				<type>double</type>
+				<tensorRank>scalar</tensorRank>
+			</ReturnValue>
+		</Member>
+
+		<Member name='qlCurrencySwapInCcyLegNPV' type='QuantExt::CurrencySwap'>
+			<description>Returns the NPV, in the leg currency, of the i-th leg of the given CurrencySwap object.</description>
+			<libraryFunction>inCcyLegNPV</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+			</SupportedPlatforms>
+			<ParameterList>
+				<Parameters>
+					<Parameter name='LegNumber' exampleValue='0'>
+						<type>long</type>
+						<tensorRank>scalar</tensorRank>
+						<description>zero based leg number.</description>
+					</Parameter>
+				</Parameters>
+			</ParameterList>
+			<ReturnValue>
+				<type>double</type>
+				<tensorRank>scalar</tensorRank>
+			</ReturnValue>
+		</Member>
+
+		<Member name='qlCurrencySwapLegCurrency' type='QuantExt::CurrencySwap'>
+			<description>Returns the currency of the i-th leg of the given CurrencySwap object.</description>
+			<libraryFunction>legCurrency</libraryFunction>
+			<SupportedPlatforms>
+				<SupportedPlatform name='Excel'/>
+			</SupportedPlatforms>
+			<ParameterList>
+				<Parameters>
+					<Parameter name='LegNumber' exampleValue='0'>
+						<type>long</type>
+						<tensorRank>scalar</tensorRank>
+						<description>zero based leg number.</description>
+					</Parameter>
+				</Parameters>
+			</ParameterList>
+			<ReturnValue>
+				<type>QuantLib::Currency</type>
+				<tensorRank>scalar</tensorRank>
+			</ReturnValue>
+		</Member>
 
 	</Functions>
 </Category>

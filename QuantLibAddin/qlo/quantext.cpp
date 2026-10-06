@@ -9,6 +9,7 @@
 #include <qle/indexes/fxindex.hpp>
 #include <qle/cashflows/fxlinkedcashflow.hpp>
 #include <qle/cashflows/floatingratefxlinkednotionalcoupon.hpp>
+#include <qle/instruments/currencyswap.hpp>
 
 namespace QuantLibAddin {
 
@@ -86,6 +87,35 @@ namespace QuantLibAddin {
                 new QuantExt::FloatingRateFXLinkedNotionalCoupon(
                     fxFixingDates[i], foreignAmount, fxIndex, coupon)));
         }
+    }
+
+    CurrencySwap::CurrencySwap(
+            const boost::shared_ptr<ObjectHandler::ValueObject>& properties,
+            const std::vector<boost::shared_ptr<Leg> >& legPtrs,
+            const std::vector<bool>& payer,
+            const std::vector<QuantLib::Currency>& currencies,
+            bool isPhysicallySettled,
+            bool isResettable,
+            bool permanent)
+    : Instrument(properties, permanent)
+    {
+        QL_REQUIRE(legPtrs.size() == payer.size() &&
+                   legPtrs.size() == currencies.size(),
+                   "Legs (" << legPtrs.size() <<
+                   "), Payer (" << payer.size() <<
+                   ") and Currencies (" << currencies.size() <<
+                   ") must have the same size");
+
+        std::vector<QuantLib::Leg> legs(legPtrs.size());
+        boost::shared_ptr<QuantLib::Leg> qlLeg;
+        for (QuantLib::Size i = 0; i < legPtrs.size(); ++i) {
+            legPtrs[i]->getLibraryObject(qlLeg);
+            legs[i] = *qlLeg;
+        }
+
+        libraryObject_ = boost::shared_ptr<QuantLib::Instrument>(
+            new QuantExt::CurrencySwap(
+                legs, payer, currencies, isPhysicallySettled, isResettable));
     }
 
 }

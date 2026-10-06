@@ -104,6 +104,7 @@
     <DataType defaultSuperType='libraryClass'>QuantLib::FxForward</DataType>
     <DataType defaultSuperType='libraryClass'>QuantLib::FxSwapRateHelper</DataType>
     <DataType defaultSuperType='libraryClass'>QuantExt::FxIndex</DataType>
+    <DataType defaultSuperType='libraryClass'>QuantExt::CurrencySwap</DataType>
     <DataType defaultSuperType='libraryClass'>QuantLib::GeneralizedBlackScholesProcess</DataType>
     <DataType defaultSuperType='libraryClass'>QuantLib::G2</DataType>
     <DataType defaultSuperType='libraryClass'>QuantLib::HistoricalForwardRatesAnalysis</DataType>

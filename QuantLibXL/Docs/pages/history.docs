@@ -54,6 +54,11 @@
   rate Leg as a QuantExt::FloatingRateFXLinkedNotionalCoupon, and the
   qlFxIndexSourceCurrency and qlFxIndexTargetCurrency inspectors
 
+- Added qlCurrencySwap, wrapping the multi-leg QuantExt::CurrencySwap
+  constructor (legs, payer flags, leg currencies, physical settlement and
+  resettable flags), with the qlCurrencySwapLegNPV, qlCurrencySwapInCcyLegNPV
+  and qlCurrencySwapLegCurrency inspectors
+
 <strong>Release 1.42
 
 - Added qlRiskyBondEngine pricing engine, qlFraAmount FRA payoff function, and renamed qlFRAforwardRate
