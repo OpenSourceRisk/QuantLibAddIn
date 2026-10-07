@@ -35,8 +35,11 @@
   qlCrossCcyBasisSwapHelper, qlCrossCcyBasisMtMResetSwapHelper,
   qlCrossCcyFixFloatSwapHelper and qlCrossCcyFixFloatMtMResetSwapHelper
 
-- Added the StandaloneExamples/Analytics/QuantExtRateHelpers.xlsx example
+- Added the StandaloneExamples/QuantExt/QuantExtRateHelpers.xlsx example
   workbook exercising the ten newly exported QuantExt rate helpers
+
+- Added the StandaloneExamples/QuantExt example workbooks FxIndex.xlsx,
+  FXLinkedCashflows.xlsx and CurrencySwap.xlsx
 
 - Added an OnIndexGiven argument to qlQxOISRateHelper and qlAverageOISRateHelper
   (default TRUE preserves prior behaviour); passing FALSE lets the helper forecast
