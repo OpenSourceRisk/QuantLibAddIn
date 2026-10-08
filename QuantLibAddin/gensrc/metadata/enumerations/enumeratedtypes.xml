@@ -713,6 +713,12 @@
           <value>QuantLib::Thirty360(QuantLib::Thirty360::BondBasis)</value>
         </EnumeratedType>
 
+        <!-- 30/360 US convention, as used by ORE for '30/360' -->
+        <EnumeratedType>
+          <string>30/360 (USA)</string>
+          <value>QuantLib::Thirty360(QuantLib::Thirty360::USA)</value>
+        </EnumeratedType>
+
         <!-- ISDA 2000 Definition Annex Article 4 Section 4.16 (f) -->
         <EnumeratedType>
           <string>30/360 (Eurobond Basis)</string>

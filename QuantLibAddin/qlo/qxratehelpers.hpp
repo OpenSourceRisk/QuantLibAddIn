@@ -148,6 +148,8 @@ namespace QuantLibAddin {
 						const boost::shared_ptr<QuantLib::IborIndex>& shortIndex,
 						bool longMinusShort,
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
+						bool longIndexGiven,
+						bool shortIndexGiven,
 						bool permanent);
 		};
 
@@ -186,6 +188,8 @@ namespace QuantLibAddin {
 						const QuantLib::Period& recFrequency,
 						bool telescopicValueDates,
 						QuantExt::SubPeriodsCoupon1::Type type,
+						bool payIndexGiven,
+						bool receiveIndexGiven,
 						bool permanent);
 		};
 
@@ -206,6 +210,9 @@ namespace QuantLibAddin {
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& spreadDiscountCurve,
 						bool eom,
 						bool flatIsDomestic,
+						QuantLib::Natural fxSettleDays,
+						const QuantLib::Calendar& fxSettleCalendar,
+						bool telescopicValueDates,
 						bool permanent);
 		};
 
@@ -226,6 +233,9 @@ namespace QuantLibAddin {
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& domesticCcyDiscountCurve,
 						bool eom,
 						bool spreadOnForeignCcy,
+						QuantLib::Natural fxSettleDays,
+						const QuantLib::Calendar& fxSettleCalendar,
+						bool telescopicValueDates,
 						bool permanent);
 		};
 

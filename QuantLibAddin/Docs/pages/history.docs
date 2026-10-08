@@ -38,6 +38,20 @@
 - Added the StandaloneExamples/QuantExt/QuantExtRateHelpers.xlsx example
   workbook exercising the ten newly exported QuantExt rate helpers
 
+- Added optional index-given flags to qlTenorBasisSwapHelper
+  (PayIndexGiven, ReceiveIndexGiven) and qlBasisTwoSwapHelper
+  (LongIndexGiven, ShortIndexGiven); added optional FxDays, FxCal and
+  Telescopic parameters to qlCrossCcyBasisSwapHelper and
+  qlCrossCcyBasisMtMResetSwapHelper; added the 30/360 (USA) day counter
+  string. Breaking change for named arguments: qlBasisTwoSwapHelper fixed-leg
+  parameters renamed to LongFixedFreq/Conv/DC and ShortFixedFreq/Conv/DC, and
+  qlCrossCcyBasisMtMResetSwapHelper index and curve parameters renamed to
+  ForIndex, DomIndex, ForDiscCurve and DomDiscCurve
+
+- Added the StandaloneExamples/QuantExt/XccySwapRebalancing.xlsx example
+  workbook replicating the NPV and cashflows of the ORE regression test
+  Cross_Currency_Swap_rebalancing using QuantExt functionality only
+
 - Added the StandaloneExamples/QuantExt example workbooks FxIndex.xlsx,
   FXLinkedCashflows.xlsx and CurrencySwap.xlsx
 

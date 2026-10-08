@@ -530,17 +530,17 @@
             <tensorRank>scalar</tensorRank>
             <description>holiday calendar.</description>
           </Parameter>
-          <Parameter name='LongFixedFrequency' exampleValue='Annual'>
+          <Parameter name='LongFixedFreq' exampleValue='Annual'>
             <type>QuantLib::Frequency</type>
             <tensorRank>scalar</tensorRank>
             <description>long swap fixed leg frequency.</description>
           </Parameter>
-          <Parameter name='LongFixedConvention' exampleValue='Following'>
+          <Parameter name='LongFixedConv' exampleValue='Following'>
             <type>QuantLib::BusinessDayConvention</type>
             <tensorRank>scalar</tensorRank>
             <description>long swap fixed leg business day convention.</description>
           </Parameter>
-          <Parameter name='LongFixedDayCount' exampleValue='Actual/360'>
+          <Parameter name='LongFixedDC' exampleValue='Actual/360'>
             <type>QuantLib::DayCounter</type>
             <tensorRank>scalar</tensorRank>
             <description>long swap fixed leg DayCounter ID.</description>
@@ -550,17 +550,17 @@
             <tensorRank>scalar</tensorRank>
             <description>long swap IborIndex object ID.</description>
           </Parameter>
-          <Parameter name='ShortFixedFrequency' exampleValue='Annual'>
+          <Parameter name='ShortFixedFreq' exampleValue='Annual'>
             <type>QuantLib::Frequency</type>
             <tensorRank>scalar</tensorRank>
             <description>short swap fixed leg frequency.</description>
           </Parameter>
-          <Parameter name='ShortFixedConvention' exampleValue='Following'>
+          <Parameter name='ShortFixedConv' exampleValue='Following'>
             <type>QuantLib::BusinessDayConvention</type>
             <tensorRank>scalar</tensorRank>
             <description>short swap fixed leg business day convention.</description>
           </Parameter>
-          <Parameter name='ShortFixedDayCount' exampleValue='Actual/360'>
+          <Parameter name='ShortFixedDC' exampleValue='Actual/360'>
             <type>QuantLib::DayCounter</type>
             <tensorRank>scalar</tensorRank>
             <description>short swap fixed leg DayCounter ID.</description>
@@ -580,6 +580,16 @@
             <superType>libToHandle</superType>
             <tensorRank>scalar</tensorRank>
             <description>discounting YieldTermStructure object ID.</description>
+          </Parameter>
+          <Parameter name='LongIndexGiven' exampleValue='true' default='true'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>TRUE if the long index already has a forecast term structure; FALSE to let the helper forecast the long index off the curve being bootstrapped.</description>
+          </Parameter>
+          <Parameter name='ShortIndexGiven' exampleValue='true' default='true'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>TRUE if the short index already has a forecast term structure; FALSE to let the helper forecast the short index off the curve being bootstrapped.</description>
           </Parameter>
         </Parameters>
       </ParameterList>
@@ -721,6 +731,16 @@
             <tensorRank>scalar</tensorRank>
             <description>sub-period coupon type (Averaging or Compounding).</description>
           </Parameter>
+          <Parameter name='PayIndexGiven' exampleValue='true' default='true'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>TRUE if the pay index already has a forecast term structure; FALSE to let the helper forecast the pay index off the curve being bootstrapped.</description>
+          </Parameter>
+          <Parameter name='ReceiveIndexGiven' exampleValue='true' default='true'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>TRUE if the receive index already has a forecast term structure; FALSE to let the helper forecast the receive index off the curve being bootstrapped.</description>
+          </Parameter>
         </Parameters>
       </ParameterList>
     </Constructor>
@@ -798,6 +818,21 @@
             <tensorRank>scalar</tensorRank>
             <description>is the flat leg the domestic leg?</description>
           </Parameter>
+          <Parameter name='FxDays' exampleValue='2' default='2'>
+            <type>QuantLib::Natural</type>
+            <tensorRank>scalar</tensorRank>
+            <description>FX spot settlement days.</description>
+          </Parameter>
+          <Parameter name='FxCal' exampleValue='TARGET' default='"NullCalendar"'>
+            <type>QuantLib::Calendar</type>
+            <tensorRank>scalar</tensorRank>
+            <description>FX spot settlement calendar.</description>
+          </Parameter>
+          <Parameter name='Telescopic' exampleValue='false' default='false'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>use telescopic value dates?</description>
+          </Parameter>
         </Parameters>
       </ParameterList>
     </Constructor>
@@ -843,23 +878,23 @@
             <tensorRank>scalar</tensorRank>
             <description>roll business day convention.</description>
           </Parameter>
-          <Parameter name='ForeignCcyIndex' exampleValue='UsdLibor3M'>
+          <Parameter name='ForIndex' exampleValue='UsdLibor3M'>
             <type>QuantLib::IborIndex</type>
             <tensorRank>scalar</tensorRank>
             <description>foreign currency IborIndex object ID.</description>
           </Parameter>
-          <Parameter name='DomesticCcyIndex' exampleValue='Euribor3M'>
+          <Parameter name='DomIndex' exampleValue='Euribor3M'>
             <type>QuantLib::IborIndex</type>
             <tensorRank>scalar</tensorRank>
             <description>domestic currency IborIndex object ID.</description>
           </Parameter>
-          <Parameter name='ForeignCcyDiscountCurve' exampleValue='USDYC' default='""'>
+          <Parameter name='ForDiscCurve' exampleValue='USDYC' default='""'>
             <type>QuantLib::YieldTermStructure</type>
             <superType>libToHandle</superType>
             <tensorRank>scalar</tensorRank>
             <description>foreign currency discounting YieldTermStructure object ID.</description>
           </Parameter>
-          <Parameter name='DomesticCcyDiscountCurve' exampleValue='EURYC' default='""'>
+          <Parameter name='DomDiscCurve' exampleValue='EURYC' default='""'>
             <type>QuantLib::YieldTermStructure</type>
             <superType>libToHandle</superType>
             <tensorRank>scalar</tensorRank>
@@ -874,6 +909,21 @@
             <type>bool</type>
             <tensorRank>scalar</tensorRank>
             <description>is the spread on the foreign currency leg?</description>
+          </Parameter>
+          <Parameter name='FxDays' exampleValue='2' default='2'>
+            <type>QuantLib::Natural</type>
+            <tensorRank>scalar</tensorRank>
+            <description>FX spot settlement days.</description>
+          </Parameter>
+          <Parameter name='FxCal' exampleValue='TARGET' default='"NullCalendar"'>
+            <type>QuantLib::Calendar</type>
+            <tensorRank>scalar</tensorRank>
+            <description>FX spot settlement calendar.</description>
+          </Parameter>
+          <Parameter name='Telescopic' exampleValue='false' default='false'>
+            <type>bool</type>
+            <tensorRank>scalar</tensorRank>
+            <description>use telescopic value dates?</description>
           </Parameter>
         </Parameters>
       </ParameterList>

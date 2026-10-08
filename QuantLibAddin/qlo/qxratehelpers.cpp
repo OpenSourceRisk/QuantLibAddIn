@@ -167,14 +167,16 @@ namespace QuantLibAddin {
 						const shared_ptr<QuantLib::IborIndex>& shortIndex,
 						bool longMinusShort,
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& discountingCurve,
+						bool longIndexGiven,
+						bool shortIndexGiven,
 						bool permanent)
 		: RateHelper(properties, permanent) {
 				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
 						QuantExt::BasisTwoSwapHelper(spread, swapTenor, calendar,
 								longFixedFrequency, longFixedConvention, longFixedDayCount,
-								longIndex, longIndex != nullptr,
+								longIndex, longIndexGiven,
 								shortFixedFrequency, shortFixedConvention, shortFixedDayCount,
-								shortIndex, longMinusShort, shortIndex != nullptr,
+								shortIndex, longMinusShort, shortIndexGiven,
 								discountingCurve, !discountingCurve.empty()));
 				quoteName_ = quoteId(properties->getSystemProperty("Spread"));
 		}
@@ -214,12 +216,14 @@ namespace QuantLibAddin {
 						const QuantLib::Period& recFrequency,
 						bool telescopicValueDates,
 						QuantExt::SubPeriodsCoupon1::Type type,
+						bool payIndexGiven,
+						bool receiveIndexGiven,
 						bool permanent)
 		: RateHelper(properties, permanent) {
 				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
 						QuantExt::TenorBasisSwapHelper(spread, swapTenor, payIndex,
-								receiveIndex, discountingCurve, payIndex != nullptr,
-								receiveIndex != nullptr, !discountingCurve.empty(),
+								receiveIndex, discountingCurve, payIndexGiven,
+								receiveIndexGiven, !discountingCurve.empty(),
 								spreadOnRec, includeSpread, payFrequency, recFrequency,
 								telescopicValueDates, type));
 				quoteName_ = quoteId(properties->getSystemProperty("Spread"));
@@ -239,6 +243,9 @@ namespace QuantLibAddin {
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& spreadDiscountCurve,
 						bool eom,
 						bool flatIsDomestic,
+						QuantLib::Natural fxSettleDays,
+						const QuantLib::Calendar& fxSettleCalendar,
+						bool telescopicValueDates,
 						bool permanent)
 		: RateHelper(properties, permanent) {
 				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
@@ -247,7 +254,14 @@ namespace QuantLibAddin {
 								flatIndex, spreadIndex, flatDiscountCurve, spreadDiscountCurve,
 								flatIndex != nullptr, spreadIndex != nullptr,
 								!flatDiscountCurve.empty(), !spreadDiscountCurve.empty(),
-								eom, flatIsDomestic));
+								eom, flatIsDomestic, QuantLib::ext::nullopt, QuantLib::ext::nullopt, 0.0, 1.0, 1.0,
+								QuantLib::Calendar(), QuantLib::Calendar(),
+								std::vector<QuantLib::Natural>(1, fxSettleDays),
+								std::vector<QuantLib::Calendar>(1, fxSettleCalendar), 0, 0,
+								QuantLib::ext::nullopt, QuantLib::ext::nullopt, QuantLib::ext::nullopt,
+								QuantLib::ext::nullopt, QuantLib::ext::nullopt, QuantLib::ext::nullopt,
+								QuantLib::ext::nullopt, QuantLib::ext::nullopt, QuantLib::ext::nullopt,
+								QuantLib::ext::nullopt, telescopicValueDates));
 				quoteName_ = quoteId(properties->getSystemProperty("SpreadQuote"));
 		}
 
@@ -265,6 +279,9 @@ namespace QuantLibAddin {
 						const QuantLib::Handle<QuantLib::YieldTermStructure>& domesticCcyDiscountCurve,
 						bool eom,
 						bool spreadOnForeignCcy,
+						QuantLib::Natural fxSettleDays,
+						const QuantLib::Calendar& fxSettleCalendar,
+						bool telescopicValueDates,
 						bool permanent)
 		: RateHelper(properties, permanent) {
 				libraryObject_ = shared_ptr<QuantLib::RateHelper>(new
@@ -276,7 +293,13 @@ namespace QuantLibAddin {
 								!domesticCcyDiscountCurve.empty(),
 								QuantLib::Handle<QuantLib::YieldTermStructure>(),
 								QuantLib::Handle<QuantLib::YieldTermStructure>(),
-								eom, spreadOnForeignCcy));
+								eom, spreadOnForeignCcy, QuantLib::ext::nullopt, QuantLib::ext::nullopt, 0, 0,
+								std::vector<QuantLib::Natural>(1, fxSettleDays),
+								std::vector<QuantLib::Calendar>(1, fxSettleCalendar),
+								QuantLib::ext::nullopt, QuantLib::ext::nullopt, QuantLib::ext::nullopt,
+								QuantLib::ext::nullopt, QuantLib::ext::nullopt, QuantLib::ext::nullopt,
+								QuantLib::ext::nullopt, QuantLib::ext::nullopt, QuantLib::ext::nullopt,
+								QuantLib::ext::nullopt, telescopicValueDates));
 				quoteName_ = quoteId(properties->getSystemProperty("SpreadQuote"));
 		}
 
