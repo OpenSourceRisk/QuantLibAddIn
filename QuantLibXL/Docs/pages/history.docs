@@ -25,46 +25,41 @@
 
 <strong>Release X.YZ - MMMM YYYY</strong>
 
-- Added QuantExt support via a nested ORE submodule and exported the
-  qlImmFraRateHelper rate helper
+- Added QuantExt support via a nested ORE submodule, with a new quantext
+  function category for QuantExt exports
 
-- Exported ten further QuantExt rate helpers: the overnight-indexed-swap
+- Exported QuantExt rate helpers: qlImmFraRateHelper; the overnight-indexed-swap
   helpers qlQxOISRateHelper, qlQxDatedOISRateHelper and qlAverageOISRateHelper;
   the basis helpers qlBasisTwoSwapHelper, qlSubPeriodsSwapHelper and
   qlTenorBasisSwapHelper; and the cross-currency helpers
   qlCrossCcyBasisSwapHelper, qlCrossCcyBasisMtMResetSwapHelper,
   qlCrossCcyFixFloatSwapHelper and qlCrossCcyFixFloatMtMResetSwapHelper
 
-- Added the StandaloneExamples/QuantExt/QuantExtRateHelpers.xlsx example
-  workbook exercising the ten newly exported QuantExt rate helpers
+- Added optional index-given flags to the QuantExt rate helpers
+  (OnIndexGiven for qlQxOISRateHelper and qlAverageOISRateHelper,
+  PayIndexGiven/ReceiveIndexGiven for qlTenorBasisSwapHelper,
+  LongIndexGiven/ShortIndexGiven for qlBasisTwoSwapHelper); the default TRUE
+  preserves prior behaviour, FALSE lets the helper forecast the index off the
+  curve being bootstrapped (e.g. self-discounting OIS curves)
 
-- Added the StandaloneExamples/QuantExt example workbooks FxIndex.xlsx,
-  FXLinkedCashflows.xlsx and CurrencySwap.xlsx
+- Added optional FxDays, FxCal and Telescopic parameters to
+  qlCrossCcyBasisSwapHelper and qlCrossCcyBasisMtMResetSwapHelper
 
-- Added an OnIndexGiven argument to qlQxOISRateHelper and qlAverageOISRateHelper
-  (default TRUE preserves prior behaviour); passing FALSE lets the helper forecast
-  the overnight index off the curve being bootstrapped, enabling self-discounting
-  OIS curves
+- Breaking change for named arguments: renamed the qlBasisTwoSwapHelper
+  fixed-leg parameters to LongFixedFreq/Conv/DC and ShortFixedFreq/Conv/DC, and
+  the qlCrossCcyBasisMtMResetSwapHelper index and curve parameters to ForIndex,
+  DomIndex, ForDiscCurve and DomDiscCurve
 
-- Added new category quantext for QuantExt exports, and the qlFxIndex constructor
-  wrapping QuantExt::FxIndex (FX spot quote, optional source/target discount curves
-  for forecasting); fixings are managed with the existing qlIndex functions
+- Added the 30/360 (USA) day counter
 
-- Added qlFXLinkedCashFlowLeg, building a Leg of QuantExt::FXLinkedCashFlow
-  (foreign amounts converted at FxIndex fixings)
-
-- Added qlFloatingRateFXLinkedNotionalLeg, wrapping each coupon of a floating
-  rate Leg as a QuantExt::FloatingRateFXLinkedNotionalCoupon, and the
-  qlFxIndexSourceCurrency and qlFxIndexTargetCurrency inspectors
-
-- Added qlCurrencySwap, wrapping the multi-leg QuantExt::CurrencySwap
-  constructor (legs, payer flags, leg currencies, physical settlement and
-  resettable flags), with the qlCurrencySwapLegNPV, qlCurrencySwapInCcyLegNPV
-  and qlCurrencySwapLegCurrency inspectors
-
-- Added qlDiscountingCurrencySwapEngine, wrapping
-  QuantExt::DiscountingCurrencySwapEngine (one discount curve and FX quote per
-  currency, and the NPV currency)
+- Exported QuantExt FX and cross-currency swap functionality: qlFxIndex (FX
+  spot quote, optional source/target discount curves for forecasting; fixings
+  managed with the existing qlIndex functions) with the qlFxIndexSourceCurrency
+  and qlFxIndexTargetCurrency inspectors; qlFXLinkedCashFlowLeg and
+  qlFloatingRateFXLinkedNotionalLeg; qlCurrencySwap (multi-leg, with physical
+  settlement and resettable flags) with the qlCurrencySwapLegNPV,
+  qlCurrencySwapInCcyLegNPV and qlCurrencySwapLegCurrency inspectors; and
+  qlDiscountingCurrencySwapEngine
 
 <strong>Release 1.42
 

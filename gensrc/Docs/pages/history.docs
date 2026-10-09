@@ -23,7 +23,16 @@
 
 /*! \page history Version History
 
-<strong>Release 1.42 - September 2026</strong>
+<strong>Release X.YZ - MMMM YYYY</strong>
+
+- Excel vector parameters of libToHandle type other than Quote now generate a
+  vector of Handles (as the C++ and serialization addins already did) instead
+  of a vector of shared pointers
+
+- Datatypes qualified with a non-QuantLib library namespace (e.g.
+  QuantExt::FxIndex) now generate references in that namespace
+
+<strong>Release 1.42
 
 - Added a cmake build that sits alongside the existing build using the manually maintained Visual Studio solution files
 
